@@ -1,5 +1,6 @@
 # Contributor: Stuart Cardall <developer@it-offshore.co.uk>
-# Maintainer: Stuart Cardall <developer@it-offshore.co.uk>
+# Contributor: fenwanderer <ask.fen.wanderer@gmail.com>
+# Maintainer: fenwanderer <ask.fen.wanderer@gmail.com>
 pkgname=cython3
 _pkgname=cython
 pkgver=0.24
