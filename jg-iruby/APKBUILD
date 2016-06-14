@@ -1,0 +1,61 @@
+# Maintainer: Kyle King <kyle@jupyter.gallery>
+pkgname=jg-iruby
+pkgver=0.1.0
+pkgrel=0
+pkgdesc="Ruby kernel for the Jupyter Gallery alpine client"
+url="https://github.com/jupyter-gallery/alpine-testing"
+arch="all"
+license="MIT"
+depends="ruby=2.2.4-r0 ruby-dev=2.2.4-r0 ruby-irb=2.2.4-r0 ruby-bigdecimal=2.2.4-r0 ruby-io-console=2.2.4-r0 ruby-json=2.2.4-r0 ruby-minitest=2.2.4-r0 ruby-rake=2.2.4-r0 ruby-rdoc=2.2.4-r0 libffi-dev"
+depends_dev=""
+makedepends="$depends_dev"
+install=""
+subpackages=""
+source="iruby-master.tar.gz::https://github.com/SciRuby/iruby/tarball/master"
+
+# this is to document the iruby version for this apk release
+_iruby_commit_id="7ac5c60"
+_builddir="$srcdir/SciRuby-iruby-$_iruby_commit_id"
+
+build() {
+	cd "$_builddir"
+	git init 
+	git add *
+	gem build iruby.gemspec
+}
+
+package() {
+	cd "$_builddir"
+	local gemdir="$pkgdir/$(ruby -rubygems -e 'puts Gem.default_dir')"
+
+	# install iruby 
+	gem install -N -i "$gemdir" -l iruby
+	
+	# install ruby-2 default gems that don't have apks
+	gem install -N -i "$gemdir" psych test-unit 
+
+	# additional iruby dependencies
+	gem install -N -i "$gemdir" iruby ffi-rzmq pry erector iruby-dependencies
+
+	# patch pry to work with more on alpine instead of less
+	sed -i "/^gem/i ENV['PAGER'] = 'more'" "$pkgdir"/usr/bin/pry
+
+	# add executables to /usr/bin
+	cd "$pkgdir"
+	local path; for path in usr/lib/ruby/gems/*/bin/*; do
+		if [ -f "$path" ]; then
+			ln -s /$path "$pkgdir"/usr/bin/ || return 1
+		fi
+	done
+
+	# configure ruby memory usage
+	mkdir "$pkgdir"/root
+	cp "$startdir"/pryrc "$pkgdir"/root/.pryrc
+
+	# cleanup
+	rm -rf "$gemdir"/cache "$gemdir"/build_info "$gemdir"/doc
+}
+
+md5sums="9e3308d3a7855dda2ea9f9760d3c4799  iruby-master.tar.gz"
+sha256sums="024617b3c337903c5271b23005f0e91304f41d06479fa8caa64465a97b97c28b  iruby-master.tar.gz"
+sha512sums="890084d82705ce53fb5f312e6159d5db9558b42b25238f254efafeee0ca522788150f11dad2a1d114aa365d67def0c5d913ed1ee6498246023952e1c6ef698e6  iruby-master.tar.gz"
