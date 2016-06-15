@@ -1,4 +1,4 @@
-# Maintainer: Kyle King <kyle@jupyter.gallery>
+# Maintainer: Jupyter Gallery Team <team@jupyter.gallery>
 pkgname=jg-iruby
 pkgver=0.1.0
 pkgrel=0
@@ -6,7 +6,7 @@ pkgdesc="Ruby kernel for the Jupyter Gallery alpine client"
 url="https://github.com/jupyter-gallery/alpine-testing"
 arch="all"
 license="MIT"
-depends="ruby=2.2.4-r0 ruby-dev=2.2.4-r0 ruby-irb=2.2.4-r0 ruby-bigdecimal=2.2.4-r0 ruby-io-console=2.2.4-r0 ruby-json=2.2.4-r0 ruby-minitest=2.2.4-r0 ruby-rake=2.2.4-r0 ruby-rdoc=2.2.4-r0 libffi-dev"
+depends="ruby ruby-dev ruby-irb ruby-bigdecimal ruby-io-console ruby-json ruby-minitest ruby-rake ruby-rdoc libffi-dev"
 depends_dev=""
 makedepends="$depends_dev"
 install=""
@@ -38,15 +38,10 @@ package() {
 	gem install -N -i "$gemdir" iruby ffi-rzmq pry erector iruby-dependencies
 
 	# patch pry to work with more on alpine instead of less
-	sed -i "/^gem/i ENV['PAGER'] = 'more'" "$pkgdir"/usr/bin/pry
+	sed -i "/^gem/i ENV['PAGER'] = 'more'" "$gemdir"/bin/pry
 
 	# add executables to /usr/bin
-	cd "$pkgdir"
-	local path; for path in usr/lib/ruby/gems/*/bin/*; do
-		if [ -f "$path" ]; then
-			ln -s /$path "$pkgdir"/usr/bin/ || return 1
-		fi
-	done
+	ln -s "$pkgdir"/usr/bin "$gemdir"/bin
 
 	# configure ruby memory usage
 	mkdir "$pkgdir"/root
