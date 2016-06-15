@@ -4,7 +4,7 @@ pkgver=0.1.0
 pkgrel=0
 pkgdesc="Ruby kernel for the Jupyter Gallery alpine client"
 url="https://github.com/jupyter-gallery/alpine-testing"
-arch="all"
+arch="x86_64"
 license="MIT"
 depends="ruby ruby-dev ruby-irb ruby-bigdecimal ruby-io-console ruby-json ruby-minitest ruby-rake ruby-rdoc libffi-dev"
 depends_dev=""
@@ -41,7 +41,7 @@ package() {
 	sed -i "/^gem/i ENV['PAGER'] = 'more'" "$gemdir"/bin/pry
 
 	# add executables to /usr/bin
-	ln -s "$pkgdir"/usr/bin "$gemdir"/bin
+	cp -r "$gemdir"/bin "$pkgdir"/usr/
 
 	# configure ruby memory usage
 	mkdir "$pkgdir"/root
