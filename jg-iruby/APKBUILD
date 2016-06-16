@@ -26,29 +26,37 @@ build() {
 
 package() {
 	cd "$_builddir"
-	local gemdir="$pkgdir/$(ruby -rubygems -e 'puts Gem.default_dir')"
+	local gemdir="$(ruby -rubygems -e 'puts Gem.default_dir')"
 
 	# install iruby 
-	gem install -N -i "$gemdir" -l iruby
+	gem install -N -i "$pkgdir/$gemdir" -l iruby
 	
 	# install ruby-2 default gems that don't have apks
-	gem install -N -i "$gemdir" psych test-unit 
+	gem install -N -i "$pkgdir/$gemdir" psych test-unit 
 
 	# additional iruby dependencies
-	gem install -N -i "$gemdir" iruby ffi-rzmq pry erector iruby-dependencies
+	gem install -N -i "$pkgdir/$gemdir" iruby ffi-rzmq pry erector iruby-dependencies
 
 	# patch pry to work with more on alpine instead of less
-	sed -i "/^gem/i ENV['PAGER'] = 'more'" "$gemdir"/bin/pry
+	sed -i "/^gem/i ENV['PAGER'] = 'more'" "$pkgdir/$gemdir"/bin/pry
 
 	# add executables to /usr/bin
-	cp -r "$gemdir"/bin "$pkgdir"/usr/
+	mkdir -p "$pkgdir/usr/bin"
 
-	# configure ruby memory usage
+	local path; for path in "$pkgdir/$gemdir"/bin/*; do
+		if [ -f "$path" ]; then
+			local file="$(basename $path)"
+			ln -s "$gemdir/bin/$file" "$pkgdir/usr/bin/$file"
+		fi
+	done
+
+	# configure ruby memory usage in pry
 	mkdir "$pkgdir"/root
 	cp "$startdir"/pryrc "$pkgdir"/root/.pryrc
 
 	# cleanup
-	rm -rf "$gemdir"/cache "$gemdir"/build_info "$gemdir"/doc
+	cd "$pkgdir/$gemdir"
+	rm -rf cache build_info doc
 }
 
 md5sums="9e3308d3a7855dda2ea9f9760d3c4799  iruby-master.tar.gz"
