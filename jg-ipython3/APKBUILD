@@ -1,0 +1,28 @@
+# Maintainer: Jupyter Gallery Team <team@jupyter.gallery>
+pkgname=jg-ipython3
+pkgver=0.1.0
+pkgrel=0
+pkgdesc="Python 3 kernel for the Jupyter Gallery alpine client"
+url="https://github.com/jupyter-gallery/alpine-testing"
+arch="x86_64"
+license="MIT"
+depends="python3 python3-dev openssl-dev libffi-dev"
+depends_dev=""
+makedepends="$depends_dev"
+install=""
+subpackages=""
+source="https://pypi.python.org/packages/f8/ad/0e77a853c745a15981ab51fa9a0cb4eca7a7a007b4c1970106ee6ba01e0c/entrypoints-0.2.2-py2.py3-none-any.whl"
+
+build() {
+	return 0;
+}
+
+package() {
+	cd "$srcdir"
+	pip3 install --root="$pkgdir" entrypoints-0.2.2-py2.py3-none-any.whl
+	pip3 install --root="$pkgdir" ipykernel ipywidgets pyopenssl
+}
+
+md5sums="73bd7ce92c19b25dc5a20aff41be996a  entrypoints-0.2.2-py2.py3-none-any.whl"
+sha256sums="0a0685962ee5ac303f470acbb659f0f97aef5b9deb6b85d059691c706ef6e45e  entrypoints-0.2.2-py2.py3-none-any.whl"
+sha512sums="860c09f1164521ab54d042f5eae2678675456b7880d09116cace4890a23d83a270177ecedee0d3b8e2422198b9826d1ea647cedf96f1d4d6f4cd98fcb3d569fb  entrypoints-0.2.2-py2.py3-none-any.whl"
