@@ -1,0 +1,15 @@
+# Jupyter Gallery
+# ipykernel will already be installed, so don't try to do it during build time
+
+diff --git a/tools/Jupyter/kernel/setup.py b/tools/Jupyter/kernel/setup.py
+index 7ceb597..ad32033 100644
+--- a/tools/Jupyter/kernel/setup.py
++++ b/tools/Jupyter/kernel/setup.py
+@@ -72,7 +72,6 @@ if 'develop' in sys.argv or any(a.startswith('bdist') for a in sys.argv):
+ 
+ setuptools_args = {}
+ install_requires = setuptools_args['install_requires'] = [
+-    'ipykernel',
+     'traitlets',
+ ]
+ 

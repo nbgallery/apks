@@ -1,27 +1,37 @@
 # Maintainer: Jupyter Gallery Team <team@jupyter.gallery>
 pkgname=jg-cling
-pkgver=0.2.0
+pkgver=1.0.0
 pkgrel=0
 pkgdesc="C++ kernel for the Jupyter Gallery alpine client"
 url="https://github.com/jupyter-gallery/alpine-testing"
 arch="x86_64"
 license="MIT"
-depends="git"
+depends=""
 depends_dev=""
-makedepends="$depends_dev"
+makedepends="$depends_dev git python py-pip cmake"
 install=""
 subpackages=""
+source="
+	llvm-0001-Add-Musl-MuslEABI-and-Musl-EABIHF-triples.patch
+	llvm-0002-Fix-build-with-musl-libc.patch
+	llvm-0003-Fix-DynamicLibrary-to-build-with-musl-libc.patch
+	llvm-nm-workaround.patch
+	"
 
 _builddir=$startdir/build
-_patchdir=$startdir/patches
-_prefix=$pkgdir/usr/local
+_prefix=/usr
 _libdir=$_prefix/lib
 _bindir=$_prefix/bin
 _includedir=$_prefix/include
 
 prepare() {
+	cd $startdir
+	mkdir -p $srcdir
 	cd $srcdir
-	git clone http://root.cern.ch/git/llvm.git
+
+	# Check out source
+	git clone http://root.cern.ch/git/llvm.git llvm
+	cd llvm
 	git checkout cling-patches
 	cd tools
 	git clone http://root.cern.ch/git/cling.git
@@ -29,64 +39,75 @@ prepare() {
 	cd clang
 	git checkout cling-patches
 
-	# Apply our patches
-	cd $srcdir
-	patch -p1 < $_patchdir/alpine-llvm-patches
-	cd $srcdir/tools/cling
-	patch -p1 < $_patchdir/cling-kernel-patches
+	# Apply patches
+	cd $srcdir/llvm
+	patch -p1 < $startdir/llvm-0001-Add-Musl-MuslEABI-and-Musl-EABIHF-triples.patch
+	patch -p1 < $startdir/llvm-0002-Fix-build-with-musl-libc.patch
+	patch -p1 < $startdir/llvm-0003-Fix-DynamicLibrary-to-build-with-musl-libc.patch
+	patch -p1 < $startdir/llvm-nm-workaround.patch
+	cd $srcdir/llvm/tools/cling
+	patch -p1 < $startdir/cling-kernel.patch
 }
 
 build() {
-	# Configure with options to minimize size.
-	# Need these CXXFLAGS to get it to compile.
-	export CXXFLAGS="-fpermissive -D_GLIBCXX_USE_CXX11_ABI=0"
 	cd $startdir
 	mkdir -p $_builddir
 	cd $_builddir
-	$srcdir/configure \
-		--prefix=$_prefix \
-		--enable-optimized \
-		--enable-cxx1y \
-		--enable-targets=host \
-		--disable-docs \
-		--disable-doxygen \
-		--disable-debug-symbols \
-		--disable-keep-symbols \
-		--disable-clang-arcmt \
-		--disable-clang-plugin-support \
-		--disable-clang-static-analyzer
+
+	# Configure with options to minimize size.
+	cmake \
+		-DCMAKE_BUILD_TYPE=MinSizeRel \
+		-DCMAKE_INSTALL_PREFIX=$_prefix \
+		-DCMAKE_CXX_FLAGS="-fpermissive -D_GLIBCXX_USE_CXX11_ABI=0" \
+		-DLLVM_BUILD_DOCS=OFF \
+		-DLLVM_BUILD_EXAMPLES=OFF \
+		-DLLVM_BUILD_TESTS=OFF \
+		-DLLVM_ENABLE_CXX1Y=ON \
+		-DLLVM_ENABLE_DOXYGEN=OFF \
+		-DLLVM_ENABLE_RTTI=ON \
+		-DLLVM_ENABLE_SPHINX=OFF \
+		-DLLVM_INCLUDE_DOCS=OFF \
+		-DLLVM_INCLUDE_EXAMPLES=OFF \
+		-DLLVM_INCLUDE_TESTS=OFF \
+		-DLLVM_TARGETS_TO_BUILD=X86 \
+		-DCLANG_BUILD_EXAMPLES=OFF \
+		-DCLANG_ENABLE_ARCMT=OFF \
+		-DCLANG_ENABLE_STATIC_ANALYZER=OFF \
+		../src/llvm/ 
+
+	# Build
+	cmake --build . --target clang
+	cmake --build . --target cling
+	cmake --build . --target libclingJupyter
 }
 
 package() {
-	# Build only llvm, clang, and cling.
-	# cling depends on a generated file inside clang, but the dependency isn't
-	# specified in the Make system, so build clang by itself first.
-	make -j4 ONLY_TOOLS="clang" BUILD_EXAMPLES=0
-	make -j4 ONLY_TOOLS="clang cling" BUILD_EXAMPLES=0
-	make -j4 ONLY_TOOLS="clang cling" BUILD_EXAMPLES=0 install
-
-	# The cling configure/make system doesn't build the Jupyter kernel shared library.
-	# These commands were generated with the cmake build system and cleaned up a bit.
-	cd $srcdir/tools/cling/tools/Jupyter
-
-	/usr/bin/c++ -DCLING_INCLUDE_PATHS=\"$_includedir:$srcdir/tools/cling/include:$srcdir/tools/cling/../clang/include:$srcdir/tools/cling/../../include\" -DCLING_VERSION="ROOT_0.2~dev" -DGTEST_HAS_RTTI=0 -D_GNU_SOURCE -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS -I$_builddir/tools/cling/tools/Jupyter -I$srcdir/tools/cling/tools/Jupyter -I$srcdir/tools/cling/include -I$_builddir/tools/cling/include -I$srcdir/tools/cling/../clang/include -I$_builddir/tools/cling/../clang/include -I$srcdir/tools/cling/../llvm/src/tools/clang/include -I$_builddir/tools/cling/../llvm/src/tools/clang/include -I$_builddir/include -I$srcdir/include  -fpermissive -D_GLIBCXX_USE_CXX11_ABI=0  -fPIC -fvisibility-inlines-hidden -Wall -W -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wno-maybe-uninitialized -Wnon-virtual-dtor -Wno-comment -std=c++11 -ffunction-sections -fdata-sections -fno-common -Woverloaded-virtual -Wcast-qual -fno-strict-aliasing -pedantic -Wno-long-long -Wall -W -Wno-unused-parameter -Wwrite-strings -Wno-unused-local-typedefs -fPIC   -fno-rtti -fno-exceptions -fno-rtti -o Kernel.cpp.o -c Kernel.cpp
-
-	/usr/bin/c++  -fPIC -fpermissive -D_GLIBCXX_USE_CXX11_ABI=0  -fPIC -fvisibility-inlines-hidden -Wall -W -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wno-missing-field-initializers -pedantic -Wno-long-long -Wno-maybe-uninitialized -Wnon-virtual-dtor -Wno-comment -std=c++11 -ffunction-sections -fdata-sections -fno-common -Woverloaded-virtual -Wcast-qual -fno-strict-aliasing -pedantic -Wno-long-long -Wall -W -Wno-unused-parameter -Wwrite-strings -Wno-unused-local-typedefs  -Wl,-O3  -Wl,-z,defs -shared -Wl,-soname,libclingJupyter.so -o $_libdir/libclingJupyter.so Kernel.cpp.o $_libdir/libclangAST.a $_libdir/libclangBasic.a $_libdir/libclangCodeGen.a $_libdir/libclangDriver.a $_libdir/libclangFrontend.a $_libdir/libclangLex.a $_libdir/libclangParse.a $_libdir/libclangSema.a $_libdir/libclangSerialization.a $_libdir/libclingUserInterface.a $_libdir/libclingMetaProcessor.a $_libdir/libclingInterpreter.a $_libdir/libclingUtils.a $_libdir/libLLVMCore.a $_libdir/libLLVMSupport.a $_libdir/libLLVMMCJIT.a $_libdir/libLLVMOrcJIT.a $_libdir/libLLVMExecutionEngine.a $_libdir/libLLVMRuntimeDyld.a $_libdir/libLLVMX86AsmParser.a $_libdir/libLLVMX86CodeGen.a $_libdir/libLLVMAsmPrinter.a $_libdir/libLLVMSelectionDAG.a $_libdir/libLLVMCodeGen.a $_libdir/libLLVMTarget.a $_libdir/libLLVMX86Desc.a $_libdir/libLLVMX86AsmPrinter.a $_libdir/libLLVMX86Utils.a $_libdir/libLLVMX86Disassembler.a $_libdir/libLLVMX86Info.a $_libdir/libLLVMMCDisassembler.a $_libdir/libclangCodeGen.a $_libdir/libclangFrontend.a $_libdir/libclangDriver.a $_libdir/libclangParse.a $_libdir/libclangSerialization.a $_libdir/libclangSema.a $_libdir/libclangAnalysis.a $_libdir/libLLVMOption.a $_libdir/libclangEdit.a $_libdir/libclangAST.a $_libdir/libclangLex.a $_libdir/libclangBasic.a $_libdir/libLLVMBitWriter.a $_libdir/libLLVMipo.a $_libdir/libLLVMVectorize.a $_libdir/libLLVMIRReader.a $_libdir/libLLVMAsmParser.a $_libdir/libLLVMInstrumentation.a $_libdir/libLLVMLinker.a $_libdir/libLLVMObjCARCOpts.a $_libdir/libLLVMScalarOpts.a $_libdir/libLLVMInstCombine.a $_libdir/libLLVMProfileData.a $_libdir/libLLVMObject.a $_libdir/libLLVMBitReader.a $_libdir/libLLVMMCParser.a $_libdir/libLLVMMC.a $_libdir/libLLVMTransformUtils.a $_libdir/libLLVMipa.a $_libdir/libLLVMAnalysis.a $_libdir/libLLVMCore.a $_libdir/libLLVMSupport.a -lrt -ldl -latomic -lpthread -lm -Wl,-rpath,"\$ORIGIN/../lib" 
-
-	# Now install the kernel itself.
-	cd $srcdir/tools/cling/tools/Jupyter/kernel
-	pip3 install --root="$pkgdir" .
-	jupyter kernelspec install cling
-	cp scripts/jupyter-cling-kernel $_bindir
-
-	# We don't need any of the binaries or libs except libclingJupyter.so
+	# Install the cling files we need
 	cd $startdir
-	rm -rf $srcdir
-	rm -rf $_builddir
-	rm $_bindir/clang*
-	rm $_bindir/cling
-	rm $_bindir/llvm-tblgen
-	rm $_libdir/libclang*.a
-	rm $_libdir/libcling*.a
-	rm $_libdir/libLLVM*.a
+	mkdir -p $pkgdir
+	mkdir -p $pkgdir/$_bindir
+	mkdir -p $pkgdir/$_libdir
+	mkdir -p $pkgdir/$_includedir
+	cp $_builddir/bin/cling $pkgdir/$_bindir
+	cp -r $_builddir/lib/clang $pkgdir/$_libdir
+	cp -r $srcdir/llvm/tools/cling/include/cling $pkgdir/$_includedir
+	rm $pkgdir/$_includedir/cling/Makefile
+
+	# Install the kernel itself
+	cp $_builddir/lib/libclingJupyter.so $pkgdir/$_libdir
+	cp $srcdir/llvm/tools/cling/tools/Jupyter/kernel/scripts/jupyter-cling-kernel $pkgdir/$_bindir
+	cd $srcdir/llvm/tools/cling/tools/Jupyter/kernel
+	pip install --root="$pkgdir" .
 }
+md5sums="a4f3777d09d9bcb101d845aff083e23c  llvm-0001-Add-Musl-MuslEABI-and-Musl-EABIHF-triples.patch
+5d0decf96e0b7c6cde545becb00ddcc3  llvm-0002-Fix-build-with-musl-libc.patch
+1d008619616d81f4372742d592e2e98d  llvm-0003-Fix-DynamicLibrary-to-build-with-musl-libc.patch
+81b8b76e232a1ec71c43f440d7a4c1b9  llvm-nm-workaround.patch"
+sha256sums="98c9fa4129493ae2032b083e4aaea68ade82f2de87859cd2a968da952547c0db  llvm-0001-Add-Musl-MuslEABI-and-Musl-EABIHF-triples.patch
+d291ad79e1855df6b47c3544ea883d95003de5cb4ef55f897c19974dde17f746  llvm-0002-Fix-build-with-musl-libc.patch
+186e3cf4fa260afb116b3fde2d80533e98ffa59034f1130660f1f47266d121a3  llvm-0003-Fix-DynamicLibrary-to-build-with-musl-libc.patch
+9303bb48353cbecb0350530322ebc652a2450a292a9e51fda40105c04a756c81  llvm-nm-workaround.patch"
+sha512sums="222a9e95ffb7eb12ddaae25079a59950c5dad51d751a441c10a42537460747a736b7d0e56e53cfef88957943b448f573614c30367b07f7b3849292c8a6116297  llvm-0001-Add-Musl-MuslEABI-and-Musl-EABIHF-triples.patch
+5cfc3a591dfb39456a03c739472fa8966914af36c4a6ac75f4b4d7973fae309326c99b719bc9525d51755295bf8f8abdb1a283f6793bb6926534863b03edc1cb  llvm-0002-Fix-build-with-musl-libc.patch
+c05b2d7d88f68f105e8ab69f4574fef4b5c3b98b2e8f09471be9b836485df04f7fd5beb8ce6e7d285d98559d073546a07c49f6492256766368a8f97e1eefcd76  llvm-0003-Fix-DynamicLibrary-to-build-with-musl-libc.patch
+c3a31fbebc329e897dd1a89c58d9e2f4f20e7a2ba17f0e4ecee364db645b70c9e50b7538965f0e6886ad2aec35b813554f712d025943243bad68b412237c792d  llvm-nm-workaround.patch"
