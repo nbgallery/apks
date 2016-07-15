@@ -1,16 +1,16 @@
 # Contributor: Francesco Colista <fcolista@alpinelinux.org>
-# Contributor: fenwanderer <ask.fen.wanderer@gmail.com>
-# Maintainer: fenwanderer <ask.fen.wanderer@gmail.com>
+# Contributor: Jupyter Gallery Team <team@jupyter.gallery>
+# Maintainer: Jupyter Gallery Team <team@jupyter.gallery>
 pkgname=py3-numpy
 _pkgname=numpy
-pkgver=1.11.0
+pkgver=1.11.1
 pkgrel=0
 pkgdesc="Scientific tools for Python"
 url="http://www.numpy.org"
 arch="all"
 license="BSD"
-depends=""
-depends_dev="python3-dev cython3 py3-numpy"
+depends="gfortran"
+depends_dev="python3-dev openblas-dev py3-nose cython3-dev py3-numpy"
 makedepends="$depends_dev"
 install=""
 subpackages="$pkgname-dev $pkgname-doc"
@@ -33,25 +33,24 @@ prepare() {
 build() {
 	cd "$_builddir"
 	export ATLAS=None
-	export BLAS=None
-	export LAPACK=None
-	python3 setup.py build || return 1
+	LDFLAGS="$LDFLAGS -shared"
+	python3 setup.py build config_fc --fcompiler=gnu95  || return 1
 }
 
 
 package() {
 	cd "$_builddir"
-	python3 setup.py install  --prefix=/usr --root="$pkgdir"  || return 1
+	python3 setup.py install  --prefix=/usr --root="$pkgdir" config_fc --fcompiler=gnu95  || return 1
 	install -m755 -d "$pkgdir"/usr/share/licenses/custom/$pkgname
 	install -m644 LICENSE.txt "$pkgdir"/usr/share/licenses/custom/$pkgname/LICENSE
 }
 
-md5sums="bc56fb9fc2895aa4961802ffbdb31d0b  numpy-1.11.0.tar.gz
-a1ad56975b7d307d7c62cfb06963322b  numpy-1.11.0-musl.patch
+md5sums="3c3700a30fae5ae2e41c947076417d4c  numpy-1.11.1.tar.gz
+a1ad56975b7d307d7c62cfb06963322b  numpy-1.11.1-musl.patch
 6f15bb8fe3d12faa8983a9e18bbea2a9  site.cfg"
-sha256sums="a1d1268d200816bfb9727a7a27b78d8e37ecec2e4d5ebd33eb64e2789e0db43e  numpy-1.11.0.tar.gz
-e94f8d85b08de300a7402c8f4c7f6badbeb88964f45890c6c1aabfed9e3e1b88  numpy-1.11.0-musl.patch
+sha256sums="108205d674adf9c128b6c1697d4a211bab820b11e898b5aa3779812a643bbc07  numpy-1.11.1.tar.gz
+e94f8d85b08de300a7402c8f4c7f6badbeb88964f45890c6c1aabfed9e3e1b88  numpy-1.11.1-musl.patch
 8aa71c1aec2a9fdf6ab6167c92e86bdaf27f9a263b6b9849097ec7dcdf6d91a3  site.cfg"
-sha512sums="92c1889397ad013e25da3a0657fc01e787d528fc19c29cc2acd286c3f07d41b984252583457b1b9259fc303afbe9694565cdcf5752eb4ecb950cc7a99ec1ad8b  numpy-1.11.0.tar.gz
-f8820c08754b5521e1a30b602bf87667459c96c1abfa78a4f54331c19ceec5e2f3108a20ba09fdf8089087296a4836dc32b2b47022efd90ade3de568aef9a1a7  numpy-1.11.0-musl.patch
+sha512sums="b8c3e90c59c070bb1ab0ea10110e106f6a392609cf249d4e23c1f669abb680d9ea89d002444f15d30529b553d85a30877e2c3564cac74718171f4e4009567ec0  numpy-1.11.1.tar.gz
+f8820c08754b5521e1a30b602bf87667459c96c1abfa78a4f54331c19ceec5e2f3108a20ba09fdf8089087296a4836dc32b2b47022efd90ade3de568aef9a1a7  numpy-1.11.1-musl.patch
 21ca8db304cbbf5949f07702f2a42bb5e5a0d641921e36649555a41b0e48f04e96f53760417823177ac27f6de24b2191e6e1d5f0eb393beafa29f7484e23284f  site.cfg"
