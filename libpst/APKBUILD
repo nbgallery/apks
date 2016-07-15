@@ -1,0 +1,46 @@
+# Maintainer: Jupyter Gallery Team <team@jupyter.gallery>
+pkgname=libpst
+pkgver=0.6.66
+pkgrel=0
+pkgdesc="Library for interacting with PST (MS Outlook Personal Folders) files"
+url="http://www.five-ten-sg.com/libpst/"
+arch="all"
+license="GPLv2"
+depends=""
+depends_dev=""
+makedepends="libgsf-dev"
+install=""
+subpackages="$pkgname-doc"
+source="http://www.five-ten-sg.com/$pkgname/packages/$pkgname-$pkgver.tar.gz"
+
+_builddir="$srcdir"/$pkgname-$pkgver
+prepare() {
+	local i
+	cd "$_builddir"
+	for i in $source; do
+		case $i in
+		*.patch) msg $i; patch -p1 -i "$srcdir"/$i || return 1;;
+		esac
+	done
+}
+
+build() {
+	cd "$_builddir"
+	./configure \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--mandir=/usr/share/man \
+		--localstatedir=/var \
+		--disable-python \
+		|| return 1
+	make || return 1
+}
+
+package() {
+	cd "$_builddir"
+	make DESTDIR="$pkgdir" install || return 1
+}
+
+md5sums="28f2fd77414442b6c240e5adf43dd1a0  libpst-0.6.66.tar.gz"
+sha256sums="92b49939d821091d9d25e27e17c78dbb867f3f9ab5b8f43e2b01ace0677e1f72  libpst-0.6.66.tar.gz"
+sha512sums="0d07b13554b9e009787ce651714281d21a4d38afae997bd87244690538bd18176ab74655c0a0646b1c475c916052d4295ffe749e6a03765450af7e9c8443dd86  libpst-0.6.66.tar.gz"
