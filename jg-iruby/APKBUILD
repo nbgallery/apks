@@ -35,7 +35,7 @@ package() {
 	gem install -N -i "$pkgdir/$gemdir" psych test-unit 
 
 	# additional iruby dependencies
-	gem install -N -i "$pkgdir/$gemdir" iruby ffi-rzmq pry erector iruby-dependencies mypki
+	gem install -N -i "$pkgdir/$gemdir" iruby ffi-rzmq pry erector iruby-dependencies mypki oj
 
 	# patch pry to work with more on alpine instead of less
 	sed -i "/^gem/i ENV['PAGER'] = 'more'" "$pkgdir/$gemdir"/bin/pry
