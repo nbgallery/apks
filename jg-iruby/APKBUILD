@@ -54,6 +54,10 @@ package() {
 	mkdir "$pkgdir"/root
 	cp "$startdir"/pryrc "$pkgdir"/root/.pryrc
 
+  # patch iruby ZMQ poller (https://github.com/SciRuby/iruby/issues/101)
+	cd "$pkgdir"
+	patch -p1 -i "$startdir/cpu-usage.patch"
+
 	# cleanup
 	cd "$pkgdir/$gemdir"
 	rm -rf cache build_info doc
