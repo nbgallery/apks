@@ -14,7 +14,7 @@ subpackages=""
 source="iruby-master.tar.gz::https://github.com/SciRuby/iruby/tarball/master"
 
 # this is to document the iruby version for this apk release
-_iruby_commit_id="7ac5c60"
+_iruby_commit_id="cba8dd1"
 _builddir="$srcdir/SciRuby-iruby-$_iruby_commit_id"
 
 build() {
@@ -63,6 +63,6 @@ package() {
 	rm -rf cache build_info doc
 }
 
-md5sums="9e3308d3a7855dda2ea9f9760d3c4799  iruby-master.tar.gz"
-sha256sums="024617b3c337903c5271b23005f0e91304f41d06479fa8caa64465a97b97c28b  iruby-master.tar.gz"
-sha512sums="890084d82705ce53fb5f312e6159d5db9558b42b25238f254efafeee0ca522788150f11dad2a1d114aa365d67def0c5d913ed1ee6498246023952e1c6ef698e6  iruby-master.tar.gz"
+md5sums="0b4982c54cc2e214b0efc4cb5f90e3ff  iruby-master.tar.gz"
+sha256sums="31f072cc6db5d7add883602b8865aab1576f3fc0781b36da3c663b9a02195f09  iruby-master.tar.gz"
+sha512sums="3ada73df47b3812574fe52591d10b68f834d39f63594752c9bd285e4d941e140124f26c51e227409cff8e29f4f5b14f93a2168b17b9999e4b2ab570a11f303bb  iruby-master.tar.gz"
