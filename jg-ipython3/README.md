@@ -7,7 +7,7 @@ Some users might get an error like this one when trying to build:
 This is a bug in pip/setuptools bundled in the python3 apk. To work around it, install the jg-ipython3 dependecies on your apk build box, then upgrade pip/setuptools with the following command:
 
 ```bash
-$ pip install --upgrade setuptools pip
+$ sudo pip3 install --upgrade setuptools pip
 ```
 
 Then build using `abuild`, instead of `abuild -r`.
