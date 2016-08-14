@@ -1,4 +1,4 @@
-# Jupyter Gallery
+# Notebook Gallery
 # ipykernel will already be installed, so don't try to do it during build time
 
 diff --git a/tools/Jupyter/kernel/setup.py b/tools/Jupyter/kernel/setup.py
