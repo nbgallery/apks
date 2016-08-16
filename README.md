@@ -1,5 +1,3 @@
-# alpine-testing
-Alpine package build files under development.
+# nb.gallery APKs 
 
-Add these subfolders under `aports/testing` to run `abuild` against them.
-
+These APKs are used by the nb.gallery Docker client to dynamically install kernels. 

@@ -1,5 +1,5 @@
 # Maintainer: Jupyter Gallery Team <team@jupyter.gallery>
-pkgname=jg-cling
+pkgname=gallery-cpp-kernel
 pkgver=1.0.1
 pkgrel=0
 pkgdesc="C++ kernel for the Jupyter Gallery alpine client"

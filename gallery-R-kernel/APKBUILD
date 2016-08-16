@@ -1,5 +1,5 @@
 # Maintainer: Jupyter Gallery Team <team@jupyter.gallery>
-pkgname=jg-IRkernel
+pkgname=gallery-R-kernel
 pkgver=0.6.0
 pkgrel=0
 pkgdesc="R kernel for the Jupyter Gallery alpine client"

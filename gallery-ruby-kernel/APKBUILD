@@ -1,5 +1,5 @@
 # Maintainer: Jupyter Gallery Team <team@jupyter.gallery>
-pkgname=jg-iruby
+pkgname=gallery-ruby-kernel
 pkgver=0.1.0
 pkgrel=0
 pkgdesc="Ruby kernel for the Jupyter Gallery alpine client"
