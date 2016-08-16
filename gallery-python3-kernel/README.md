@@ -1,4 +1,4 @@
-# Building jg-ipython3
+# Building gallery-python3-kernel
 
 Some users might get an error like this one when trying to build:
 

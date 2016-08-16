@@ -1,5 +1,5 @@
 # Maintainer: Jupyter Gallery Team <team@jupyter.gallery>
-pkgname=gallery-ptyhon3-kernel
+pkgname=gallery-python3-kernel
 pkgver=0.1.0
 pkgrel=0
 pkgdesc="Python 3 kernel for the Jupyter Gallery alpine client"

@@ -1,4 +1,4 @@
-# Building jg-IRkernel
+# Building gallery-R-kernel
 
 IRKernel needs to be linked against lizmq. We use libzmq 4.0.4 since all kernels seem to be compatible with that version. To install libzmq on your apk build box, do the following: 
 
