@@ -1,0 +1,48 @@
+# Contributor: Isaac Dunham <ibid.ag@gmail.com>
+# Contributor: Jupyter Gallery Team <team@jupyter.gallery>
+# Maintainer: Jupyter Gallery Team <team@jupyter.gallery>
+pkgname=py3-scipy
+_pkgname=scipy
+pkgver=0.18.0
+_pkgver=0.18.0-1
+pkgrel=0
+pkgdesc="Python library for scientific computing"
+url="http://www.scipy.org"
+arch="all"
+license="BSD"
+depends="python3 py3-numpy"
+depends_dev="python3-dev gfortran py3-numpy-dev openblas-dev"
+makedepends="$depends_dev"
+install=""
+subpackages="$pkgname-dev"
+#source="https://files.pythonhosted.org/packages/source/s/scipy/scipy-$pkgver.tar.gz"
+source="$_pkgname-$_pkgver.tar.gz::http://github.com/$_pkgname/$_pkgname/archive/v$_pkgver.tar.gz"
+
+_builddir="$srcdir"/$_pkgname-$_pkgver
+prepare() {
+	local i
+	cd "$_builddir"
+	for i in $source; do
+		case $i in
+		*.patch) msg $i; patch -p1 -i "$srcdir"/$i || return 1;;
+		esac
+	done
+}
+
+build() {
+	cd "$_builddir"
+	export LDFLAGS="$LDFLAGS -shared"
+	python3 setup.py config_fc \
+		--fcompiler=gnu95 config || return 1
+	python3 setup.py config_fc \
+		--fcompiler=gnu95 build || return 1
+}
+
+package() {
+	cd "$_builddir"
+	python3 setup.py install --prefix=/usr --root="$pkgdir" || return 1
+}
+
+md5sums="9c6bc68693d7307acffce690fe4f1076  scipy-0.18.0-1.tar.gz"
+sha256sums="bb66eddfa4192b521fc84c2c3ad53371de4a4c28d826c86dfebaf7f084aa6583  scipy-0.18.0-1.tar.gz"
+sha512sums="4daa92de233a97c6c318a7ff62c9931e8e3bb7b6f11e603144b301a84e9d40caa5e3266c8d02b4546457e01586c380e1aefda4ff1d4985c1983046fa07e1a421  scipy-0.18.0-1.tar.gz"
