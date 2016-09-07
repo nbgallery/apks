@@ -14,8 +14,9 @@ depends="python3"
 depends_dev=""
 makedepends="python3-dev"
 install=""
-subpackages=""
-source="http://pypi.python.org/packages/source/${_pkgname:0:1}/$_pkgname/$_pkgname-$pkgver.tar.gz"
+subpackages="py3-nose-doc"
+source="http://pypi.python.org/packages/source/${_pkgname:0:1}/$_pkgname/$_pkgname-$pkgver.tar.gz
+        $_pkgname-$pkgver-man.patch"
 
 _builddir="$srcdir"/$_pkgname-$pkgver
 prepare() {
@@ -38,6 +39,9 @@ package() {
 	python3 setup.py install --prefix=/usr --root="$pkgdir" || return 1
 }
 
-md5sums="4d3ad0ff07b61373d2cefc89c5d0b20b  nose-1.3.7.tar.gz"
-sha256sums="f1bffef9cbc82628f6e7d7b40d7e255aefaa1adb6a1b1d26c69a8b79e6208a98  nose-1.3.7.tar.gz"
-sha512sums="e65c914f621f8da06b9ab11a0ff2763d6e29b82ce2aaed56da0e3773dc899d9deb1f20015789d44c65a5dad7214520f5b659b3f8d7695fb207ad3f78e5cf1b62  nose-1.3.7.tar.gz"
+md5sums="4d3ad0ff07b61373d2cefc89c5d0b20b  nose-1.3.7.tar.gz
+7827039a7209186e86e4157095c1882a  nose-1.3.7-man.patch"
+sha256sums="f1bffef9cbc82628f6e7d7b40d7e255aefaa1adb6a1b1d26c69a8b79e6208a98  nose-1.3.7.tar.gz
+1a6480e796905bb178d8cc5161ff49cf6717dd2d8cfc0958989afafdf5ef3478  nose-1.3.7-man.patch"
+sha512sums="e65c914f621f8da06b9ab11a0ff2763d6e29b82ce2aaed56da0e3773dc899d9deb1f20015789d44c65a5dad7214520f5b659b3f8d7695fb207ad3f78e5cf1b62  nose-1.3.7.tar.gz
+62b3b909ec41fcfc390868f4f1e508b7c0b3f3ee30f21842abbc8f1a36d234d49ec6221115de62fc7ba458b64042d1fb56dcf13fb9395f56fc15a6d976f8a244  nose-1.3.7-man.patch"
