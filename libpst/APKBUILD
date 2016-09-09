@@ -1,3 +1,4 @@
+# Contributor: Jupyter Gallery Team <team@jupyter.gallery>
 # Maintainer: Jupyter Gallery Team <team@jupyter.gallery>
 pkgname=libpst
 pkgver=0.6.66
@@ -10,7 +11,7 @@ depends=""
 depends_dev=""
 makedepends="libgsf-dev"
 install=""
-subpackages="$pkgname-doc"
+subpackages="$pkgname-dev $pkgname-doc"
 source="http://www.five-ten-sg.com/$pkgname/packages/$pkgname-$pkgver.tar.gz"
 
 _builddir="$srcdir"/$pkgname-$pkgver
@@ -31,6 +32,7 @@ build() {
 		--sysconfdir=/etc \
 		--mandir=/usr/share/man \
 		--localstatedir=/var \
+		--enable-libpst-shared \
 		--disable-python \
 		|| return 1
 	make || return 1
