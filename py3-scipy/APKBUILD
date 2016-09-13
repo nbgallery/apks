@@ -15,7 +15,6 @@ depends_dev="python3-dev gfortran py3-numpy-dev openblas-dev"
 makedepends="$depends_dev"
 install=""
 subpackages="$pkgname-dev"
-#source="https://files.pythonhosted.org/packages/source/s/scipy/scipy-$pkgver.tar.gz"
 source="$_pkgname-$_pkgver.tar.gz::http://github.com/$_pkgname/$_pkgname/archive/v$_pkgver.tar.gz"
 
 _builddir="$srcdir"/$_pkgname-$_pkgver
