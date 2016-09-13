@@ -1,0 +1,41 @@
+# Contributor: William Pitcock <nenolod@dereferenced.org>
+# Maintainer: Jupyter Gallery Team <team@jupyter.gallery>
+pkgname=py3-dateutil
+_pkgname=dateutil
+pkgver=2.5.3
+pkgrel=0
+pkgdesc="Python extensions for datetime module"
+url="https://dateutil.readthedocs.io"
+arch="noarch"
+license="BSD"
+depends="python3 py3-six"
+depends_dev=""
+makedepends="python3-dev"
+install=""
+subpackages=""
+source="python-$_pkgname-$pkgver.tar.gz::https://github.com/$_pkgname/$_pkgname/archive/$pkgver.tar.gz"
+
+_builddir="$srcdir"/$_pkgname-$pkgver
+prepare() {
+	local i
+	cd "$_builddir"
+	for i in $source; do
+		case $i in
+		*.patch) msg $i; patch -p1 -i "$srcdir"/$i || return 1;;
+		esac
+	done
+}
+
+build() {
+	cd "$_builddir"
+	python3 setup.py build || return 1
+}
+
+package() {
+	cd "$_builddir"
+	python3 setup.py install --prefix=/usr --root="$pkgdir" || return 1
+}
+
+md5sums="93e297b21a3c5d2a8db878788efbcf25  python-dateutil-2.5.3.tar.gz"
+sha256sums="7cd888138963e4b699998c651b27e732f06671e3620f8cc745144c881e36fb3a  python-dateutil-2.5.3.tar.gz"
+sha512sums="9c8944b1d9915191f3511b9fadf9da038369a72138ff0ea08257476aaa6879530273d9fc85e98d0a8ab5709f6abacd2b55ef4c08a2d28ca558ff961aebc67b41  python-dateutil-2.5.3.tar.gz"
