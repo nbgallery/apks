@@ -1,0 +1,42 @@
+# Contributor: Isaac Dunham <ibid.ag@gmail.com>
+# Maintainer: Jupyter Gallery Team <team@jupyter.gallery>
+pkgname=py3-matplotlib
+_pkgname=matplotlib
+pkgver=1.5.2
+pkgrel=0
+pkgdesc="A Python library for plots"
+url="http://matplotlib.org"
+arch="all"
+license="custom"
+depends="python3 py3-numpy py3-tkinter py3-dateutil py3-parsing py3-tz py3-cycler"
+makedepends="python3-dev gfortran py3-numpy-dev freetype-dev libpng-dev tk-dev"
+subpackages="$pkgname-doc $pkgname-tests"
+source="$_pkgname-$pkgver.tar.gz::https://github.com/matplotlib/$_pkgname/archive/v$pkgver.tar.gz"
+builddir="$srcdir/$_pkgname-$pkgver"
+
+build() {
+	cd "$builddir"
+	python3 setup.py build || return 1
+}
+
+package() {
+	cd "$builddir"
+
+	python3 setup.py install --prefix=/usr --root="$pkgdir" || return 1
+	install -m755 -d "$pkgdir"/usr/share/licenses/custom/$pkgname
+	install -m644 LICENSE/* "$pkgdir"/usr/share/licenses/custom/$pkgname/
+}
+
+tests() {
+	pkgdesc="$pkgdesc (tests)"
+	arch="noarch"
+	depends="$depends py3-nose"
+	local sitepath="$(python3 -c 'import site; print(site.getsitepackages()[0])')/$_pkgname"
+
+	mkdir -p "$subpkgdir"$sitepath
+	mv "$pkgdir"$sitepath/tests "$subpkgdir"$sitepath/
+}
+
+md5sums="b9a6678397a477403b96c6e7f022f9d8  matplotlib-1.5.2.tar.gz"
+sha256sums="c334c5dccda790423e1e6ebc5a9a442aa2423894cfea08e62c5fd0116e40d9ae  matplotlib-1.5.2.tar.gz"
+sha512sums="7d4688665273d30a08edf0cf2414cf0c05c619335f72b190c6ea125687e74cafe6133b7f3b6588e969c931ec8f970593d44654766205e6cc19f760925826a7e3  matplotlib-1.5.2.tar.gz"
