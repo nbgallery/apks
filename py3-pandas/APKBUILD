@@ -1,0 +1,30 @@
+# Maintainer: Jupyter Gallery Team <team@jupyter.gallery>
+pkgname=py3-pandas
+_pkgname=pandas
+pkgver=0.18.1
+pkgrel=0
+pkgdesc="Cross-section and time series data analysis toolkit"
+url="http://pandas.pydata.org"
+arch="all"
+license="BSD"
+depends="python3"
+depends_dev=""
+makedepends="python3-dev py3-dateutil py3-numpy-dev py3-tz cython3-dev"
+install=""
+subpackages=""
+source="$_pkgname-$pkgver.tar.gz::https://github.com/pydata/$_pkgname/archive/v$pkgver.tar.gz"
+
+builddir="${srcdir}/${_pkgname}-$pkgver"
+build() {
+	cd "$builddir" || return 1
+	python3 setup.py build || return 1
+}
+
+package() {
+	cd "$builddir"
+	python3 setup.py install --prefix=/usr --root="$pkgdir" || return 1
+}
+
+md5sums="c6cb010d115a05842878c77f6959b8b0  pandas-0.18.1.tar.gz"
+sha256sums="1f3136f69a58d490ba9f9874e67601042a11138270515dedcf6979c003bba79b  pandas-0.18.1.tar.gz"
+sha512sums="0cace411d881e6a4e040661d6087f393a71dbcf118de57ff4e58653bdfbfa2a735e4db48bfb36805973a17f8e7904102ab3220613bb4bd260500c1bba860c222  pandas-0.18.1.tar.gz"
