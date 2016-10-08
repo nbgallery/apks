@@ -1,0 +1,72 @@
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
+pkgname=gallery-toree-kernel
+pkgver=1.0.0
+pkgrel=0
+pkgdesc="Apache Toree (Spark) kernels for NBGallery alpine client"
+url="https://github.com/nbgallery/alpine-testing"
+arch="x86_64"
+license="MIT"
+depends="openjdk8 snappy java-snappy-native"
+depends_dev=""
+makedepends="$depends_dev python py2-pip"
+install=""
+subpackages=""
+# wget http://d3kbcqa49mib13.cloudfront.net/spark-1.6.0-bin-hadoop2.6.tgz
+spark_version="spark-1.6.0-bin-hadoop2.6"
+spark_tar="$spark_version.tgz"
+#source="$spark_tar"
+source=""
+
+_builddir=$startdir/build
+_prefix=/usr
+
+prepare() {
+        if [ ! -f $startdir/$spark_tar ]; then
+                wget http://d3kbcqa49mib13.cloudfront.net/spark-1.6.0-bin-hadoop2.6.tgz
+	fi
+}
+
+build() {
+        echo 'Nothing to build'
+}
+
+package() {
+	cd $startdir
+	mkdir -p $pkgdir/$_prefix
+	export JAVA_HOME=/usr/lib/jvm/default-jvm
+	export PATH=$PATH:$JAVA_HOME/bin
+
+	# Install spark
+        ls -l $startdir/$spark_tar
+	tar xzf $startdir/$spark_tar -C $pkgdir/$_prefix
+	pwd
+	echo $pkgdir/$_prefix
+	cd $pkgdir/$_prefix
+	ln -s $spark_version spark
+	export SPARK_HOME=/usr/spark
+	cd $startdir
+
+        # Patch spark jar with alpine snappy .so
+        cd $pkgdir/$_prefix/spark
+        mkdir -p org/xerial/snappy/native/Linux/x86_64
+	cp /usr/lib/libsnappyjava.so.1.1.2 org/xerial/snappy/native/Linux/x86_64/libsnappyjava.so
+	jar -uf lib/spark-assembly-1.6.0-hadoop2.6.0.jar org/xerial/snappy/native/Linux/x86_64/libsnappyjava.so
+	rm -rf org
+	jar tvf lib/spark-assembly-1.6.0-hadoop2.6.0.jar | grep Linux | grep libsnappy
+	cd $startdir
+
+	# Install the kernel
+	pip install --no-deps --no-cache-dir --root="$pkgdir" toree
+
+	# Cleanup
+        cd $pkgdir/$_prefix/spark
+	rm -rf R/lib/SparkR/html
+	rm -rf R/lib/SparkR/tests
+	rm -rf data
+	rm -rf examples
+	rm -rf python/docs
+	rm -rf python/test_support
+	rm CHANGES.txt
+	rm lib/spark-examples-1.6.0-hadoop2.6.0.jar
+	cd $startdir
+}
