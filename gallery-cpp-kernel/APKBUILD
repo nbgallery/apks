@@ -12,6 +12,7 @@ makedepends="$depends_dev git python py2-pip cmake"
 install=""
 subpackages=""
 source="
+	cling-kernel.patch
 	llvm-0002-Fix-build-with-musl-libc.patch
 	llvm-0003-Fix-DynamicLibrary-to-build-with-musl-libc.patch
 	llvm-nm-workaround.patch
@@ -97,12 +98,15 @@ package() {
 	cd $srcdir/llvm/tools/cling/tools/Jupyter/kernel
 	pip install --root="$pkgdir" .
 }
-md5sums="e784f2d249887b370d986d97e569d847  llvm-0002-Fix-build-with-musl-libc.patch
+md5sums="89564aefaeb6607ab6afd98e3e7ba7cf  cling-kernel.patch
+e784f2d249887b370d986d97e569d847  llvm-0002-Fix-build-with-musl-libc.patch
 673d5c2e10e8be51cf9a8d0793ba49c1  llvm-0003-Fix-DynamicLibrary-to-build-with-musl-libc.patch
 941c06516943657760905123729429fb  llvm-nm-workaround.patch"
-sha256sums="053bf96cbaa669ff7d2dae093a50c8a43c97bd173ca62617f1e15a30ea8ad949  llvm-0002-Fix-build-with-musl-libc.patch
+sha256sums="6e138e72614a00e034d6b51710aad8e63a56e6e98399b2945fb01efabd2ad81a  cling-kernel.patch
+053bf96cbaa669ff7d2dae093a50c8a43c97bd173ca62617f1e15a30ea8ad949  llvm-0002-Fix-build-with-musl-libc.patch
 b626c87b4097ee385154fe0db8dee07e1880ee9dc1097cfd8d385d10fc7e85c8  llvm-0003-Fix-DynamicLibrary-to-build-with-musl-libc.patch
 d1daab63ada2cd10a3117780de9969de1ed56900066d8ed9899fbcc6e7103611  llvm-nm-workaround.patch"
-sha512sums="3ac81c0801e70c0491ee83e601b2687e63ec439bc110d4c522765f3ba1dee863f7d6a67bc26af03293fe6f8dbb0e084972e85a15f442927894fca541b8cc7237  llvm-0002-Fix-build-with-musl-libc.patch
+sha512sums="e496fdd9b2553ff557cdc001a0f7e01f1f8ee0459eb64f9a569c94390e48082181fac1daf170fa478ab5566822b5b1fab0a3e995f1e449d34169c57a32a37f08  cling-kernel.patch
+3ac81c0801e70c0491ee83e601b2687e63ec439bc110d4c522765f3ba1dee863f7d6a67bc26af03293fe6f8dbb0e084972e85a15f442927894fca541b8cc7237  llvm-0002-Fix-build-with-musl-libc.patch
 d996f1512011f7700c3f08ef801973b6e4f5d5c218fa72e38750a1dadbd761f53ede86c48af41d63e782a07ed9675ecba3b921aa8ee17ed124236f1e3411fe86  llvm-0003-Fix-DynamicLibrary-to-build-with-musl-libc.patch
 0fe536291138172a755257b1f2c6c7133ce5fa312e723079cffa0a4ccf547d26c59800a8018f63ec1ec4d144fd24d6dfcf9e74bdc3ed435005576aa4d8276b7e  llvm-nm-workaround.patch"
