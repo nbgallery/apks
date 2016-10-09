@@ -1,5 +1,5 @@
 # Contributor: Natanael Copa <ncopa@alpinelinux.org>
-# Maintainer: Jupyter Gallery Team <team@jupyter.gallery>
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=py3-parsing
 _pkgname=pyparsing
 pkgver=2.1.9

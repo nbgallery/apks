@@ -1,6 +1,5 @@
 # Contributor: Stuart Cardall <developer@it-offshore.co.uk>
-# Contributor: Jupyter Gallery Team <team@jupyter.gallery>
-# Maintainer: Jupyter Gallery Team <team@jupyter.gallery>
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=cython3
 _pkgname=cython
 pkgver=0.24.1

@@ -1,6 +1,5 @@
 # Contributor: Isaac Dunham <ibid.ag@gmail.com>
-# Contributor: Jupyter Gallery Team <team@jupyter.gallery>
-# Maintainer: Jupyter Gallery Team <team@jupyter.gallery>
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=py3-scipy
 _pkgname=scipy
 pkgver=0.18.0

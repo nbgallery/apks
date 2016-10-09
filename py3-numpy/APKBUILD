@@ -1,6 +1,5 @@
 # Contributor: Francesco Colista <fcolista@alpinelinux.org>
-# Contributor: Jupyter Gallery Team <team@jupyter.gallery>
-# Maintainer: Jupyter Gallery Team <team@jupyter.gallery>
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=py3-numpy
 _pkgname=numpy
 pkgver=1.11.1

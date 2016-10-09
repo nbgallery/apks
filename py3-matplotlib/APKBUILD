@@ -1,5 +1,5 @@
 # Contributor: Isaac Dunham <ibid.ag@gmail.com>
-# Maintainer: Jupyter Gallery Team <team@jupyter.gallery>
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=py3-matplotlib
 _pkgname=matplotlib
 pkgver=1.5.2

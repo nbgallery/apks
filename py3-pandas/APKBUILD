@@ -1,4 +1,4 @@
-# Maintainer: Jupyter Gallery Team <team@jupyter.gallery>
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=py3-pandas
 _pkgname=pandas
 pkgver=0.18.1

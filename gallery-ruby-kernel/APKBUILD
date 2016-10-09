@@ -1,9 +1,9 @@
-# Maintainer: Jupyter Gallery Team <team@jupyter.gallery>
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=gallery-ruby-kernel
 pkgver=0.1.0
 pkgrel=0
-pkgdesc="Ruby kernel for the Jupyter Gallery alpine client"
-url="https://github.com/jupyter-gallery/alpine-testing"
+pkgdesc="Ruby kernel for the Notebook Gallery Alpine client"
+url="https://github.com/nbgallery/apks"
 arch="x86_64"
 license="MIT"
 depends="ruby ruby-dev ruby-irb ruby-bigdecimal ruby-io-console ruby-json ruby-minitest ruby-rake ruby-rdoc libffi-dev"
@@ -63,6 +63,6 @@ package() {
 	rm -rf cache build_info doc
 }
 
-md5sums="0b4982c54cc2e214b0efc4cb5f90e3ff  iruby-master.tar.gz"
-sha256sums="31f072cc6db5d7add883602b8865aab1576f3fc0781b36da3c663b9a02195f09  iruby-master.tar.gz"
-sha512sums="3ada73df47b3812574fe52591d10b68f834d39f63594752c9bd285e4d941e140124f26c51e227409cff8e29f4f5b14f93a2168b17b9999e4b2ab570a11f303bb  iruby-master.tar.gz"
+md5sums="f663973d5ff3e0a78a2e63fcad112539  iruby-master.tar.gz"
+sha256sums="bb0a9a221efae3d2d0a1b4b7249482d57d7562953627a81f11c6556cf8425ba6  iruby-master.tar.gz"
+sha512sums="f571d90e6a1e0b86fc5ca8b192b2c11a3a5927887db111ed1876ac58ca6d91e6a653d730408e59c9b9deceab7b1ea5a5598c7829aed8bf4b7c2fb6cc5bc6fbf9  iruby-master.tar.gz"

@@ -1,6 +1,6 @@
 # Contributor: Peter Bui <pnutzh4x0r@gmail.com>
 # Contributor: Fabian Affolter <fabian@affolter-engineering.ch>
-# Maintainer: Jupyter Gallery Team <team@jupyter.gallery>
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=py3-tz
 _pkgname=pytz
 pkgver=2016.6.1

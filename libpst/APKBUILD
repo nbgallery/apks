@@ -1,5 +1,4 @@
-# Contributor: Jupyter Gallery Team <team@jupyter.gallery>
-# Maintainer: Jupyter Gallery Team <team@jupyter.gallery>
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=libpst
 pkgver=0.6.66
 pkgrel=0

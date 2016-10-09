@@ -1,9 +1,9 @@
-# Maintainer: Jupyter Gallery Team <team@jupyter.gallery>
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=gallery-R-kernel
 pkgver=0.6.0
 pkgrel=0
-pkgdesc="R kernel for the Jupyter Gallery alpine client"
-url="https://github.com/jupyter-gallery/alpine-testing"
+pkgdesc="R kernel for the Notebook Gallery Alpine client"
+url="https://github.com/nbgallery/apks"
 arch="x86_64"
 license="MIT"
 depends="R R-dev R-doc openssl-dev curl-dev ttf-liberation"

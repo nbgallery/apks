@@ -1,5 +1,5 @@
 # Contributor: William Pitcock <nenolod@dereferenced.org>
-# Maintainer: Jupyter Gallery Team <team@jupyter.gallery>
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=py3-dateutil
 _pkgname=dateutil
 pkgver=2.5.3

@@ -1,9 +1,9 @@
-# Maintainer: Jupyter Gallery Team <team@jupyter.gallery>
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=gallery-cpp-kernel
 pkgver=1.0.1
 pkgrel=0
-pkgdesc="C++ kernel for the Jupyter Gallery alpine client"
-url="https://github.com/jupyter-gallery/alpine-testing"
+pkgdesc="C++ kernel for the Notebook Gallery Alpine client"
+url="https://github.com/nbgaller/apks"
 arch="x86_64"
 license="MIT"
 depends=""
