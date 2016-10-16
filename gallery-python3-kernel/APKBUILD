@@ -21,8 +21,9 @@ package() {
 	cd "$srcdir"
 	pip3 install --root="$pkgdir" entrypoints-0.2.2-py2.py3-none-any.whl
 	pip3 install --root="$pkgdir" ipykernel ipywidgets 
-	pip3 install --root="$pkgdir" http://github.com/nbgallery/pypki2/tarball/master#egg=package-1.0
-	pip3 install --root="$pkgdir" --no-deps http://github.com/nbgallery/ipydeps/tarball/master#egg=package-1.0
+	pip3 install --root="$pkgdir" http://github.com/nbgallery/pypki2/tarball/master#egg=pypki2
+	pip3 install --root="$pkgdir" --no-deps http://github.com/nbgallery/ipydeps/tarball/master#egg=ipydeps
+	rm -rf "$pkgdir/usr/share/man"
 }
 
 md5sums="73bd7ce92c19b25dc5a20aff41be996a  entrypoints-0.2.2-py2.py3-none-any.whl"
