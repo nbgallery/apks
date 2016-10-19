@@ -1,0 +1,35 @@
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
+pkgname=qhull
+pkgver=7.2.0
+pkgrel=0
+pkgdesc="Computational Geometry C++ Libraries"
+url="http://www.qhull.org"
+arch="all"
+license="CB Barber, The Geometry Center (Univ of Minn)"
+depends="gcc cmake"
+depends_dev=""
+makedepends="$depends_dev"
+install=""
+subpackages="$pkgname-dev $pkgname-doc"
+source="qhull.zip::https://github.com/qhull/qhull/archive/master.zip"
+
+builddir="$srcdir"/qhull-master
+build() {
+	cd "$builddir"
+	cd build || return 1
+	cmake -G "Unix Makefiles" .. || return 1
+	cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr .. || return 1
+	make || return 1
+}
+
+package() {
+	cd "$builddir"
+	cd build || return 1
+	make DESTDIR="$pkgdir" install || return 1
+	cd ..
+	install -Dm644 COPYING.txt "$pkgdir"/usr/share/licenses/"$pkgname"/COPYING.txt
+	rm -f "$pkgdir"/usr/lib/*.la
+}
+md5sums="d07179abc6f282a98eb8959d553590ea  qhull.zip"
+sha256sums="14e0493ba07e40e9e3333d0ed90b285f86a43586c21f01ebb96882e33365dec5  qhull.zip"
+sha512sums="b7f2afc27fa58516f9d0d290ad9c6dab2cdc2f60269589dcf3cffb261b62cda3c9713fbc5079f48e2d14e769be03f4ba664f06177c98499f7d00fa79f970ef55  qhull.zip"

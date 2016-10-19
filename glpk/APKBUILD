@@ -1,0 +1,33 @@
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
+pkgname=glpk
+pkgver=4.60
+pkgrel=0
+pkgdesc="GNU Linear Programming Kit"
+url="http://www.gnu.org/software/glpk"
+arch="all"
+license="GNU"
+depends="gcc"
+depends_dev=""
+makedepends="$depends_dev"
+install=""
+subpackages="$pkgname-dev $pkgname-doc"
+source="http://ftp.gnu.org/gnu/glpk/glpk-$pkgver.tar.gz"
+
+builddir="$srcdir"/glpk-"$pkgver"
+build() {
+	cd "$builddir"
+	./configure --prefix=/usr || return 1
+	make || return 1
+}
+
+package() {
+	cd "$builddir"
+	make DESTDIR="$pkgdir" install || return 1
+	make check || return 1
+	install -Dm644 COPYING "$pkgdir"/usr/share/licenses/$pkgname/COPYING
+	rm -f "$pkgdir"/usr/lib/*.la
+}
+
+md5sums="eda7965907f6919ffc69801646f13c3e  glpk-4.60.tar.gz"
+sha256sums="1356620cb0a0d33ac3411dd49d9fd40d53ece73eaec8f6b8d19a77887ff5e297  glpk-4.60.tar.gz"
+sha512sums="521bc48c588318fe6075eb66b1c43465200039f64b105b4a24f9f6eb9bb4742c7ebc96750ce999f64c60d6531486476386467dd41e949f1a00cba0cf00fbe20a  glpk-4.60.tar.gz"

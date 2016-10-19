@@ -1,0 +1,53 @@
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
+pkgname=suitesparse
+pkgver=4.5.3
+pkgrel=0
+pkgdesc="Suite of sparse matrix algorithms"
+url="http://faculty.cse.tamu.edu/davis/suitesparse.html"
+arch="all"
+license="GPL"
+depends="gfortran gcc cmake chrpath openblas lapack libtbb"
+depends_dev="lapack-dev libtbb-dev"
+makedepends="$depends_dev"
+install=""
+subpackages="$pkgname-dev $pkgname-doc"
+source="http://faculty.cse.tamu.edu/davis/SuiteSparse/SuiteSparse-$pkgver.tar.gz
+	suitesparse-link-tbb.patch"
+
+builddir="$srcdir"/SuiteSparse
+
+prepare() {
+	local i
+	cd "$builddir"
+	for i in $source; do
+		case $i in
+		*.patch) msg $i; patch -p1 -i "$srcdir"/$i || return 1;;
+		esac
+	done
+}
+
+build() {
+	cd "$builddir"
+	BLAS=-lblas TBB=-ltbb SPQR_CONFIG=-DHAVE_TBB make
+}
+
+package() {
+	cd "${srcdir}"/SuiteSparse
+
+	pushd metis-5.1.0
+		#make config prefix="$pkgdir"/usr/lib
+		#make
+		#make DESTDIR="$pkgdir"/usr/lib install
+		mkdir -p "${pkgdir}"/usr/lib
+		cp "${builddir}"/lib/libmetis.so "${pkgdir}"/usr/lib
+	BLAS=-lblas TBB=-ltbb SPQR_CONFIG=-DHAVE_TBB make install INSTALL_LIB="${pkgdir}"/usr/lib INSTALL_INCLUDE="${pkgdir}"/usr/include INSTALL_DOC="${pkgdir}"/usr/share/doc
+
+	# fix RPATH
+	chrpath -d "$pkgdir"/usr/lib/*
+}
+md5sums="8ec57324585df3c6483ad7f556afccbd  SuiteSparse-4.5.3.tar.gz
+b29f8d71e917d2dff3342f1ee1db317f  suitesparse-link-tbb.patch"
+sha256sums="6199a3a35fbce82b155fd2349cf81d2b7cddaf0dac218c08cb172f9bc143f37a  SuiteSparse-4.5.3.tar.gz
+dfdfa38ca9fce765d44df426c6ba71fe84a7ae61c0b816b6ef1ccb5ef52acbcf  suitesparse-link-tbb.patch"
+sha512sums="88a5ba6c70e4d66751d1ac32fd8998cde11509e7b034814c34757180db70ce2838ebb77fd7c617bf96e473214c70ccbdd0064b4f5e4dd69ae4c51dfeb9696496  SuiteSparse-4.5.3.tar.gz
+38dfab88782e8167a46a980f2ccd4c6578df9962dbaecfd37a4398b0e5245f47f48396e7f8eb009d3fe95d5e9f0341354350316c2eea7ac9b22832f5766ec038  suitesparse-link-tbb.patch"

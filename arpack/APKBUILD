@@ -1,0 +1,33 @@
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
+pkgname=arpack
+pkgver=3.4.0
+pkgrel=1
+pkgdesc="Collection of Fortran77 subroutines designed to solve large scale eigenvalue problems"
+url="https://github.com/opencollab/arpack-ng"
+arch="all"
+license="BSD"
+depends="gfortran"
+depends_dev="lapack-dev"
+makedepends="$depends_dev"
+install=""
+subpackages="$pkgname-dev $pkgname-doc"
+source="arpack-ng-master.zip::https://github.com/opencollab/arpack-ng/archive/master.zip"
+
+builddir="$srcdir"/arpack-ng-master
+build() {
+	cd "$builddir"
+	sh bootstrap || return 1
+	./configure --prefix=/usr || return 1
+	make || return 1
+}
+
+package() {
+	cd "$builddir"
+	make DESTDIR="$pkgdir" install || return 1
+	install -Dm644 COPYING "$pkgdir"/usr/share/licenses/"$pkgname"/COPYING
+	rm -f "$pkgdir"/usr/lib/*.la
+}
+
+md5sums="47b01f5795c8c126204bada543aa7313  arpack-ng-master.zip"
+sha256sums="fcc89178baf8afde1d5116acd20ad8ce132382385d2e28bc60c16e45f04c421c  arpack-ng-master.zip"
+sha512sums="60ebe26f0892d0b8e19b607421ae8189b16f2c7aa31fa472092d49e335ae04df0da749ed70f31444d724986e27eb4431f6cff15d6d95efa0869e45bbc9cab2c1  arpack-ng-master.zip"

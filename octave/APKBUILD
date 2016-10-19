@@ -1,0 +1,71 @@
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
+pkgname=octave
+pkgver=4.0.3
+pkgrel=0
+pkgdesc="A high-level language, primarily intended for numerical computations."
+url="http://www.octave.org"
+arch="all"
+license="GPL"
+
+depends="arpack glpk gl2ps qhull qrupdate suitesparse fftw fftw-single-libs fftw-double-libs fftw-long-double-libs arpack curl fltk pcre zlib"
+depends_dev="arpack-dev glpk-dev gl2ps-dev qhull-dev qrupdate-dev suitesparse-dev gfortran gnuplot pcre-dev fftw-dev fltk-dev zlib-dev"
+
+makedepends="$depends_dev"
+install=""
+subpackages="$pkgname-dev"
+source="ftp://ftp.gnu.org/gnu/octave/octave-$pkgver.tar.xz
+        ftp://ftp.gnu.org/gnu/octave/octave-$pkgver.tar.xz.sig
+	octave.patch"
+
+builddir="$srcdir"/octave-$pkgver
+
+prepare() {
+	local i
+	cd "$builddir"
+	for i in $source; do
+		case $i in
+		*.patch) msg $i; patch -p1 -i "$srcdir"/$i || return 1;;
+		esac
+	done
+	find -name \*.cc -o -name \*.h -o -name \*.yy | xargs sed -i -e 's/#include <c\(math\|stdlib\)>/#include <\1.h>/'
+	find -name \*.h -o -name \*.cc | xargs sed -i -e 's/<config.h>/"config.h"/' -e 's/<base-list.h>/"base-list.h"/'
+}
+
+build() {
+	cd "$builddir"
+	autoreconf -vfi
+	export LDFLAGS="${LDFLAGS} -L/usr/lib"
+	export CFLAGS="${CFLAGS} -I/usr/include"
+	./configure --prefix=/usr --libexecdir=/usr/lib LIBS=-lz \
+		--enable-shared --disable-static \
+		--with-quantum-depth=16 \
+		--with-umfpack="-lumfpack -lsuitesparseconfig" \
+		--with-qhull="-lqhull" \
+		--with-fft3-includedir=/usr/include \
+		--with-fft3-libdir=/usr/lib \
+		--disable-gui --disable-docs \
+		--disable-java
+#		--with-java-libdir=/usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/server
+	
+	echo "${PWD} is PWD"
+	LANG=C make CFLAGS=-O CXXFLAGS=-O LDFLAGS= || return 1
+	echo "Done with build..."
+}
+
+package() {
+	cd "$builddir"
+	make DESTDIR="$pkgdir" install || return 1
+	install -d "${pkgdir}/etc/ld.so.conf.d"
+	rm "${pkgdir}"/usr/lib/charset.alias || return 1
+	echo "/usr/lib/${pkgname}/${pkgver}" > "${pkgdir}/etc/ld.so.conf.d/${pkgname}.conf"
+}
+
+md5sums="73b140bc69ac21cfaa3e473b91b6842b  octave-4.0.3.tar.xz
+ab8fafdba48b0147fad2943faef9188a  octave-4.0.3.tar.xz.sig
+4563e42784db1acee66751b015d0fb70  octave.patch"
+sha256sums="dc2bec8c68fa5733a5847563634b1729356a84f3a5071008ecdb793293f0aa85  octave-4.0.3.tar.xz
+71fc6e750cafb35283477d5cf616ffbfe2f19f34f8b86c023a9ceb8e0f09eddb  octave-4.0.3.tar.xz.sig
+8863a0d1284ec3456f6b6cfe56a046389b5c38e5d458c05a3c9a280b487cffa4  octave.patch"
+sha512sums="bad009235b04be09c051dd27ebef7df2542adec0a0b57c070662deebe33a0cdceb7d6816653f5afc3fc0cc1287ba1ca1a5c50858169004210224039374c9c55d  octave-4.0.3.tar.xz
+5e0385206f073276f09e8ad8170c190b7d8505df97477a019186f067dcffd5e796056d990f1dcccb6b3f09081c6cc53dbdec7baa571ce91338d930277a8956d2  octave-4.0.3.tar.xz.sig
+bbd6fcc235a43ee2f2263589aba09374eae3beede2422a0e18e89eb4086db0808596280bac2b7fb0093f5a1e3d8e2fa0f7c22d95aa25fa941182699693133d18  octave.patch"
