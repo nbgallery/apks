@@ -10,7 +10,7 @@ license="GPL"
 depends="arpack glpk gl2ps qhull qrupdate suitesparse fftw fftw-single-libs fftw-double-libs fftw-long-double-libs arpack curl fltk pcre zlib"
 depends_dev="arpack-dev glpk-dev gl2ps-dev qhull-dev qrupdate-dev suitesparse-dev gfortran gnuplot pcre-dev fftw-dev fltk-dev zlib-dev"
 
-makedepends="$depends_dev"
+makedepends="$depends_dev readline-dev ncurses-dev perl bison"
 install=""
 subpackages="$pkgname-dev"
 source="ftp://ftp.gnu.org/gnu/octave/octave-$pkgver.tar.xz
