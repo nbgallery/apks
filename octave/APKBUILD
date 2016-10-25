@@ -1,16 +1,51 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=octave
 pkgver=4.0.3
-pkgrel=0
+pkgrel=1
 pkgdesc="A high-level language, primarily intended for numerical computations."
 url="http://www.octave.org"
 arch="all"
 license="GPL"
-
-depends="arpack glpk gl2ps qhull qrupdate suitesparse fftw fftw-single-libs fftw-double-libs fftw-long-double-libs arpack curl fltk pcre zlib"
-depends_dev="arpack-dev glpk-dev gl2ps-dev qhull-dev qrupdate-dev suitesparse-dev gfortran gnuplot pcre-dev fftw-dev fltk-dev zlib-dev"
-
-makedepends="$depends_dev readline-dev ncurses-dev perl bison"
+depends="
+  arpack
+  curl
+  fftw
+  fftw-double-libs
+  fftw-long-double-libs
+  fftw-single-libs
+  fltk
+  ghostscript
+  gl2ps
+  glpk
+  gnuplot
+  pcre
+  qhull
+  qrupdate
+  suitesparse
+  zlib
+  "
+depends_dev="
+  arpack-dev
+  fftw-dev
+  fltk-dev
+  gfortran
+  ghostscript-dev
+  gl2ps-dev
+  glpk-dev
+  gnuplot
+  pcre-dev
+  qhull-dev
+  qrupdate-dev
+  suitesparse-dev
+  zlib-dev
+  "
+makedepends="
+  $depends_dev
+  bison
+  ncurses-dev
+  perl
+  readline-dev
+  "
 install=""
 subpackages="$pkgname-dev"
 source="ftp://ftp.gnu.org/gnu/octave/octave-$pkgver.tar.xz
