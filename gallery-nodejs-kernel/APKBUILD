@@ -1,0 +1,28 @@
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
+pkgname=gallery-nodejs-kernel
+pkgver=1.0.0
+pkgrel=0
+pkgdesc="Node.js kernel for the Notebook Gallery Alpine client"
+url="https://github.com/nbgaller/apks"
+arch="x86_64"
+license="MIT"
+depends="nodejs nodejs-dev"
+depends_dev=""
+makedepends="$depends_dev python2"
+install=""
+subpackages=""
+source=""
+
+_prefix=/usr
+
+package() {
+	cd $startdir
+	mkdir -p $pkgdir/$_prefix
+	npm install --prefix $pkgdir/$_prefix -g ijavascript
+        rm -rf $pkgdir/$_prefix/lib/node_modules/ijavascript/images
+        rm -rf $pkgdir/$_prefix/lib/node_modules/ijavascript/test
+        rm -rf $pkgdir/$_prefix/lib/node_modules/ijavascript/node_modules/zmq/examples
+        rm -rf $pkgdir/$_prefix/lib/node_modules/ijavascript/node_modules/zmq/test
+        rm -rf $pkgdir/$_prefix/lib/node_modules/ijavascript/node_modules/zmq/windows
+        rm -rf $pkgdir/$_prefix/lib/node_modules/ijavascript/node_modules/nan/doc
+}
