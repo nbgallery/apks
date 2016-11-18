@@ -1,0 +1,42 @@
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
+pkgname=gallery-pig-kernel
+pkgver=0.16.0
+pkgrel=0
+pkgdesc="Pig kernel for the Notebook Gallery Alpine client"
+url="https://github.com/nbgallery/apks"
+arch="x86_64"
+license="MIT"
+depends="pig"
+depends_dev=""
+makedepends="$depends_dev"
+install=""
+subpackages=""
+source="log4j.properties"
+
+prepare() {
+	if [ ! -d "SimplePigKernel" ]; then
+		echo "Cloning SimplePigKernel" 
+	        git clone https://github.com/rfestag/SimplePigKernel.git
+	else
+		echo "Updating SimplePigKernel"
+		cd SimplePigKernel
+		git pull
+		cd -
+	fi
+}
+build() {
+	cd SimplePigKernel
+	python setup.py bdist_egg
+	cd -
+	return 0;
+}
+
+package() {
+	mkdir -p "$pkgdir/usr/lib/python2.7/site-packages"
+	ls -la SimplePigKernel/dist/*.egg
+        cp SimplePigKernel/dist/*.egg $pkgdir/usr/lib/python2.7/site-packages/
+	cp log4j.properties "$pkgdir/usr/lib/python2.7/site-packages/pig-log4j.properties"
+}
+md5sums="3630281b77592b348dea70a29b70d382  log4j.properties"
+sha256sums="a5809fd485f751175bd6a0a3a66aa50e3225a0d89ee0828b1fd9b3aab64fd559  log4j.properties"
+sha512sums="0ea02b7a6179480f0ac2ed8310c9911b4a8cd5920aa4040890fe05366a56aa48ea2655cd195eca92828d2a35d5fc7f41e8f4034f4b8c72c7bf9ab14606eac7be  log4j.properties"
