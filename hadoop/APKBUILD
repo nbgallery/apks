@@ -1,0 +1,55 @@
+# Contributor:
+# Maintainer:
+pkgname=hadoop
+pkgver=2.6.5
+pkgrel=0
+pkgdesc="Apache Hadoop and Map/Reduce"
+url="https://github.com/nbgallery/alpine-testing"
+arch="x86_64"
+license="MIT"
+depends="openjdk8"
+depends_dev=""
+makedepends=""
+install=""
+subpackages=""
+package="$pkgname-$pkgver"
+package_tar="$package.tar.gz"
+source=""
+base_url="http://apache.mirrors.tds.net/$pkgname/common"
+
+_builddir=$startdir/build
+_prefix=/usr
+
+prepare() {
+        if [ ! -f $startdir/$package_tar ]; then
+		echo $base_url/$package/$package_tar
+                wget $base_url/$package/$package_tar
+	fi
+}
+
+build() {
+        echo 'Nothing to build'
+}
+
+package() {
+	cd $startdir
+	mkdir -p $pkgdir/$_prefix
+
+	# Install package
+        ls -l $startdir/$package_tar
+	tar xzf $startdir/$package_tar -C $pkgdir/$_prefix
+	pwd
+	echo $pkgdir/$_prefix
+	cd $pkgdir/$_prefix
+	ln -s $package $pkgname
+	cd $startdir
+
+        # Patch spark jar with alpine snappy .so
+
+	# Cleanup
+        cd $pkgdir/$_prefix/$pkgname
+        #TODO: Identify files to cleanup
+	rm -rf share/doc
+	find . -name "*sources.jar" -exec rm {} \;
+	cd $startdir
+}
