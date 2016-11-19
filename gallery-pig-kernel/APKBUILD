@@ -13,29 +13,10 @@ install=""
 subpackages=""
 source="log4j.properties"
 
-prepare() {
-	if [ ! -d "SimplePigKernel" ]; then
-		echo "Cloning SimplePigKernel" 
-	        git clone https://github.com/rfestag/SimplePigKernel.git
-	else
-		echo "Updating SimplePigKernel"
-		cd SimplePigKernel
-		git pull
-		cd -
-	fi
-}
-build() {
-	cd SimplePigKernel
-	python setup.py bdist_egg
-	cd -
-	return 0;
-}
-
 package() {
-	mkdir -p "$pkgdir/usr/lib/python2.7/site-packages"
-	ls -la $srcdir/SimplePigKernel/dist/*.egg
-        cp $srcdir/SimplePigKernel/dist/*.egg $pkgdir/usr/lib/python2.7/site-packages/
-	cp log4j.properties "$pkgdir/usr/lib/python2.7/site-packages/pig-log4j.properties"
+	cd $srcdir
+	pip install --root="$pkgdir" SimplePigKernel
+	cp $srcdir/log4j.properties "$pkgdir/usr/lib/python2.7/site-packages/pig-log4j.properties"
 }
 md5sums="3630281b77592b348dea70a29b70d382  log4j.properties"
 sha256sums="a5809fd485f751175bd6a0a3a66aa50e3225a0d89ee0828b1fd9b3aab64fd559  log4j.properties"
