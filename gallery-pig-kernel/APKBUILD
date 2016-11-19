@@ -33,8 +33,8 @@ build() {
 
 package() {
 	mkdir -p "$pkgdir/usr/lib/python2.7/site-packages"
-	ls -la SimplePigKernel/dist/*.egg
-        cp SimplePigKernel/dist/*.egg $pkgdir/usr/lib/python2.7/site-packages/
+	ls -la $srcdir/SimplePigKernel/dist/*.egg
+        cp $srcdir/SimplePigKernel/dist/*.egg $pkgdir/usr/lib/python2.7/site-packages/
 	cp log4j.properties "$pkgdir/usr/lib/python2.7/site-packages/pig-log4j.properties"
 }
 md5sums="3630281b77592b348dea70a29b70d382  log4j.properties"
