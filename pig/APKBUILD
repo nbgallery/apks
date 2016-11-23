@@ -1,56 +1,45 @@
-# Contributor:
-# Maintainer:
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=pig
 pkgver=0.16.0
 pkgrel=0
 pkgdesc="Pig framework for Hadoop"
-url="https://github.com/nbgallery/alpine-testing"
-arch="x86_64"
+url="https://pig.apache.org"
+arch="noarch"
 license="MIT"
 depends="hadoop hadoop-dev"
 depends_dev=""
 makedepends=""
 install=""
 subpackages=""
-package="$pkgname-$pkgver"
-package_tar="$package.tar.gz"
-source=""
-base_url="http://apache.mirrors.tds.net/$pkgname"
+source="http://apache.mirrors.tds.net/$pkgname/$pkgname-$pkgver/$pkgname-$pkgver.tar.gz"
 
-_builddir=$startdir/build
-_prefix=/usr
+builddir="$srcdir/$pkgname-$pkgver"
 
 prepare() {
-        if [ ! -f $startdir/$package_tar ]; then
-		echo $base_url/$package/$package_tar
-                wget $base_url/$package/$package_tar
-	fi
-}
-
-build() {
-        echo 'Nothing to build'
-}
-
-package() {
-	cd $startdir
-	mkdir -p $pkgdir/$_prefix
-
-	# Install package
-        ls -l $startdir/$package_tar
-	tar xzf $startdir/$package_tar -C $pkgdir/$_prefix
-	pwd
-	echo $pkgdir/$_prefix
-	cd $pkgdir/$_prefix
-	ln -s $package $pkgname
-	cd $startdir
-
-        # Patch spark jar with alpine snappy .so
+	# Patch spark jar with alpine snappy .so
 
 	# Cleanup
-        cd $pkgdir/$_prefix/$pkgname
-        #TODO: Identify files to cleanup
+	cd $builddir
+	# TODO: Identify more files to cleanup
 	rm -rf docs
 	rm -rf src
 	rm -rf tutorial
-	cd $startdir
 }
+
+build() {
+	# Nothing to build
+	return 0
+}
+
+package() {
+	# This destination is more canonical, but the contents
+	# of $builddir are not what you commonly see in /usr.
+	#mkdir -p $pkgdir/usr
+	#cp -r $builddir/* $pkgdir/usr
+
+	mkdir -p $pkgdir/usr/$pkgname
+	cp -r $builddir/* $pkgdir/usr/$pkgname
+}
+md5sums="e9d7b20c70bd7d9e9dc0f15f2c50bcbc  pig-0.16.0.tar.gz"
+sha256sums="08947c3f381a1f810430c3703081277bd0b27ac3f76c5a52c096ea587e7ee95c  pig-0.16.0.tar.gz"
+sha512sums="1c0161418a0f17c44a93704a4881670a790aac9387dd1601ab797418023ec5c565a96768602a9eecefff79d1356e3d44efe12ca177934d8dd4fb178d1362006e  pig-0.16.0.tar.gz"
