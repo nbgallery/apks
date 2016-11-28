@@ -1,5 +1,5 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
-pkgname=py3-pandas
+pkgname=py-pandas
 _pkgname=pandas
 pkgver=0.19.1
 pkgrel=0
@@ -7,9 +7,9 @@ pkgdesc="Cross-section and time series data analysis toolkit"
 url="http://pandas.pydata.org"
 arch="all"
 license="BSD"
-depends="python3"
+depends="python"
 depends_dev=""
-makedepends="python3-dev py3-dateutil py3-numpy-dev py3-tz cython3-dev"
+makedepends="python-dev py-dateutil py-numpy-dev py-tz cython-dev"
 install=""
 subpackages=""
 source="$_pkgname-$pkgver.tar.gz::https://github.com/pydata/$_pkgname/archive/v$pkgver.tar.gz"
@@ -17,12 +17,12 @@ source="$_pkgname-$pkgver.tar.gz::https://github.com/pydata/$_pkgname/archive/v$
 builddir="${srcdir}/${_pkgname}-$pkgver"
 build() {
 	cd "$builddir" || return 1
-	python3 setup.py build || return 1
+	python setup.py build || return 1
 }
 
 package() {
 	cd "$builddir"
-	python3 setup.py install --prefix=/usr --root="$pkgdir" || return 1
+	python setup.py install --prefix=/usr --root="$pkgdir" || return 1
 }
 
 md5sums="ea445fb299f80ed4133c81e2a456dc81  pandas-0.19.1.tar.gz"
