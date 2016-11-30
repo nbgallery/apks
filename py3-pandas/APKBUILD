@@ -2,17 +2,17 @@
 pkgname=py3-pandas
 _pkgname=pandas
 pkgver=0.19.1
-pkgrel=0
+pkgrel=1
 pkgdesc="Cross-section and time series data analysis toolkit"
 url="http://pandas.pydata.org"
 arch="all"
 license="BSD"
-depends="python3"
+depends="python3 py3-dateutil py3-numpy py3-tz"
 depends_dev=""
-makedepends="python3-dev py3-dateutil py3-numpy-dev py3-tz cython3-dev"
+makedepends="py3-numpy-dev cython3-dev"
 install=""
 subpackages=""
-source="$_pkgname-$pkgver.tar.gz::https://github.com/pydata/$_pkgname/archive/v$pkgver.tar.gz"
+source="$_pkgname-$pkgver.tar.gz::https://github.com/$_pkgname-dev/$_pkgname/archive/v$pkgver.tar.gz"
 
 builddir="${srcdir}/${_pkgname}-$pkgver"
 build() {
