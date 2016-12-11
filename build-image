@@ -1,0 +1,3 @@
+#!/bin/sh
+
+docker build -t nbgallery/apkbuilder `dirname $0`/apkbuilder

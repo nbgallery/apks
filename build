@@ -1,0 +1,36 @@
+#!/bin/bash
+
+KEY=*.rsa
+SRCDIR=$PWD
+PKGDIR=$PWD/packages
+
+while [[ $# -gt 1 ]]; do
+  case "$1" in
+  -k|--key)
+    KEY="$2"
+    shift
+    ;;
+  -s|--src)
+    SRCDIR="$2"
+    shift
+    ;;
+  -p|--pkg)
+    PKGDIR="$2"
+    shift
+    ;;
+  *)
+    ;;
+  esac
+  shift
+done
+
+KEYFILE=`basename $KEY`
+KEYDIR=`dirname $KEY`
+KEYDIR=`realpath $KEYDIR`
+
+echo "keyfile: $KEYFILE"
+echo "keydir: $KEYDIR"
+echo "srcdir: $SRCDIR"
+echo "pkgdir: $PKGDIR"
+
+docker run --rm -t -i -v $KEYDIR:/home/nbgallery/keys -v $PKGDIR:/home/nbgallery/packages -v $SRCDIR:/home/nbgallery/apks -e PACKAGER_PRIVKEY=/home/nbgallery/keys/$KEYFILE nbgallery/apkbuilder "$@"
