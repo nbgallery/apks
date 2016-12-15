@@ -2,18 +2,26 @@ FROM alpine:edge
 MAINTAINER team@nb.gallery
 
 ENV SHELL=/bin/bash
+
+# Add apks needed for making apks
 ADD repositories /etc/apk/
-ADD min-package build-apk /usr/local/bin/
 RUN \
   apk update && \
   apk upgrade --available && \
   apk add alpine-sdk coreutils bash && \
+  rm -rf /var/cache/apk/*
+
+# Add specific version of zeromq
+ADD min-package /usr/local/bin/
+RUN \
   min-package https://archive.org/download/zeromq_4.0.4/zeromq-4.0.4.tar.gz && \
-  ln -s libzmq.so.3 /usr/local/lib/libzmq.so.4 && \
-  rm -rf /var/cache/apk/* && \
+  ln -s libzmq.so.3 /usr/local/lib/libzmq.so.4
+
+# Add non-root user for building apks and setup environment
+RUN \
   adduser -G abuild -g "nbgallery" -s /bin/bash -D nbgallery && \
   echo "nbgallery ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-
+ADD build-apk /usr/local/bin/
 USER nbgallery
 ADD abuild.conf /home/nbgallery/.abuild/
 RUN echo "alias ll='ls -l'" >> /home/nbgallery/.bashrc
