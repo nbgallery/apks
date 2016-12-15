@@ -29,6 +29,7 @@ while [[ $# -gt 1 ]]; do
 done
 
 KEYFILE=`basename $KEY`
+PUBKEYFILE=$KEYFILE.pub
 KEYDIR=`dirname $KEY`
 KEYDIR=`realpath $KEYDIR`
 
@@ -37,4 +38,4 @@ echo "keydir: $KEYDIR"
 echo "srcdir: $SRCDIR"
 echo "pkgdir: $PKGDIR"
 
-docker run --rm -t -i -v $KEYDIR:/home/nbgallery/keys -v $PKGDIR:/home/nbgallery/packages -v $SRCDIR:/home/nbgallery/apks -e PACKAGER_PRIVKEY=/home/nbgallery/keys/$KEYFILE nbgallery/apkbuilder "$@"
+docker run --rm -v $KEYDIR:/home/nbgallery/keys -v $PKGDIR:/home/nbgallery/packages -v $SRCDIR:/home/nbgallery/apks -e PACKAGER_PRIVKEY=/home/nbgallery/keys/$KEYFILE -e PACKAGER_PUBKEY=/home/nbgallery/keys/$PUBKEYFILE nbgallery/apkbuilder "$@"

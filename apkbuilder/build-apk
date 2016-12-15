@@ -1,5 +1,6 @@
 #!/bin/sh
 
+sudo cp $PACKAGER_PUBKEY /etc/apk/keys
 cd $HOME/apks/$1
 abuild-apk update
 abuild -r
