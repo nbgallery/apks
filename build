@@ -4,6 +4,10 @@ KEY=*.rsa
 SRCDIR=$PWD
 PKGDIR=$PWD/packages
 
+command -v realpath &> /dev/null || realpath() {
+    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}
+
 while [[ $# -gt 1 ]]; do
   case "$1" in
   -k|--key)
