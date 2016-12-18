@@ -1,12 +1,12 @@
-# Maintainer: Notebook Gallery Team <team@nb.gallery>
+# Maintainer: nb.gallery team <team@nb.gallery>
 pkgname=gallery-R-kernel
-pkgver=0.6.0
+pkgver=0.7.0
 pkgrel=0
-pkgdesc="R kernel for the Notebook Gallery Alpine client"
+pkgdesc="R kernel for the nb.gallery Jupyter Alpine client"
 url="https://github.com/nbgallery/apks"
 arch="x86_64"
 license="MIT"
-depends="R R-dev R-doc libressl-dev curl-dev ttf-liberation"
+depends="R R-dev R-doc ttf-liberation"
 depends_dev=""
 makedepends="$depends_dev"
 install=""
@@ -23,12 +23,9 @@ package() {
 	# add a default CRAN mirror
 	echo 'options(repos = c(CRAN = "http://cloud.r-project.org/"))' > "$pkgdir"/usr/lib/R/etc/Rprofile.site
 
-	# symlink the real path to libzmq
-	ln -s "$pkgdir"/usr/local/lib/libzmq.so.3 /usr/local/lib/libzmq.so.4
-
 	# install IRKernel dependencies
-	echo "install.packages(c('repr', 'pbdZMQ', 'devtools'), repos='http://cloud.r-project.org')" | R --no-save || return 1
-	echo "devtools::install_github('IRkernel/IRdisplay')" | R --no-save || return 1
-	echo "devtools::install_github('IRkernel/IRkernel')" | R --no-save || return 1
+        echo "install.packages(c('repr', 'pbdZMQ', 'crayon', 'jsonlite', 'uuid', 'digest', 'evaluate', 'IRdisplay'), repos='http://cloud.r-project.org')" | R --no-save
+	git clone https://github.com/IRkernel/IRkernel
+	echo "install.packages(c('./IRkernel'), repos=NULL, type='source')" | R --no-save
 
 }
