@@ -1,8 +1,8 @@
-# Maintainer: Notebook Gallery Team <team@nb.gallery>
+# Maintainer: nb.gallery team <team@nb.gallery>
 pkgname=gallery-python3-kernel
 pkgver=1.0.0
-pkgrel=0
-pkgdesc="Python 3 kernel for the Notebook Gallery Alpine client"
+pkgrel=1
+pkgdesc="Python 3 kernel for the nb.gallery Jupyter client"
 url="https://github.com/nbgallery/apks"
 arch="x86_64"
 license="MIT"
