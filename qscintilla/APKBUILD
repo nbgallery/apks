@@ -1,0 +1,41 @@
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
+pkgname=qscintilla
+pkgver=2.9.4
+pkgrel=0
+pkgdesc="A QT port of Scintilla"
+url="http://www.riverbankcomputing.co.uk/software/qscintilla"
+arch="all"
+license="GPL3"
+depends=""
+depends_dev="qt-dev"
+makedepends="$depends_dev"
+install=""
+subpackages="$pkgname-dev"
+source="http://sourceforge.net/projects/pyqt/files/QScintilla2/QScintilla-$pkgver/QScintilla_gpl-$pkgver.tar.gz"
+
+builddir="$srcdir"/QScintilla_gpl-"$pkgver"/Qt4Qt5
+
+prepare() {
+	local i
+	cd "$builddir"
+	for i in $source; do
+		case $i in
+		*.patch) msg $i; patch -p1 -i "$srcdir"/$i || return 1;;
+		esac
+	done
+}
+
+build() {
+	cd "$builddir" 
+	qmake qscintilla.pro DESTDIR="${pkgdir}" || return 1
+	make DESTDIR="${pkgdir}" || return 1
+}
+
+package() {
+	echo "HERE just about to MAKE INSTALL"
+	cd "$builddir"
+	make install INSTALL_ROOT="${pkgdir}" DESTDIR="${pkgdir}" INSTALL_LIB="${pkgdir}"/usr/lib INSTALL_INCLUDE="${pkgdir}"/usr/include INSTALL_DOC="${pkgdir}"/usr/share/doc || return 1
+}
+md5sums="e60d61ca1ee1dca8df25fe15d8ca7112  QScintilla_gpl-2.9.4.tar.gz"
+sha256sums="8b3a23023e9f0573caed6f9cee86f898d87b768ee15b8c211a423783a4cfa4e6  QScintilla_gpl-2.9.4.tar.gz"
+sha512sums="5a2eebbe523a0f2f1c7bc63ce5ee9cb8793a597d00eea5b638f18f90d6e798e92c281be23ee5e7072d5afced9e1fccb6ae51526a3623d373d57c3db64d026b16  QScintilla_gpl-2.9.4.tar.gz"
