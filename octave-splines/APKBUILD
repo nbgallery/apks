@@ -1,0 +1,53 @@
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
+_pack=splines
+pkgname=octave-$_pack
+pkgver=1.3.2
+pkgrel=0
+pkgdesc="Additional spline functions."
+url="http://octave.sourceforge.net/$_pack/"
+arch="noarch"
+license="GPL3"
+
+depends="octave"
+depends_dev="octave-dev"
+
+makedepends="$depends_dev"
+install=""
+_archive=$_pack-$pkgver.tar.gz
+subpackages=""
+source="http://downloads.sourceforge.net/octave/$_archive"
+noextract="$_archive"
+
+_octave_run() {
+	octave --no-history --no-init-file --no-window-system -q -f --eval "$*"
+}
+
+_install_dir() {
+	src=$1
+	dst=$2
+	mkdir -p "$(dirname "$dst")"
+	cp -r "$src" "$dst"
+}
+
+build() {
+	_prefix="$srcdir"/install_prefix
+	_alpineprefix="$srcdir"/install_alpineprefix
+	mkdir -p "$_prefix" "$_alpineprefix"
+	cd "$srcdir"
+	_octave_run "$(cat <<-EOF
+		pkg local_list octave_packages;
+		pkg prefix $_prefix $_alpineprefix;
+		pkg install -verbose -nodeps $_archive;
+		EOF
+		)"
+}
+
+package() {
+	prefix=$pkgdir/usr/share/octave/packages
+	alpineprefix=$pkgdir/usr/lib/octave/packages
+	_install_dir "$srcdir"/install_prefix "$prefix"
+	_install_dir "$srcdir"/install_alpineprefix "$alpineprefix"
+}
+md5sums="f682724bd68820d83c4e560fc49e144f  splines-1.3.2.tar.gz"
+sha256sums="61cb4c8420e23e7a9febd014ecfc4314d8977635976571edaae7749f651d2b1f  splines-1.3.2.tar.gz"
+sha512sums="c8cb45fe06fee5b70d859c0167660cb43cbd9a0d08a8d02b94a5a44f86bb4ada3879722be21223e0e0e741720846dc6a27ca9f62a06fa6495d5d81a34da7efb2  splines-1.3.2.tar.gz"

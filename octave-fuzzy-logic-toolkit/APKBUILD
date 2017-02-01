@@ -1,0 +1,53 @@
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
+_pack=fuzzy-logic-toolkit
+pkgname=octave-$_pack
+pkgver=0.4.5
+pkgrel=0
+pkgdesc="A mostly MATLAB-compatible fuzzy logic toolkit for octave."
+url="http://octave.sourceforge.net/$_pack/"
+arch="noarch"
+license="GPL3"
+
+depends="octave"
+depends_dev="octave-dev"
+
+makedepends="$depends_dev"
+install=""
+_archive=$_pack-$pkgver.tar.gz
+subpackages=""
+source="http://downloads.sourceforge.net/octave/$_archive"
+noextract="$_archive"
+
+_octave_run() {
+	octave --no-history --no-init-file --no-window-system -q -f --eval "$*"
+}
+
+_install_dir() {
+	src=$1
+	dst=$2
+	mkdir -p "$(dirname "$dst")"
+	cp -r "$src" "$dst"
+}
+
+build() {
+	_prefix="$srcdir"/install_prefix
+	_alpineprefix="$srcdir"/install_alpineprefix
+	mkdir -p "$_prefix" "$_alpineprefix"
+	cd "$srcdir"
+	_octave_run "$(cat <<-EOF
+		pkg local_list octave_packages;
+		pkg prefix $_prefix $_alpineprefix;
+		pkg install -verbose -nodeps $_archive;
+		EOF
+		)"
+}
+
+package() {
+	prefix=$pkgdir/usr/share/octave/packages
+	alpineprefix=$pkgdir/usr/lib/octave/packages
+	_install_dir "$srcdir"/install_prefix "$prefix"
+	_install_dir "$srcdir"/install_alpineprefix "$alpineprefix"
+}
+md5sums="9f9e88a7d7c4dd2e3ba6958982af75aa  fuzzy-logic-toolkit-0.4.5.tar.gz"
+sha256sums="b4c24ac48662ce413599721d2565e9eabf23ead6b9b36863d33740920aec4133  fuzzy-logic-toolkit-0.4.5.tar.gz"
+sha512sums="f89146b0108d31c3339f9903fba9786513c89c05d893006964a91f8d034de9ade8e015498d6696217b1b682c77ba28317dfd7d3aaaee528e39343d717cacd1f6  fuzzy-logic-toolkit-0.4.5.tar.gz"
