@@ -1,14 +1,14 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=gl2ps
 pkgver=1.3.9
-pkgrel=0
+pkgrel=1
 pkgdesc="An OpenGL to PostScript printing library"
 url="http://www.geuz.org/gl2ps"
 arch="all"
 license="GL2PS"
 depends=""
 depends_dev=""
-makedepends="$depends_dev gcc cmake make"
+makedepends="$depends_dev gcc cmake make freeglut-dev zlib-dev libpng-dev libxmu-dev libxi-dev texlive"
 install=""
 subpackages="$pkgname-dev $pkgname-doc"
 source="http://geuz.org/gl2ps/src/gl2ps-$pkgver.tgz"
