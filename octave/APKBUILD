@@ -38,8 +38,11 @@ depends_dev="
 	graphicsmagick-dev 
 	hdf5-dev 
 	imagemagick-dev 
+	libltdl
 	libsm-dev 
+	libtool
 	lcms2-dev 
+	ncurses-dev
 	pcre-dev 
 	qhull-dev 
 	qrupdate-dev 
