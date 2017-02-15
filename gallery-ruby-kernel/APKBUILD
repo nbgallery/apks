@@ -1,7 +1,7 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=gallery-ruby-kernel
 pkgver=0.1.0
-pkgrel=0
+pkgrel=1
 pkgdesc="Ruby kernel for the Notebook Gallery Alpine client"
 url="https://github.com/nbgallery/apks"
 arch="x86_64"
@@ -14,7 +14,7 @@ subpackages=""
 source="iruby-master.tar.gz::https://github.com/SciRuby/iruby/tarball/master"
 
 # this is to document the iruby version for this apk release
-_iruby_commit_id="cba8dd1"
+_iruby_commit_id="07885c8"
 _builddir="$srcdir/SciRuby-iruby-$_iruby_commit_id"
 
 build() {
@@ -63,6 +63,6 @@ package() {
 	rm -rf cache build_info doc
 }
 
-md5sums="f663973d5ff3e0a78a2e63fcad112539  iruby-master.tar.gz"
-sha256sums="bb0a9a221efae3d2d0a1b4b7249482d57d7562953627a81f11c6556cf8425ba6  iruby-master.tar.gz"
-sha512sums="f571d90e6a1e0b86fc5ca8b192b2c11a3a5927887db111ed1876ac58ca6d91e6a653d730408e59c9b9deceab7b1ea5a5598c7829aed8bf4b7c2fb6cc5bc6fbf9  iruby-master.tar.gz"
+md5sums="698ba81fab3e106f82d66dc06e90ee6e  iruby-master.tar.gz"
+sha256sums="9cfb36e99620e7c9147867c7471e489533572adb243464b43fc65a0fec58231f  iruby-master.tar.gz"
+sha512sums="75f06bc56741a6101431d2a0d938f993958a2abda28b9bf7fa3684dc58eec1300dbd8c8d8db92a7dc99718a4cc9bbfcc7eedb4e6bb7681add6105afff23fb734  iruby-master.tar.gz"
