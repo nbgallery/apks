@@ -1,5 +1,11 @@
 # Building gallery-python3-kernel
 
+First, you have to manually install pexpect:
+
+```bash
+$ sudo pip3 install pexpect
+```
+
 Some users might get an error like this one when trying to build:
 
 > error in ipython setup command: Invalid environment marker: sys_platform == "darwin" and platform_python_implementation == "CPython"
