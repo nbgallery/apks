@@ -28,6 +28,12 @@ while [[ $# -gt 1 ]]; do
   shift
 done
 
+if [ -z "$1" ]; then
+  echo "Usage: `basename $0` [options] <package-name>"
+  echo "Use package-name 'debug' to enter with bash"
+  exit 1
+fi
+
 KEYFILE=`basename $KEY`
 PUBKEYFILE=$KEYFILE.pub
 KEYDIR=`dirname $KEY`
@@ -38,4 +44,12 @@ echo "keydir: $KEYDIR"
 echo "srcdir: $SRCDIR"
 echo "pkgdir: $PKGDIR"
 
-docker run --rm -v $KEYDIR:/home/nbgallery/keys -v $PKGDIR:/home/nbgallery/packages -v $SRCDIR:/home/nbgallery/apks -e PACKAGER_PRIVKEY=/home/nbgallery/keys/$KEYFILE -e PACKAGER_PUBKEY=/home/nbgallery/keys/$PUBKEYFILE nbgallery/apkbuilder "$@"
+ARGS="--rm -v $KEYDIR:/home/nbgallery/keys -v $PKGDIR:/home/nbgallery/packages -v $SRCDIR:/home/nbgallery/apks -e PACKAGER_PRIVKEY=/home/nbgallery/keys/$KEYFILE -e PACKAGER_PUBKEY=/home/nbgallery/keys/$PUBKEYFILE"
+
+if [ "$1" == "debug" ]; then
+  ARGS="$ARGS -ti --entrypoint bash nbgallery/apkbuilder"
+else
+  ARGS="$ARGS nbgallery/apkbuilder $@"
+fi
+
+docker run $ARGS
