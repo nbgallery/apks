@@ -1,10 +1,10 @@
-FROM alpine:edge
+ARG branch
 MAINTAINER team@nb.gallery
 
 ENV SHELL=/bin/bash
 
 # Add apks needed for making apks
-ADD repositories /etc/apk/
+ADD repositories.$branch /etc/apk/repositories
 RUN \
   apk update && \
   apk upgrade --available && \

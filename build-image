@@ -1,3 +1,17 @@
 #!/bin/sh
 
-docker build -t nbgallery/apkbuilder `dirname $0`/apkbuilder
+if [ -z "$1" ]; then
+  echo "Usage: `basename $0` <alpine-branch>"
+  exit 1
+fi
+
+branch=$1
+context=`dirname $0`/apkbuilder
+dockerfile=$context/Dockerfile.$branch
+
+echo "FROM alpine:$branch" > $dockerfile
+cat $context/Dockerfile.base >> $dockerfile
+
+docker build -t nbgallery/apkbuilder:$branch --build-arg branch=$branch -f $dockerfile $context
+
+rm $dockerfile
