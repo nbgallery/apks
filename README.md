@@ -1,14 +1,16 @@
 # nb.gallery APKs 
 
-These APKs are used by the nb.gallery Docker client to dynamically install kernels. 
+These APKs are used by the [nbgallery Jupyter Docker client](https://github.com/nbgallery/jupyter-docker) to dynamically install kernels. 
 
 ## apkbuilder docker image
 
 [This image](https://hub.docker.com/r/nbgallery/apkbuilder/) can be used to build the apks in this project.  By default it will use a signing key from this directory and will mount source and package directories located here.  The image is similar to [alpine-jazz-hands](https://github.com/madedotcom/alpine-jazz-hands) but customized for the nbgallery project.
 
-1. If needed, run `sudo ./build-image` to build the `nbgallery/apkbuilder` image.  Or just [pull it](https://hub.docker.com/r/nbgallery/apkbuilder/).
-2. Copy the signing key to this directory.  The `build` script will pick it up automatically, or use the -k option.
-3. Run `sudo ./build <subdir>` to build the apk from the specified subdir.  If you're running from this directory, the source and package directories should get set automatically.
+1. git clone https://github.com/nbgallery/apks
+2. cd apks
+3. If needed, run `sudo ./build-image` to build the `nbgallery/apkbuilder` image.  Or just [pull it](https://hub.docker.com/r/nbgallery/apkbuilder/).
+4. Copy the signing key to the current directory.  The `build` script will pick it up automatically, or use the -k option.
+5. Run `sudo ./build <subdir>` to build the apk from the specified subdir.  If you're running from the `apks` top-level directory, the source and package directories should get set automatically.
 
 ## Serving APKs from within the [jupyter-alpine](https://github.com/nbgallery/jupyter-docker) image
 
