@@ -8,9 +8,9 @@ These APKs are used by the [nbgallery Jupyter Docker client](https://github.com/
 
 1. git clone https://github.com/nbgallery/apks
 2. cd apks
-3. If needed, run `sudo ./build-image` to build the `nbgallery/apkbuilder` image.  Or just [pull it](https://hub.docker.com/r/nbgallery/apkbuilder/).
-4. Copy the signing key to the current directory.  The `build` script will pick it up automatically, or use the -k option.
-5. Run `sudo ./build <subdir>` to build the apk from the specified subdir.  If you're running from the `apks` top-level directory, the source and package directories should get set automatically.
+3. If needed, run `sudo ./build-image <branch>` to build the `nbgallery/apkbuilder:<branch>` image.  Currently supported branches are `edge` and `3.5`.  Or just [pull the image](https://hub.docker.com/r/nbgallery/apkbuilder/) you need.
+4. Copy the signing key to the current directory -- both public and private keys are required.  The `build` script will pick them up automatically, or use the -k option to specify the private key (public key is assumed to be `<private-key-filename>.pub`.
+5. Run `sudo ./build <branch> <subdir>` to build the apk from the specified subdir.  If you're running from the `apks` top-level directory, the source and package directories should get set automatically.  If branch is `edge`, apks and index will be written to the `packages` subdirectory; otherwise they will be written to `packages-<branch>`.
 
 ## Serving APKs from within the [jupyter-alpine](https://github.com/nbgallery/jupyter-docker) image
 
