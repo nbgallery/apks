@@ -1,1 +1,1 @@
-Default location for apk build artifacts
+Default location for apk build artifacts for Alpine edge branch

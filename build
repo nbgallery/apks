@@ -1,14 +1,10 @@
 #!/bin/bash
 
-KEY=*.rsa
-SRCDIR=$PWD
-PKGDIR=$PWD/packages
-
 command -v realpath &> /dev/null || realpath() {
     [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
 }
 
-while [[ $# -gt 1 ]]; do
+while [[ $# -gt 2 ]]; do
   case "$1" in
   -k|--key)
     KEY="$2"
@@ -28,10 +24,39 @@ while [[ $# -gt 1 ]]; do
   shift
 done
 
-if [ -z "$1" ]; then
-  echo "Usage: `basename $0` [options] <package-name>"
+if [[ -z "$1" || -z "$2" ]]; then
+  echo "Usage: `basename $0` [options] <branch> <package-name>"
   echo "Use package-name 'debug' to enter with bash"
+  echo
+  echo "Options:"
+  echo "  --key <private-key.rsa>"
+  echo "  --src <parent-dir-of-apks>"
+  echo "  --pkg <output-dir-for-packages>"
   exit 1
+fi
+
+BRANCH=$1
+PACKAGE=$2
+IMAGE="nbgallery/apkbuilder:$BRANCH"
+
+if [ -z "$KEY" ]; then
+  if [ "$BRANCH" == "edge" ]; then
+    KEY=*jupyter.gallery*.rsa
+  else
+    KEY=*nb.gallery*.rsa
+  fi
+fi
+
+if [ -z "$SRCDIR" ]; then
+  SRCDIR=$PWD
+fi
+
+if [ -z "$PKGDIR" ]; then
+  if [ "$BRANCH" == "edge" ]; then
+    PKGDIR=$PWD/packages
+  else
+    PKGDIR=$PWD/packages-$BRANCH
+  fi
 fi
 
 KEYFILE=`basename $KEY`
@@ -47,9 +72,10 @@ echo "pkgdir: $PKGDIR"
 ARGS="--rm -v $KEYDIR:/home/nbgallery/keys -v $PKGDIR:/home/nbgallery/packages -v $SRCDIR:/home/nbgallery/apks -e PACKAGER_PRIVKEY=/home/nbgallery/keys/$KEYFILE -e PACKAGER_PUBKEY=/home/nbgallery/keys/$PUBKEYFILE"
 
 if [ "$1" == "debug" ]; then
-  ARGS="$ARGS -ti --entrypoint bash nbgallery/apkbuilder"
+  ARGS="$ARGS -ti --entrypoint bash $IMAGE"
 else
-  ARGS="$ARGS nbgallery/apkbuilder $@"
+  ARGS="$ARGS $IMAGE $PACKAGE"
 fi
 
+echo docker run $ARGS
 docker run $ARGS
