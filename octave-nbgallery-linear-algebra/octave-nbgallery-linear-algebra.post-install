@@ -1,0 +1,5 @@
+#!/bin/sh
+
+octave --no-history --no-init-file --no-window-system -q -f --eval "pkg prefix /usr/share/octave/packages; pkg rebuild linear-algebra;"
+
+exit 0
