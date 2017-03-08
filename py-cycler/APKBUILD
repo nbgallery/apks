@@ -1,6 +1,6 @@
 # Contributor: Isaac Dunham <ibid.ag@gmail.com>
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
-pkgname=py3-cycler
+pkgname=py-cycler
 _pkgname=cycler
 pkgver=0.10.0
 pkgrel=1
@@ -8,22 +8,38 @@ pkgdesc="Composable style cycles in Python"
 url="http://matplotlib.org/cycler/"
 arch="noarch"
 license="BSD"
-depends="python3"
+depends=""
 depends_dev=""
-makedepends="python3-dev"
-install=""
-subpackages=""
+makedepends="python2-dev python3-dev py-setuptools"
+subpackages="py2-${pkgname#py-}:_py2 py3-${pkgname#py-}:_py3"
 source="$_pkgname-$pkgver.tar.gz::https://github.com/matplotlib/$_pkgname/archive/v$pkgver.tar.gz"
-
 builddir="${srcdir}/${_pkgname}-$pkgver"
+
 build() {
 	cd "$builddir" || return 1
+	python2 setup.py build || return 1
 	python3 setup.py build || return 1
 }
 
 package() {
+	mkdir -p "$pkgdir"
+}
+
+_py2() {
+	_py python2
+}
+
+_py3() {
+	_py python3
+}
+
+_py() {
+	local python="$1"
+	pkgdesc="$pkgdesc (for $python)"
+	install_if="$pkgname=$pkgver-r$pkgrel $python"
+
 	cd "$builddir"
-	python3 setup.py install --prefix=/usr --root="$pkgdir" || return 1
+	$python setup.py install --prefix=/usr --root="$subpkgdir" || return 1
 }
 
 md5sums="83dd0df7810e838b59e4dd9fa6e2d198  cycler-0.10.0.tar.gz"
