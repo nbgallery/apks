@@ -1,13 +1,13 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=py-pandas
 _pkgname=pandas
-pkgver=0.19.1
-pkgrel=1
+pkgver=0.19.2
+pkgrel=2
 pkgdesc="Cross-section and time series data analysis toolkit"
 url="http://pandas.pydata.org"
 arch="all"
 license="BSD"
-depends="python py-dateutil py-numpy py-tz"
+depends="python2 py-dateutil py-numpy py-tz"
 depends_dev=""
 makedepends="py-numpy-dev py-setuptools cython-dev"
 install=""
@@ -17,14 +17,14 @@ source="$_pkgname-$pkgver.tar.gz::https://github.com/$_pkgname-dev/$_pkgname/arc
 builddir="${srcdir}/${_pkgname}-$pkgver"
 build() {
 	cd "$builddir" || return 1
-	python setup.py build || return 1
+	python2 setup.py build || return 1
 }
 
 package() {
 	cd "$builddir"
-	python setup.py install --prefix=/usr --root="$pkgdir" || return 1
+	python2 setup.py install --prefix=/usr --root="$pkgdir" || return 1
 }
 
-md5sums="ea445fb299f80ed4133c81e2a456dc81  pandas-0.19.1.tar.gz"
-sha256sums="1ccd374e6a85414837ebb934ce9504ac4153576e59f7efbf802a393b5bd8997b  pandas-0.19.1.tar.gz"
-sha512sums="870f896f8b7f9c7ab3356791b6bf3aa4c4bbcc801dbd8a15e09666ffa91def06f3ab0f80dadf361e945ae39b4ce563c9562d4a9768b82d7ecb59e92fd66f153e  pandas-0.19.1.tar.gz"
+md5sums="ec94ff3e7e8f6c8ed8f96aa3aa9e6659  pandas-0.19.2.tar.gz"
+sha256sums="af634dd6ed3ca1f8635183f41e7f7769108531ccca8213067d9627857461702e  pandas-0.19.2.tar.gz"
+sha512sums="075cd1db6050c9823f615a584e5b9cdcab15eda141cda1847bf3060abd766da493e02ad988738714db77f6b4444aeecc1a4807031b162aa106ab8674ca97c246  pandas-0.19.2.tar.gz"
