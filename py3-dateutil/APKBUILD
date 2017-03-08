@@ -2,8 +2,8 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=py3-dateutil
 _pkgname=dateutil
-pkgver=2.5.3
-pkgrel=0
+pkgver=2.6.0
+pkgrel=1
 pkgdesc="Python extensions for datetime module"
 url="https://dateutil.readthedocs.io"
 arch="noarch"
@@ -36,6 +36,6 @@ package() {
 	python3 setup.py install --prefix=/usr --root="$pkgdir" || return 1
 }
 
-md5sums="93e297b21a3c5d2a8db878788efbcf25  python-dateutil-2.5.3.tar.gz"
-sha256sums="7cd888138963e4b699998c651b27e732f06671e3620f8cc745144c881e36fb3a  python-dateutil-2.5.3.tar.gz"
-sha512sums="9c8944b1d9915191f3511b9fadf9da038369a72138ff0ea08257476aaa6879530273d9fc85e98d0a8ab5709f6abacd2b55ef4c08a2d28ca558ff961aebc67b41  python-dateutil-2.5.3.tar.gz"
+md5sums="7ac719938274be8da1ab870c3b35941c  python-dateutil-2.6.0.tar.gz"
+sha256sums="3a027333eda28ad003f1a6c77cc0a46be06cb9e0790843dad6a1b619b102a181  python-dateutil-2.6.0.tar.gz"
+sha512sums="d95683f4d67822ccec8a3903d4c989cdedd2edb6a2a83ed0eb3cad2311cb37febe7e1b33f892984436ed25c39e235e861d67d0cd8ab95c44fc883d3d86c37e38  python-dateutil-2.6.0.tar.gz"

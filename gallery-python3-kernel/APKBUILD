@@ -1,7 +1,7 @@
 # Maintainer: nb.gallery team <team@nb.gallery>
 pkgname=gallery-python3-kernel
 pkgver=1.0.0
-pkgrel=2
+pkgrel=3
 pkgdesc="Python 3 kernel for the nb.gallery Jupyter client"
 url="https://github.com/nbgallery/apks"
 arch="x86_64"
@@ -13,6 +13,7 @@ depends="
   py3-cffi
   py3-cparser
   py3-cryptography
+  py3-dateutil
   py3-decorator
   py3-jinja2
   py3-openssl

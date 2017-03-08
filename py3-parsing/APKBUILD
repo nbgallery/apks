@@ -2,8 +2,8 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=py3-parsing
 _pkgname=pyparsing
-pkgver=2.1.9
-pkgrel=0
+pkgver=2.2.0
+pkgrel=1
 pkgdesc="An object-oriented approach to text processing"
 url="https://pyparsing.wikispaces.com/"
 arch="noarch"
@@ -36,6 +36,6 @@ package() {
 	python3 setup.py install --prefix=/usr --root="$pkgdir" || return 1
 }
 
-md5sums="ee943c354eac79526533c58342f322c7  pyparsing-2.1.9.tar.gz"
-sha256sums="93326f5490bcfe7069806ff342692e75f72529cfa82f20683b5fceeb5d4a7fc2  pyparsing-2.1.9.tar.gz"
-sha512sums="55765816f38159ee84f250f131c7c95a87658dde9dfc51c2dc3aa3532d19b12f9801af197b1590031cecd62959603e6e9f7c9b7a15c1521c25ca24326a9de73f  pyparsing-2.1.9.tar.gz"
+md5sums="0214e42d63af850256962b6744c948d9  pyparsing-2.2.0.tar.gz"
+sha256sums="0832bcf47acd283788593e7a0f542407bd9550a55a8a8435214a1960e04bcb04  pyparsing-2.2.0.tar.gz"
+sha512sums="6a409f429d40a5ac202d144e4150de2c80d7c7120147f603f72a4a99797d48c50822a6437f590ec5ae4418d51aa1f6b1d4e5d95a57e19bec0a127b04e4937008  pyparsing-2.2.0.tar.gz"

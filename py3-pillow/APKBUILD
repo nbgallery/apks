@@ -2,8 +2,8 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery> 
 pkgname=py3-pillow
 _pkgname=Pillow
-pkgver=3.4.1
-pkgrel=0
+pkgver=4.0.0
+pkgrel=1
 pkgdesc="A Python Imaging Library"
 url="http://python-pillow.org/"
 arch="all"
@@ -40,6 +40,6 @@ package() {
 	python3 setup.py install --prefix=/usr --root="$pkgdir" || return 1
 }
 
-md5sums="ceb885ef8e55048fb5c91f29772f45e9  Pillow-3.4.1.tar.gz"
-sha256sums="693eaab8719a6d6a3bc239e5af2474c72062f64266a9b2ace23b5d2ed3a636af  Pillow-3.4.1.tar.gz"
-sha512sums="ba53cdce9b05d157738ed67604f99091de3afe231d42ec254fb56d793758a1cd73838be242958406f0e378ab8720b686e739bafb6017a89afa9f65555bd3138e  Pillow-3.4.1.tar.gz"
+md5sums="19fab64e3680775f406af3529b6cec32  Pillow-4.0.0.tar.gz"
+sha256sums="ece687f83a78db7ac608aaa9469fc4d5dbc22757c5bc814cee75f457382d26bc  Pillow-4.0.0.tar.gz"
+sha512sums="d3620329d028666f72d896d49fb1743c73578d9231fb0641730d30e47355796b8eae76b77ae5a70ac54aa972ce044d67b8b9ce4c072c7aa16cdb1420c06774ed  Pillow-4.0.0.tar.gz"
