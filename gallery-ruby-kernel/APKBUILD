@@ -1,7 +1,7 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=gallery-ruby-kernel
 pkgver=0.1.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Ruby kernel for the Notebook Gallery Alpine client"
 url="https://github.com/nbgallery/apks"
 arch="x86_64"
