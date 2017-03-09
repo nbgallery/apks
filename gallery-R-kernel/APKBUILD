@@ -1,7 +1,7 @@
 # Maintainer: nb.gallery team <team@nb.gallery>
 pkgname=gallery-R-kernel
 pkgver=0.7.0
-pkgrel=1
+pkgrel=2
 pkgdesc="R kernel for the nb.gallery Jupyter Alpine client"
 url="https://github.com/nbgallery/apks"
 arch="x86_64"
