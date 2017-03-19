@@ -1,6 +1,6 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 _pack=image
-pkgname=octave-$_pack
+pkgname=octave-nbgallery-$_pack
 pkgver=2.6.1
 pkgrel=0
 pkgdesc="Provides functions for image processing."
@@ -8,14 +8,15 @@ url="http://octave.sourceforge.net/$_pack/"
 arch="all"
 license="GPL3"
 
-depends="octave"
-depends_dev="octave-dev"
+depends="octave-nbgallery"
+depends_dev="octave-nbgallery-dev"
 
 makedepends="$depends_dev"
-install=""
+install="$pkgname.post-install"
 _archive=$_pack-$pkgver.tar.gz
 subpackages=""
-source="http://downloads.sourceforge.net/octave/$_archive"
+source="http://downloads.sourceforge.net/octave/$_archive
+	$install"
 noextract="$_archive"
 
 _octave_run() {
@@ -48,6 +49,9 @@ package() {
 	_install_dir "$srcdir"/install_prefix "$prefix"
 	_install_dir "$srcdir"/install_alpineprefix "$alpineprefix"
 }
-md5sums="0efd8fcbd5f243903faf34a7ea932402  image-2.6.1.tar.gz"
-sha256sums="a576761094c88b4ea44a977fcdcf47ebc73ed5026cd1180d9884d86d1e89778d  image-2.6.1.tar.gz"
-sha512sums="4b1f08d91d3b024ae0ed410906098c2c73fd4c8096fc8ad8b2f1c0c9b1329f449091e1c169508e002778357f2b433947fdb9d5f22e8b8c60b23182b805008024  image-2.6.1.tar.gz"
+md5sums="0efd8fcbd5f243903faf34a7ea932402  image-2.6.1.tar.gz
+c1b31f193de8db1e66611758a22653f8  octave-nbgallery-image.post-install"
+sha256sums="a576761094c88b4ea44a977fcdcf47ebc73ed5026cd1180d9884d86d1e89778d  image-2.6.1.tar.gz
+75bdc46c31eadf7ab107c536401cb61820cfad1957d5bde335ec29045a5a2718  octave-nbgallery-image.post-install"
+sha512sums="4b1f08d91d3b024ae0ed410906098c2c73fd4c8096fc8ad8b2f1c0c9b1329f449091e1c169508e002778357f2b433947fdb9d5f22e8b8c60b23182b805008024  image-2.6.1.tar.gz
+00529b619f7d00d6f9548b6b68293fdbbda61f22c4c1f980025453f297bfff8a6886044fba147fe31270d7d9cc916a220ffb9a7f7005f54b5c0a698cea78195f  octave-nbgallery-image.post-install"

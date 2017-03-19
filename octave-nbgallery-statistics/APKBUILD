@@ -1,6 +1,6 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 _pack=statistics
-pkgname=octave-$_pack
+pkgname=octave-nbgallery-$_pack
 pkgver=1.3.0
 pkgrel=0
 pkgdesc="Additional statistics functions for Octave."
@@ -8,14 +8,15 @@ url="http://octave.sourceforge.net/$_pack/"
 arch="noarch"
 license="GPL3"
 
-depends="octave"
-depends_dev="octave-dev"
+depends="octave-nbgallery"
+depends_dev="octave-nbgallery-dev"
 
 makedepends="$depends_dev"
-install=""
+install="$pkgname.post-install"
 _archive=$_pack-$pkgver.tar.gz
 subpackages=""
-source="http://downloads.sourceforge.net/octave/$_archive"
+source="http://downloads.sourceforge.net/octave/$_archive
+	$install"
 noextract="$_archive"
 
 _octave_run() {
@@ -48,6 +49,9 @@ package() {
 	_install_dir "$srcdir"/install_prefix "$prefix"
 	_install_dir "$srcdir"/install_alpineprefix "$alpineprefix"
 }
-md5sums="c0a82761323f5668f2c9933227a874e7  statistics-1.3.0.tar.gz"
-sha256sums="06454e3a7ae6d2b7c5f442638c29c28ea8e5976766373fffcf0e297d5d076a33  statistics-1.3.0.tar.gz"
-sha512sums="31f9fb2104a4da4879ae97a7a699f24a47a8b96a7e78a12380beef0035dfe54b4d14ebbabbac7bfbaf4e64553a8cd9ca6e128014a40b8762dfc3f3ca984fc3d2  statistics-1.3.0.tar.gz"
+md5sums="c0a82761323f5668f2c9933227a874e7  statistics-1.3.0.tar.gz
+0b1bebe0cf6961f85a387f97e7d2af76  octave-nbgallery-statistics.post-install"
+sha256sums="06454e3a7ae6d2b7c5f442638c29c28ea8e5976766373fffcf0e297d5d076a33  statistics-1.3.0.tar.gz
+1101a71441e917a10cb8ed259b6b1a2d20a5eb31167ce6005548b612f21f9b1f  octave-nbgallery-statistics.post-install"
+sha512sums="31f9fb2104a4da4879ae97a7a699f24a47a8b96a7e78a12380beef0035dfe54b4d14ebbabbac7bfbaf4e64553a8cd9ca6e128014a40b8762dfc3f3ca984fc3d2  statistics-1.3.0.tar.gz
+5be521d2e7acbf1167c9491116f583ee343bf1755f47da646a862140927c761083833a81caed9f9bf0bf6f6ec01d7a075f9de50a51b7b2ebe2dae294f363102c  octave-nbgallery-statistics.post-install"

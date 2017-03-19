@@ -30,6 +30,6 @@ package() {
 	install -Dm644 COPYING.txt "$pkgdir"/usr/share/licenses/"$pkgname"/COPYING.txt
 	rm -f "$pkgdir"/usr/lib/*.la
 }
-md5sums="d07179abc6f282a98eb8959d553590ea  qhull.zip"
-sha256sums="14e0493ba07e40e9e3333d0ed90b285f86a43586c21f01ebb96882e33365dec5  qhull.zip"
-sha512sums="b7f2afc27fa58516f9d0d290ad9c6dab2cdc2f60269589dcf3cffb261b62cda3c9713fbc5079f48e2d14e769be03f4ba664f06177c98499f7d00fa79f970ef55  qhull.zip"
+md5sums="30c2985adf62009039c2f14e1e1e4cce  qhull.zip"
+sha256sums="dd570505e81fd1d59edf35dfac3c5c5cb0ae2399e7a2baedb7b1726a35693604  qhull.zip"
+sha512sums="7c627268378aa9600fbd622a03d9d126c0e93303bf4a06322b6b945a20599b7bf938f8889ba28c08f7cf9838856a26281a19077560479ae399767530f7d5001e  qhull.zip"

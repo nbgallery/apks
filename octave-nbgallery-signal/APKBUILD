@@ -1,6 +1,6 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 _pack=signal
-pkgname=octave-$_pack
+pkgname=octave-nbgallery-$_pack
 pkgver=1.3.2
 pkgrel=0
 pkgdesc="Signal processing tools, including filtering, windowing, and display functions."
@@ -8,14 +8,15 @@ url="http://octave.sourceforge.net/$_pack/"
 arch="all"
 license="GPL3"
 
-depends="octave"
-depends_dev="octave-dev"
+depends="octave-nbgallery"
+depends_dev="octave-nbgallery-dev"
 
 makedepends="$depends_dev"
-install=""
+install="$pkgname.post-install"
 _archive=$_pack-$pkgver.tar.gz
 subpackages=""
-source="http://downloads.sourceforge.net/octave/$_archive"
+source="http://downloads.sourceforge.net/octave/$_archive
+	$install"
 noextract="$_archive"
 
 _octave_run() {
@@ -48,6 +49,9 @@ package() {
 	_install_dir "$srcdir"/install_prefix "$prefix"
 	_install_dir "$srcdir"/install_alpineprefix "$alpineprefix"
 }
-md5sums="04a4f1142fe71f14c3b6d7d1d369c215  signal-1.3.2.tar.gz"
-sha256sums="a277f12e9f47cc66a8c56ab26284ac4839b223f32de13e35e710401fd0539b60  signal-1.3.2.tar.gz"
-sha512sums="f687012156e635f2d893162cea76b5cc1f86fcfaf037aeaabd72f7b855d319c955f24d44c77f254cad83b798bd76325ede9401357070f6a66ca8d0e89630c3c6  signal-1.3.2.tar.gz"
+md5sums="04a4f1142fe71f14c3b6d7d1d369c215  signal-1.3.2.tar.gz
+f7167177b724ccc9604d51a120c49b65  octave-nbgallery-signal.post-install"
+sha256sums="a277f12e9f47cc66a8c56ab26284ac4839b223f32de13e35e710401fd0539b60  signal-1.3.2.tar.gz
+b624d79ca4bf4fd64eb35777f6459649f987eb34ac1045eeb78fbdea9b67fdda  octave-nbgallery-signal.post-install"
+sha512sums="f687012156e635f2d893162cea76b5cc1f86fcfaf037aeaabd72f7b855d319c955f24d44c77f254cad83b798bd76325ede9401357070f6a66ca8d0e89630c3c6  signal-1.3.2.tar.gz
+29c9ae7f0ac7e1467481bbcda6a7c0b3eda08bdbb67b867fc6ece7f687c7275444de2eb44c0c330e1115fdd98c0cd4afb54fb8174262ff3f32a22500ab42361e  octave-nbgallery-signal.post-install"

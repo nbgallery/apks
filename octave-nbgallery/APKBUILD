@@ -1,31 +1,54 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
-pkgname=octave
-pkgver=4.2.0
-pkgrel=0
+pkgname=octave-nbgallery
+pkgver=4.2.1
+pkgrel=1
 pkgdesc="A high-level language, primarily intended for numerical computations."
 url="http://www.octave.org"
 arch="all"
 license="GPL3"
 
 depends="
+	arpack
 	autoconf 
 	automake 
 	bison 
 	curl 
+	fftw
 	fftw-double-libs 
 	fftw-long-double-libs 
 	fftw-single-libs 
+	fltk
+	fontconfig-dev
+	freetype-dev
 	gfortran 
-	ghostscript 
+	ghostscript-dev
+	glu
+	gl2ps
+	glpk
 	gnuplot 
-	less 
-	libltdl 
+	graphicsmagick-dev
+	hdf5
+	imagemagick-dev
+	lcms2
+	less
+	libltdl
+	libsm 
+	libtool
+	ncurses
+	pcre
 	perl 
-	pkgconf 
+	pkgconf
+	qhull
+	qrupdate
+	qscintilla
+	qt
+	readline
+	suitesparse
 	texinfo
+	zlib
 	"
 depends_dev="
-	arpack-dev 
+	arpack-dev
 	fftw-dev 
 	fltk-dev 
 	fontconfig-dev 
@@ -38,13 +61,13 @@ depends_dev="
 	graphicsmagick-dev 
 	hdf5-dev 
 	imagemagick-dev 
+	lcms2-dev
 	libltdl
-	libsm-dev 
+	libsm-dev
 	libtool
-	lcms2-dev 
 	ncurses-dev
-	pcre-dev 
-	qhull-dev 
+	pcre-dev
+	qhull-dev
 	qrupdate-dev 
 	qscintilla-dev 
 	qt-dev 
@@ -61,7 +84,7 @@ source="ftp://ftp.gnu.org/gnu/octave/octave-$pkgver.tar.gz
 	abs.patch
 	libinterp-deps.patch"
 
-builddir="$srcdir"/$pkgname-$pkgver
+builddir="$srcdir"/octave-$pkgver
 
 prepare() {
 	local i
@@ -88,9 +111,9 @@ build() {
 		--with-fft3-includedir=/usr/include \
 		--with-fft3-libdir=/usr/lib \
 		--disable-docs \
-		--with-java-libdir=/usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/server
+		--with-java-libdir=/usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/server \
+		--disable-gui
 #		--with-quantum-depth=16 \
-#		--disable-gui \
 #		--disable-java
 	
 	echo "${PWD} is PWD"
@@ -106,15 +129,15 @@ package() {
 	echo "/usr/lib/${pkgname}/${pkgver}" > "${pkgdir}/etc/ld.so.conf.d/${pkgname}.conf"
 }
 
-md5sums="4423db4dd6c2b43cacf9e9dcfa95473d  octave-4.2.0.tar.gz
-0fa97871b3696943a29dc282a3221ffd  octave-4.2.0.tar.gz.sig
+md5sums="b7b95cc595c706b77fca544f6682b596  octave-4.2.1.tar.gz
+8de864dc947b33537232980e4da7528e  octave-4.2.1.tar.gz.sig
 016d563eb6111c559aa8e65656f7dbc0  abs.patch
 1f7f8e7f36c7550d561b7edfa88f10d2  libinterp-deps.patch"
-sha256sums="443ba73782f3531c94bcf016f2f0362a58e186ddb8269af7dcce973562795567  octave-4.2.0.tar.gz
-24e18e8545cd38f7f195e92cced2998d26f0bdb541c97b3235fee8455c232e6a  octave-4.2.0.tar.gz.sig
+sha256sums="80c28f6398576b50faca0e602defb9598d6f7308b0903724442c2a35a605333b  octave-4.2.1.tar.gz
+746b177e5949c0c8c945b5b073c21a9e08c3a07c3fe37010e9cb6156702ac258  octave-4.2.1.tar.gz.sig
 3e990698df8ce69f63ba5b80bce1924efe630a7ef71c47b8f39303d45a033ae0  abs.patch
 f33a0f2ef8c1b1b0bac61c88a25d881990849b6f9810468229059af42d42c7fc  libinterp-deps.patch"
-sha512sums="5d16665d4ef8f218320f471704f8702f3a2911cc4a083cae318c1df0f787d50dddbc511dc91e11379314d65cecac6d521abac026860feca19d11ffdb52d3e678  octave-4.2.0.tar.gz
-7e12c38715253ca8f178a7820c23c31d7da5f7fc7b295d85798a0a46f6451d5a36dbc2e4f4a135f43f6fb58f96004eb644f0939889605a0c953bfda303dfe782  octave-4.2.0.tar.gz.sig
+sha512sums="c437c57eb145ddea7b97124dc6406d130fd91c9141198b93bc756bb05cb3f7645a7c591443faeb65e69edf6abc2b8d5612e515f7703a04eed27213a2133009b7  octave-4.2.1.tar.gz
+413e87d7dfb38f4f4a7e2937e396e09cf1d2c5ea125f124621436083c0d3b29893ba6275c879b6e86353c977b64a7c2c4aeb4e9d105f690e5e1ea3df743b05fd  octave-4.2.1.tar.gz.sig
 363a0072a43ddaf42527e224e249e7134026ee53c094817780816085f35be681db4e6d2210628efef0e52ab4963ff95d5b261560830beb9176f53a8a556c356c  abs.patch
 b57adbf3af5cbf13806f862cbf02fdafa6d0d6ddb969d51c9368d660717f2a398ae3ad88de90b030867dd0acbaaf84153e5cce0d61cf4b7740be569f839a6809  libinterp-deps.patch"

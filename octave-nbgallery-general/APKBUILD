@@ -1,6 +1,6 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 _pack=general
-pkgname=octave-$_pack
+pkgname=octave-nbgallery-$_pack
 pkgver=2.0.0
 pkgrel=0
 pkgdesc="General tools for Octave."
@@ -8,14 +8,15 @@ url="http://octave.sourceforge.net/$_pack/"
 arch="all"
 license="GPL3"
 
-depends="octave"
-depends_dev="octave-dev"
+depends="octave-nbgallery"
+depends_dev="octave-nbgallery-dev"
 
 makedepends="$depends_dev"
-install=""
+install="$pkgname.post-install"
 _archive=$_pack-$pkgver.tar.gz
 subpackages=""
-source="http://downloads.sourceforge.net/octave/$_archive"
+source="http://downloads.sourceforge.net/octave/$_archive
+	$install"
 noextract="$_archive"
 
 _octave_run() {
@@ -48,6 +49,9 @@ package() {
 	_install_dir "$srcdir"/install_prefix "$prefix"
 	_install_dir "$srcdir"/install_alpineprefix "$alpineprefix"
 }
-md5sums="81514b9d133b8013ae2b394f7aa6e16b  general-2.0.0.tar.gz"
-sha256sums="80a6921bea3437ea233873ca4382bdc7c31c9e61bd1bcb9059da18db39df7194  general-2.0.0.tar.gz"
-sha512sums="414f024eac5f1afa56ac80e22ed8828338a7692b6c326bc7e84603941b76bfe2a00b6b8fc0bbd5947e76f62d2966ccfb118aa1e865e4c912dc5c7ebb8de58ac6  general-2.0.0.tar.gz"
+md5sums="81514b9d133b8013ae2b394f7aa6e16b  general-2.0.0.tar.gz
+2156b0bc23bc4243e01c09ffed30e310  octave-nbgallery-general.post-install"
+sha256sums="80a6921bea3437ea233873ca4382bdc7c31c9e61bd1bcb9059da18db39df7194  general-2.0.0.tar.gz
+5be8f6631282cab8f6a8a558d00114913d976a12ddc536a3b122d4b27fa12ffc  octave-nbgallery-general.post-install"
+sha512sums="414f024eac5f1afa56ac80e22ed8828338a7692b6c326bc7e84603941b76bfe2a00b6b8fc0bbd5947e76f62d2966ccfb118aa1e865e4c912dc5c7ebb8de58ac6  general-2.0.0.tar.gz
+50f7674e5ce83372907948226cfe367f741bbea356fbd943c2f206a6523175484b0d8018f4d559c86efe155bf3346e35f91e32c1a7e970fd3d161b5807b0845d  octave-nbgallery-general.post-install"
