@@ -3,7 +3,7 @@
 pkgname=cython3
 _pkgname=cython
 pkgver=0.25.2
-pkgrel=1
+pkgrel=2
 pkgdesc="Cython is an optimising static compiler for both the Python & the extended Cython programming languages."
 url="http://cython.org"
 arch="all"
@@ -24,6 +24,9 @@ package() {
         cd "$_builddir"
         python3 setup.py install --prefix=/usr \
           --root="$pkgdir" --optimize=1 || return 1
+        mv "$pkgdir"/usr/bin/cython "$pkgdir"/usr/bin/cython3
+        mv "$pkgdir"/usr/bin/cythonize "$pkgdir"/usr/bin/cythonize3
+        mv "$pkgdir"/usr/bin/cygdb "$pkgdir"/usr/bin/cygdb3
 }
 
 md5sums="212d50002f72bcdd928f036a46b3ae09  cython-0.25.2.tar.gz"
