@@ -1,7 +1,7 @@
 # Maintainer: nb.gallery team <team@nb.gallery>
 pkgname=gallery-python3-kernel
 pkgver=1.0.0
-pkgrel=5
+pkgrel=6
 pkgdesc="Python 3 kernel for the nb.gallery Jupyter client"
 url="https://github.com/nbgallery/apks"
 arch="x86_64"
@@ -37,7 +37,7 @@ build() {
 package() {
 	cd "$srcdir"
 	pip3 install --root="$pkgdir" entrypoints-0.2.2-py2.py3-none-any.whl
-	pip3 install --root="$pkgdir" ipykernel ipywidgets==5.2.2 widgetsnbextension==1.2.6
+	pip3 install --root="$pkgdir" ipykernel ipywidgets
 	pip3 install --root="$pkgdir" http://github.com/nbgallery/pypki2/tarball/master#egg=pypki2
 	pip3 install --root="$pkgdir" --no-deps http://github.com/nbgallery/ipydeps/tarball/master#egg=ipydeps
 	rm -rf "$pkgdir/usr/share/man"
