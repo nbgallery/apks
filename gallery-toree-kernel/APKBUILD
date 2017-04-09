@@ -1,7 +1,7 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=gallery-toree-kernel
 pkgver=1.0.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Apache Toree (Spark) kernels for NBGallery alpine client"
 url="https://github.com/nbgallery/apks"
 arch="x86_64"
@@ -11,8 +11,8 @@ depends_dev=""
 makedepends="$depends_dev python py2-pip"
 install=""
 subpackages=""
-# wget http://d3kbcqa49mib13.cloudfront.net/spark-1.6.0-bin-hadoop2.6.tgz
-spark_version="spark-1.6.0-bin-hadoop2.6"
+# wget http://d3kbcqa49mib13.cloudfront.net/spark-2.1.0-bin-hadoop2.7.tgz
+spark_version="spark-2.1.0-bin-hadoop2.7"
 spark_tar="$spark_version.tgz"
 #source="$spark_tar"
 source=""
@@ -22,7 +22,7 @@ _prefix=/usr
 
 prepare() {
 	if [ ! -f $startdir/$spark_tar ]; then
-		wget http://d3kbcqa49mib13.cloudfront.net/spark-1.6.0-bin-hadoop2.6.tgz
+		wget http://d3kbcqa49mib13.cloudfront.net/spark-2.1.0-bin-hadoop2.7.tgz
 	fi
 }
 
@@ -46,31 +46,7 @@ package() {
 	export SPARK_HOME=/usr/spark
 	cd $startdir
 
-	# Patch spark jar with alpine snappy .so
-	cd $pkgdir/$_prefix/spark
-	echo "Patching spark with alpine x86_64 snappy library..."
-	echo "Before:"
-	jar tvf lib/spark-assembly-1.6.0-hadoop2.6.0.jar | grep Linux | grep libsnappy
-	mkdir -p org/xerial/snappy/native/Linux/x86_64
-	cp /usr/lib/libsnappyjava.so.1.1.2 org/xerial/snappy/native/Linux/x86_64/libsnappyjava.so
-	jar -uf lib/spark-assembly-1.6.0-hadoop2.6.0.jar org/xerial/snappy/native/Linux/x86_64/libsnappyjava.so
-	rm -rf org
-	echo "After:"
-	jar tvf lib/spark-assembly-1.6.0-hadoop2.6.0.jar | grep Linux | grep libsnappy
-	cd $startdir
-
 	# Install the kernel
-	pip install --no-deps --no-cache-dir --root="$pkgdir" toree
-
-	# Cleanup
-	cd $pkgdir/$_prefix/spark
-	rm -rf R/lib/SparkR/html
-	rm -rf R/lib/SparkR/tests
-	rm -rf data
-	rm -rf examples
-	rm -rf python/docs
-	rm -rf python/test_support
-	rm CHANGES.txt
-	rm lib/spark-examples-1.6.0-hadoop2.6.0.jar
-	cd $startdir
+	pip install --no-deps --no-cache-dir --root="$pkgdir" py4j
+	pip install --no-deps --no-cache-dir --root="$pkgdir" https://dist.apache.org/repos/dist/dev/incubator/toree/0.2.0/snapshots/dev1/toree-pip/toree-0.2.0.dev1.tar.gz
 }
