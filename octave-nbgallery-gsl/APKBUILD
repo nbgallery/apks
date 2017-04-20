@@ -1,0 +1,57 @@
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
+_pack=gsl
+pkgname=octave-nbgallery-$_pack
+pkgver=2.0.0
+pkgrel=0
+pkgdesc="Octave bindings to the GNU Scientific Library."
+url="http://octave.sourceforge.net/$_pack/"
+arch="all"
+license="GPL3"
+
+depends="octave-nbgallery"
+depends_dev="octave-nbgallery-dev gsl-dev"
+
+makedepends="$depends_dev"
+install="$pkgname.post-install"
+_archive=$_pack-$pkgver.tar.gz
+subpackages=""
+source="http://downloads.sourceforge.net/octave/$_archive
+	$install"
+noextract="$_archive"
+
+_octave_run() {
+	octave --no-history --no-init-file --no-window-system -q -f --eval "$*"
+}
+
+_install_dir() {
+	src=$1
+	dst=$2
+	mkdir -p "$(dirname "$dst")"
+	cp -r "$src" "$dst"
+}
+
+build() {
+	_prefix="$srcdir"/install_prefix
+	_alpineprefix="$srcdir"/install_alpineprefix
+	mkdir -p "$_prefix" "$_alpineprefix"
+	cd "$srcdir"
+	_octave_run "$(cat <<-EOF
+		pkg local_list octave_packages;
+		pkg prefix $_prefix $_alpineprefix;
+		pkg install -verbose -nodeps $_archive;
+		EOF
+		)"
+}
+
+package() {
+	prefix=$pkgdir/usr/share/octave/packages
+	alpineprefix=$pkgdir/usr/lib/octave/packages
+	_install_dir "$srcdir"/install_prefix "$prefix"
+	_install_dir "$srcdir"/install_alpineprefix "$alpineprefix"
+}
+md5sums="d1f09f0b60a4a66c9ef462a6b2645429  gsl-2.0.0.tar.gz
+287d9dfc896c2f7319e5208d1b3795cb  octave-nbgallery-gsl.post-install"
+sha256sums="4a93623745024a7617eef435b99a03aaebece3d7967771518197f150746f58b1  gsl-2.0.0.tar.gz
+da29a238d0ad51ed124dc232570a9f44039668acf2e70b27cec966e45463cc5a  octave-nbgallery-gsl.post-install"
+sha512sums="608b501a715cf46d159501e9c8de5e6c2ecd521d525ebf6ca62bbb2a063c4ffb4663a74adfcf9a6c49f59a41455c5004dd856624fbfa9b906de4af906c62cace  gsl-2.0.0.tar.gz
+f28ce927f9430bebbe57b3b6c8314689041fcf130e7655ee8feaebd740ebceedede73ea2e2ce979e44508a8ffa00e0f1c8b3ef64fb5a4b0678069ef3085e4084  octave-nbgallery-gsl.post-install"
