@@ -1,0 +1,152 @@
+Only in communications-1.2.1/src: base-lu.cc
+Only in communications-1.2.1/src: base-lu.h
+--- communications-1.2.1/src.orig/configure.ac
++++ communications-1.2.1/src/configure.ac
+@@ -99,5 +99,21 @@
+   PKG_CPPFLAGS="$PKG_CPPFLAGS -DHAVE_OCTAVE_BASE_VALUE_PRINT_CONST=1"
+ fi
+ 
++comm_save_CXXFLAGS=$CXXFLAGS
++CXXFLAGS="$CXXFLAGS $comm_CXXFLAGS"
++AC_LANG_PUSH(C++)
++AC_CHECK_HEADER([octave/ls-oct-ascii.h], [PKG_CPPFLAGS="$PKG_CPPFLAGS -DHAVE_OCTAVE_ASCII_H=1"], [],
++[
++#include <octave/config.h>
++#include <octave/ov.h>
++]
++AC_CHECK_HEADER([octave/ls-oct-text.h], [PKG_CPPFLAGS="$PKG_CPPFLAGS -DHAVE_OCTAVE_TEXT_H=1"], [],
++[
++#include <octave/config.h>
++#include <octave/ov.h>
++]
++AC_LANG_POP(C++)
++CXXFLAGS=$comm_save_CXXFLAGS
++
+ AC_CONFIG_FILES([Makefile])
+ AC_OUTPUT
+--- communications-1.2.1/src.orig/galois-ops.h
++++ communications-1.2.1/src/galois-ops.h
+@@ -21,6 +21,32 @@
+ #if !defined (galois_octave_ops_h)
+ #define galois_octave_ops_h 1
+ 
++#if ! defined (CAST_BINOP_ARGS)
++#  define CAST_BINOP_ARGS(t1,t2)		\
++  t1 v1 = dynamic_cast<t1> (a1);		\
++  t2 v2 = dynamic_cast<t2> (a2);
++#endif
++
++#if ! defined (CAST_UNOP_ARG)
++#  define CAST_UNOP_ARG(t)			\
++  t v = dynamic_cast<t> (a)
++#endif
++
++#if ! defined (BINOPDECL)
++#  define BINOPDECL(name, a1, a2)				\
++  static octave_value						\
++  CONCAT2(oct_binop_, name) (const octave_base_value& a1,	\
++			     const octave_base_value& a2)
++#endif
++
++#if ! defined (CATOPDECL)
++#  define CATOPDECL(name, a1, a2)					\
++  static octave_value							\
++  CONCAT2(oct_catop_,name) (octave_base_value& a1,			\
++			    const octave_base_value& a2,		\
++			    const Array<octave_idx_type>& ra_idx)
++#endif
++
+ // Override the operator and function definition defines from Octave
+ 
+ #define DEFBINOP_OP_G(name, t1, t2, op) \
+--- communications-1.2.1/src.orig/galois.cc
++++ communications-1.2.1/src/galois.cc
+@@ -27,7 +27,7 @@
+ #include "galoisfield.h"
+ #include "galois-def.h"
+ 
+-#include <octave/base-lu.cc>
++#include "base-lu.cc"
+ 
+ galois_field_list stored_galois_fields;
+ 
+--- communications-1.2.1/src.orig/galois.h
++++ communications-1.2.1/src/galois.h
+@@ -22,10 +22,10 @@
+ #define octave_galois_int_h 1
+ 
+ #include <octave/config.h>
+-#include <octave/base-lu.h>
+ #include <octave/mx-base.h>
+ 
+ #include "galoisfield.h"
++#include "base-lu.h"
+ 
+ typedef void (*solve_singularity_handler) (double rcond);
+ 
+--- communications-1.2.1/src.orig/ov-galois.cc
++++ communications-1.2.1/src/ov-galois.cc
+@@ -24,16 +24,35 @@
+ #include <octave/byte-swap.h>
+ #include <octave/gripes.h>
+ #include <octave/lo-ieee.h>
+-#include <octave/oct-hdf5.h>
+ #include <octave/oct-locbuf.h>
+ #include <octave/oct-obj.h>
+ #include <octave/ov.h>
+ #include <octave/pr-output.h>
+ 
+-#include <octave/ls-oct-ascii.h>
++//#if defined(HAVE_OCTAVE_TEXT_H)
++#  include <octave/ls-oct-text.h>
++//#else
++//#  include <octave/ls-oct-ascii.h>
++//#endif
+ 
+ #include "galois.h"
+ #include "ov-galois.h"
++
++#if defined (HAVE_HDF5)
++#  if defined (HAVE_HDF5_H)
++#    include <hdf5.h>
++#  endif
++#  include "oct-hdf5-types.h"
++#  if defined (OCTAVE_ENABLE_64)
++#    define H5T_NATIVE_IDX H5T_NATIVE_INT64
++#  else
++#    define H5T_NATIVE_IDX H5T_NATIVE_INT
++#  endif
++#endif
++
++#if ! defined(X_CAST)
++#  define X_CAST(T,E) (T) (E)
++#endif
+ 
+ #if defined (DEFINE_OCTAVE_ALLOCATOR)
+ DEFINE_OCTAVE_ALLOCATOR (octave_galois);
+--- communications-1.2.1/src.orig/ov-galois.h
++++ communications-1.2.1/src/ov-galois.h
+@@ -44,6 +44,10 @@
+ #endif
+ #endif
+ 
++#if ! defined (OV_REP_TYPE)
++#  define OV_REP_TYPE octave_base_value
++#endif
++
+ class octave_value_list;
+ class tree_walker;
+ 
+--- communications-1.2.1/src.orig/syndtable.cc
++++ communications-1.2.1/src/syndtable.cc
+@@ -20,8 +20,8 @@
+ 
+ #include <octave/oct.h>
+ 
+-#define COL_MAJ(N) (N / (SIZEOF_INT << 3))
+-#define COL_MIN(N) (N % (SIZEOF_INT << 3))
++#define COL_MAJ(N) (N / (sizeof (int) << 3))
++#define COL_MIN(N) (N % (sizeof (int) << 3))
+ 
+ Array<int>
+ get_errs (const int& nmin, const int& nmax, const int &nerrs)

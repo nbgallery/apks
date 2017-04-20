@@ -9,6 +9,7 @@ license="GPL3"
 makedepends=""
 depends="
 	octave-nbgallery
+	octave-nbgallery-communications
 	octave-nbgallery-data-smoothing
 	octave-nbgallery-fuzzy-logic-toolkit
 	octave-nbgallery-general
