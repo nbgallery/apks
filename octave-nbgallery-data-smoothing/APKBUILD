@@ -1,0 +1,57 @@
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
+_pack=data-smoothing
+pkgname=octave-nbgallery-$_pack
+pkgver=1.3.0
+pkgrel=0
+pkgdesc="Algorithms for smoothing noisy data."
+url="http://octave.sourceforge.net/$_pack/"
+arch="noarch"
+license="GPL3"
+
+depends="octave-nbgallery"
+depends_dev="octave-nbgallery-dev"
+
+makedepends="$depends_dev"
+install="$pkgname.post-install"
+_archive=$_pack-$pkgver.tar.gz
+subpackages=""
+source="http://downloads.sourceforge.net/octave/$_archive
+	$install"
+noextract="$_archive"
+
+_octave_run() {
+	octave --no-history --no-init-file --no-window-system -q -f --eval "$*"
+}
+
+_install_dir() {
+	src=$1
+	dst=$2
+	mkdir -p "$(dirname "$dst")"
+	cp -r "$src" "$dst"
+}
+
+build() {
+	_prefix="$srcdir"/install_prefix
+	_alpineprefix="$srcdir"/install_alpineprefix
+	mkdir -p "$_prefix" "$_alpineprefix"
+	cd "$srcdir"
+	_octave_run "$(cat <<-EOF
+		pkg local_list octave_packages;
+		pkg prefix $_prefix $_alpineprefix;
+		pkg install -verbose -nodeps $_archive;
+		EOF
+		)"
+}
+
+package() {
+	prefix=$pkgdir/usr/share/octave/packages
+	alpineprefix=$pkgdir/usr/lib/octave/packages
+	_install_dir "$srcdir"/install_prefix "$prefix"
+	_install_dir "$srcdir"/install_alpineprefix "$alpineprefix"
+}
+md5sums="d8fc52ed097b5096f5e7ea16dc5ab343  data-smoothing-1.3.0.tar.gz
+bc2681f82cdeaa5d73a31c934cc3fcaa  octave-nbgallery-data-smoothing.post-install"
+sha256sums="012bd7a9681619ed33d8643f3785ba9b17a82febab9b242674fe79746bc31b60  data-smoothing-1.3.0.tar.gz
+94fa905c9b3ad85051b48edebd7f3f7ab2fe7a33077c21f583060efe3fc2fa10  octave-nbgallery-data-smoothing.post-install"
+sha512sums="60df6576b73d972515b9012f7f3e7d84d2f1c77d395b7d130c0590926f514ce586f056ecb22a04d0aedcc7c02afc8318ad36061b231420419506a09d5620826a  data-smoothing-1.3.0.tar.gz
+2add545956a2eebf7a8adcc76f0a609ca9983f732cbdd0f95bc1f20def2d4a594312feb0d9d6fa14a99072ca29b5458ac42f2a10a5ec6da0b0e8ab445dce81f3  octave-nbgallery-data-smoothing.post-install"

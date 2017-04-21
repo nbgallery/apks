@@ -1,0 +1,57 @@
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
+_pack=linear-algebra
+pkgname=octave-nbgallery-$_pack
+pkgver=2.2.2
+pkgrel=0
+pkgdesc="Additional linear algebra code, including general SVD and matrix functions."
+url="http://octave.sourceforge.net/$_pack/"
+arch="all"
+license="GPL3"
+
+depends="octave-nbgallery"
+depends_dev="octave-nbgallery-dev"
+
+makedepends="$depends_dev"
+install="$pkgname.post-install"
+_archive=$_pack-$pkgver.tar.gz
+subpackages=""
+source="http://downloads.sourceforge.net/octave/$_archive
+	$install"
+noextract="$_archive"
+
+_octave_run() {
+	octave --no-history --no-init-file --no-window-system -q -f --eval "$*"
+}
+
+_install_dir() {
+	src=$1
+	dst=$2
+	mkdir -p "$(dirname "$dst")"
+	cp -r "$src" "$dst"
+}
+
+build() {
+	_prefix="$srcdir"/install_prefix
+	_alpineprefix="$srcdir"/install_alpineprefix
+	mkdir -p "$_prefix" "$_alpineprefix"
+	cd "$srcdir"
+	_octave_run "$(cat <<-EOF
+		pkg local_list octave_packages;
+		pkg prefix $_prefix $_alpineprefix;
+		pkg install -verbose -nodeps $_archive;
+		EOF
+		)"
+}
+
+package() {
+	prefix=$pkgdir/usr/share/octave/packages
+	alpineprefix=$pkgdir/usr/lib/octave/packages
+	_install_dir "$srcdir"/install_prefix "$prefix"
+	_install_dir "$srcdir"/install_alpineprefix "$alpineprefix"
+}
+md5sums="702461982f6028addf00bac1d0b31538  linear-algebra-2.2.2.tar.gz
+c19780836e3a826a95158d8749b8af0e  octave-nbgallery-linear-algebra.post-install"
+sha256sums="fbaaa5f520bcbcf3469b4848876a38d2aaab7bdeeadf241fdcc33881836e9da3  linear-algebra-2.2.2.tar.gz
+49b1ebff2552f12e6c92c4188482515c342a38a4c2b9ee607b5ab7e3d551196b  octave-nbgallery-linear-algebra.post-install"
+sha512sums="a63e27512416366054d3d7001a4c41f6f4644a901e992b5f5b5b1cd23c319cb3aa66e8e611560f086d3d1790b38387259202eb63e8f63934b27000f99769795a  linear-algebra-2.2.2.tar.gz
+0aeb869eb540e3c6a5622d5da78029ac4f83496c4d397509cd1478a8e317c7703d1dcd92bfa097b8663dfe44aa65ad71224f813bc3016d4639de4dc17066b35a  octave-nbgallery-linear-algebra.post-install"

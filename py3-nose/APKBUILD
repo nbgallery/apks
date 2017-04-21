@@ -4,7 +4,7 @@
 pkgname=py3-nose
 _pkgname=nose
 pkgver=1.3.7
-pkgrel=0
+pkgrel=2
 pkgdesc="A Python unittest module"
 url="http://readthedocs.org/docs/nose/"
 arch="noarch"
@@ -36,6 +36,7 @@ build() {
 package() {
 	cd "$_builddir"
 	python3 setup.py install --prefix=/usr --root="$pkgdir" || return 1
+	mv "$pkgdir"/usr/bin/nosetests "$pkgdir"/usr/bin/nosetests3
 }
 
 md5sums="4d3ad0ff07b61373d2cefc89c5d0b20b  nose-1.3.7.tar.gz

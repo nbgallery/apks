@@ -1,0 +1,57 @@
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
+_pack=mvn
+pkgname=octave-nbgallery-$_pack
+pkgver=1.1.0
+pkgrel=0
+pkgdesc="Multivariate normal distribution clustering and utility functions."
+url="http://octave.sourceforge.net/$_pack/"
+arch="all"
+license="GPL3"
+
+depends="octave-nbgallery"
+depends_dev="octave-nbgallery-dev gsl-dev"
+
+makedepends="$depends_dev"
+install="$pkgname.post-install"
+_archive=$_pack-$pkgver.tar.gz
+subpackages=""
+source="http://downloads.sourceforge.net/octave/$_archive
+	$install"
+noextract="$_archive"
+
+_octave_run() {
+	octave --no-history --no-init-file --no-window-system -q -f --eval "$*"
+}
+
+_install_dir() {
+	src=$1
+	dst=$2
+	mkdir -p "$(dirname "$dst")"
+	cp -r "$src" "$dst"
+}
+
+build() {
+	_prefix="$srcdir"/install_prefix
+	_alpineprefix="$srcdir"/install_alpineprefix
+	mkdir -p "$_prefix" "$_alpineprefix"
+	cd "$srcdir"
+	_octave_run "$(cat <<-EOF
+		pkg local_list octave_packages;
+		pkg prefix $_prefix $_alpineprefix;
+		pkg install -verbose -nodeps $_archive;
+		EOF
+		)"
+}
+
+package() {
+	prefix=$pkgdir/usr/share/octave/packages
+	alpineprefix=$pkgdir/usr/lib/octave/packages
+	_install_dir "$srcdir"/install_prefix "$prefix"
+	_install_dir "$srcdir"/install_alpineprefix "$alpineprefix"
+}
+md5sums="13039ee507519eda19bc2952ea33c535  mvn-1.1.0.tar.gz
+4c32ba4745b858a9379a4393b67d2ea6  octave-nbgallery-mvn.post-install"
+sha256sums="af5a16b91cb6b83ef05ba62321fc1b8a90c8fe7ee79a4fc819b5618b3b4c8603  mvn-1.1.0.tar.gz
+c850cde69fd2ec2390a4e0d023354c5e764a52913de63147b1edcbee92c60760  octave-nbgallery-mvn.post-install"
+sha512sums="8ac2f92b5f6ddb5325a96b97d9fa09fa6f4fe9141f54a5fde615cf4bbebf49f5eb5de4bb14b89eec743601f96d922f87d25ff037311b5f9e190e0e6a659faccc  mvn-1.1.0.tar.gz
+b3f62c5e3adf38ce2c52d901877d395652ad9a2ea8f9d0ea69b887c8a8281f73fb23a3f3969f668bfeeaae1a0ace321b9fe2054de8800327f9cd20db019bcef6  octave-nbgallery-mvn.post-install"

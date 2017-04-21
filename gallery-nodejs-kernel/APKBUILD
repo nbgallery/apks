@@ -1,7 +1,7 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=gallery-nodejs-kernel
 pkgver=1.0.0
-pkgrel=0
+pkgrel=1
 pkgdesc="Node.js kernel for the Notebook Gallery Alpine client"
 url="https://github.com/nbgaller/apks"
 arch="x86_64"

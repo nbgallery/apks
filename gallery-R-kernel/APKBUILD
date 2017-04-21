@@ -1,7 +1,7 @@
 # Maintainer: nb.gallery team <team@nb.gallery>
 pkgname=gallery-R-kernel
 pkgver=0.7.0
-pkgrel=1
+pkgrel=4
 pkgdesc="R kernel for the nb.gallery Jupyter Alpine client"
 url="https://github.com/nbgallery/apks"
 arch="x86_64"
@@ -21,11 +21,13 @@ package() {
         export R_LIBS_USER="$pkgdir"/usr/lib/R/library/
 
 	# add a default CRAN mirror
+	mkdir -p "$pkgdir"/usr/lib/R/etc/
 	echo 'options(repos = c(CRAN = "http://cloud.r-project.org/"))' > "$pkgdir"/usr/lib/R/etc/Rprofile.site
 
 	# install IRKernel dependencies
         echo "install.packages(c('repr', 'pbdZMQ', 'crayon', 'jsonlite', 'uuid', 'digest', 'evaluate', 'IRdisplay'), repos='http://cloud.r-project.org')" | R --no-save
 	git clone https://github.com/IRkernel/IRkernel
 	echo "install.packages(c('./IRkernel'), repos=NULL, type='source')" | R --no-save
+	rm -rf IRkernel
 
 }

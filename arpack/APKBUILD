@@ -28,6 +28,6 @@ package() {
 	rm -f "$pkgdir"/usr/lib/*.la
 }
 
-md5sums="47b01f5795c8c126204bada543aa7313  arpack-ng-master.zip"
-sha256sums="fcc89178baf8afde1d5116acd20ad8ce132382385d2e28bc60c16e45f04c421c  arpack-ng-master.zip"
-sha512sums="60ebe26f0892d0b8e19b607421ae8189b16f2c7aa31fa472092d49e335ae04df0da749ed70f31444d724986e27eb4431f6cff15d6d95efa0869e45bbc9cab2c1  arpack-ng-master.zip"
+md5sums="bcd8408387681f9f1faad6c916a245b7  arpack-ng-master.zip"
+sha256sums="74b6a85b3bd0720b02730d64de362262e00d21d9509d25414cee840345b63e0c  arpack-ng-master.zip"
+sha512sums="4187354d9ab3eadd835d7da148726d922bb47a7a73074b1cf0754eb0c7b39276887efd1b326176d86590037f82cdb79ac107cd2519b77bb967de9a027c622fd4  arpack-ng-master.zip"
