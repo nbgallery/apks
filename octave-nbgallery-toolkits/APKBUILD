@@ -1,0 +1,36 @@
+#Maintainer: Notebook Gallery Team <team@nb.gallery>
+pkgname=octave-nbgallery-toolkits
+pkgver=0.2
+pkgrel=0
+pkgdesc="Meta package for NBGallery Octave and toolkits"
+url="https://github.com/nbgallery/apks"
+arch="noarch"
+license="GPL3"
+makedepends=""
+depends="
+	octave-nbgallery
+	octave-nbgallery-communications
+	octave-nbgallery-data-smoothing
+	octave-nbgallery-fuzzy-logic-toolkit
+	octave-nbgallery-general
+	octave-nbgallery-gsl
+	octave-nbgallery-image
+	octave-nbgallery-linear-algebra
+	octave-nbgallery-ltfat
+	octave-nbgallery-miscellaneous
+	octave-nbgallery-mvn
+	octave-nbgallery-nan
+	octave-nbgallery-signal
+	octave-nbgallery-splines
+	octave-nbgallery-statistics
+	octave-nbgallery-strings
+	octave-nbgallery-struct
+	octave-nbgallery-tsa
+	"
+install=""
+subpackages=""
+source=""
+
+package() {
+	mkdir -p "$pkgdir"
+}

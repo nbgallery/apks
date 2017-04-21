@@ -1,0 +1,45 @@
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
+pkgname=gnu-units
+pkgver=2.14
+pkgrel=0
+pkgdesc="Converts measurements to their equivalents in other systems of measurement."
+url="https://www.gnu.org/software/units"
+arch="all"
+license="GPL"
+depends=""
+depends_dev="readline"
+makedepends="$depends_dev"
+install=""
+subpackages="$pkgname-doc"
+source="https://ftp.gnu.org/gnu/units/units-$pkgver.tar.gz 
+	https://ftp.gnu.org/gnu/units/units-$pkgver.tar.gz.sig"
+
+builddir="$srcdir"/units-$pkgver
+
+prepare() {
+	local i
+	cd "$builddir"
+	for i in $source; do
+		case $i in
+		*.patch) msg $i; patch -p1 -i "$srcdir"/$i || return 1;;
+		esac
+	done
+}
+
+build() {
+	cd "$builddir"
+	./configure --prefix=/usr || return 1
+}
+
+package() {
+	cd "$builddir"
+	make || return 1
+	make DESTDIR="$pkgdir" install || return 1
+	install -Dm644 COPYING "$pkgdir"/usr/share/licenses/"$pkgname"/COPYING || return 1
+}
+md5sums="a0f133794d2d36b92319be56094b4096  units-2.14.tar.gz
+8e0378e168b9990d68468a822b9d8e53  units-2.14.tar.gz.sig"
+sha256sums="9d33893d82f3ddd831d5822992007c40bcd0826ae67d3cbc96539951fb0a82e8  units-2.14.tar.gz
+ed3faeb37744c2413a8adf64bbf2e88b41800687bd68fdeed0311b8fa9c904b2  units-2.14.tar.gz.sig"
+sha512sums="3cd09a76fb1cccbafaa3e023c791740738c8347425b2645cad1fa768dee3ebde917602cf65988ee8922fed512ec0bc2367f68545450789fc6bf1a79f066a6986  units-2.14.tar.gz
+42fa9816857964a10b2eeb01bcc4b7183ceafbd440addb57ffaa90d0bf4d85fd016e56382d2f0c7ab23bf4d3784996861d876a6c6206e1d2adf799b80f5add65  units-2.14.tar.gz.sig"

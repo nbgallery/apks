@@ -1,0 +1,57 @@
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
+_pack=strings
+pkgname=octave-nbgallery-$_pack
+pkgver=1.2.0
+pkgrel=0
+pkgdesc="Additional functions for manipulation and analysis of strings."
+url="http://octave.sourceforge.net/$_pack/"
+arch="all"
+license="GPL3"
+
+depends="octave-nbgallery"
+depends_dev="octave-nbgallery-dev"
+
+makedepends="$depends_dev"
+install="$pkgname.post-install"
+_archive=$_pack-$pkgver.tar.gz
+subpackages=""
+source="http://downloads.sourceforge.net/octave/$_archive
+	$install"
+noextract="$_archive"
+
+_octave_run() {
+	octave --no-history --no-init-file --no-window-system -q -f --eval "$*"
+}
+
+_install_dir() {
+	src=$1
+	dst=$2
+	mkdir -p "$(dirname "$dst")"
+	cp -r "$src" "$dst"
+}
+
+build() {
+	_prefix="$srcdir"/install_prefix
+	_alpineprefix="$srcdir"/install_alpineprefix
+	mkdir -p "$_prefix" "$_alpineprefix"
+	cd "$srcdir"
+	_octave_run "$(cat <<-EOF
+		pkg local_list octave_packages;
+		pkg prefix $_prefix $_alpineprefix;
+		pkg install -verbose -nodeps $_archive;
+		EOF
+		)"
+}
+
+package() {
+	prefix=$pkgdir/usr/share/octave/packages
+	alpineprefix=$pkgdir/usr/lib/octave/packages
+	_install_dir "$srcdir"/install_prefix "$prefix"
+	_install_dir "$srcdir"/install_alpineprefix "$alpineprefix"
+}
+md5sums="d8554b4131f753f0cc9fddebd985a8f3  strings-1.2.0.tar.gz
+40b00d24fb5231dcfcca8530b49d415c  octave-nbgallery-strings.post-install"
+sha256sums="cfe2702d9e1b69e1fc6bee9a8fab8bb3d63a42d74e763538687d0dbcdd5619ac  strings-1.2.0.tar.gz
+5672f006a2d605d2f408cc2c6ee8d19a5b4345d57e51d27519c5760c2815d3c4  octave-nbgallery-strings.post-install"
+sha512sums="5635e67796c7f04fe6bf8cd1d39f3aa6d473ceae067b8127edfade936359cea015efe4418a4865b9aacbb254b9c6f4cf0dfd681d7da33d3fa6e5015ec89fdc0f  strings-1.2.0.tar.gz
+1d431d5dd15c06f9c251f261af5518bc4306e5feb503892d0eedb428a20a0f36fa6e17b5d8d2ece3eefd0d25723bd1274c31af8f26d6f0935417527faa3e28a8  octave-nbgallery-strings.post-install"

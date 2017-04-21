@@ -1,0 +1,57 @@
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
+_pack=nan
+pkgname=octave-nbgallery-$_pack
+pkgver=3.1.2
+pkgrel=0
+pkgdesc="A statistics and machine learning toolbox for data with and w/o missing values."
+url="http://octave.sourceforge.net/$_pack/"
+arch="all"
+license="GPL3"
+
+depends="octave-nbgallery"
+depends_dev="octave-nbgallery-dev gsl-dev"
+
+makedepends="$depends_dev"
+install="$pkgname.post-install"
+_archive=$_pack-$pkgver.tar.gz
+subpackages=""
+source="http://downloads.sourceforge.net/octave/$_archive
+	$install"
+noextract="$_archive"
+
+_octave_run() {
+	octave --no-history --no-init-file --no-window-system -q -f --eval "$*"
+}
+
+_install_dir() {
+	src=$1
+	dst=$2
+	mkdir -p "$(dirname "$dst")"
+	cp -r "$src" "$dst"
+}
+
+build() {
+	_prefix="$srcdir"/install_prefix
+	_alpineprefix="$srcdir"/install_alpineprefix
+	mkdir -p "$_prefix" "$_alpineprefix"
+	cd "$srcdir"
+	_octave_run "$(cat <<-EOF
+		pkg local_list octave_packages;
+		pkg prefix $_prefix $_alpineprefix;
+		pkg install -verbose -nodeps $_archive;
+		EOF
+		)"
+}
+
+package() {
+	prefix=$pkgdir/usr/share/octave/packages
+	alpineprefix=$pkgdir/usr/lib/octave/packages
+	_install_dir "$srcdir"/install_prefix "$prefix"
+	_install_dir "$srcdir"/install_alpineprefix "$alpineprefix"
+}
+md5sums="5f62903b5f4593889b07c3d89636281a  nan-3.1.2.tar.gz
+d91aca87b485689b981036a05b2f42b4  octave-nbgallery-nan.post-install"
+sha256sums="0bb8d985cf3b1d5c478253c60a5712af6af301842b869fba1ce93693ce40398d  nan-3.1.2.tar.gz
+ad806e467f63a1de0810adcc5fbd60a1b3038ab1b271b3e1b58a69774ccb5e5e  octave-nbgallery-nan.post-install"
+sha512sums="1e442140c73a990b2d35e2cf3689e4c90f6841fe3959dfcae153107e4ef7a686a43461c3275e42641f1cbcf872bcbe682ca8c0c56dd170027bb00a09f04d56b3  nan-3.1.2.tar.gz
+9a94034bbcd12890fdd2e2b3cc99d7d7f441149b9daf4b00529fd38ca9535bc8d54ed88b081b59b9f654b7b551c3357304474606ca8892895798870bc70d0e69  octave-nbgallery-nan.post-install"

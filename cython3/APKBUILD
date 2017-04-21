@@ -2,8 +2,8 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=cython3
 _pkgname=cython
-pkgver=0.24.1
-pkgrel=0
+pkgver=0.25.2
+pkgrel=2
 pkgdesc="Cython is an optimising static compiler for both the Python & the extended Cython programming languages."
 url="http://cython.org"
 arch="all"
@@ -24,8 +24,11 @@ package() {
         cd "$_builddir"
         python3 setup.py install --prefix=/usr \
           --root="$pkgdir" --optimize=1 || return 1
+        mv "$pkgdir"/usr/bin/cython "$pkgdir"/usr/bin/cython3
+        mv "$pkgdir"/usr/bin/cythonize "$pkgdir"/usr/bin/cythonize3
+        mv "$pkgdir"/usr/bin/cygdb "$pkgdir"/usr/bin/cygdb3
 }
 
-md5sums="ba3474937557f210acb45852e9ebb0fc  cython-0.24.1.tar.gz"
-sha256sums="e4228632447705d1fe5606867fc51218f2bf390a824934f0b4c0d2de315ff6b8  cython-0.24.1.tar.gz"
-sha512sums="2bfe767f0d707962fab2726ea457a0b926c5904a75b9a4a29b088e9198e5e40a87f241076192d817b1adb047d569c565e18fddd42a5256d324029bb558d5dcf9  cython-0.24.1.tar.gz"
+md5sums="212d50002f72bcdd928f036a46b3ae09  cython-0.25.2.tar.gz"
+sha256sums="206b6fc7e8cebe8e0529064a92e4f53f13a8f1d1f4dc173c32782ab134a2551e  cython-0.25.2.tar.gz"
+sha512sums="65c15dd5f8af1ecc5943f557d38a122b69a4d02b41f63dfa68d7201f97eb2b4ff9684eb6cc0dd629fe8e3c9acdbeac1be9835e92fab0ba9e54768731a794d866  cython-0.25.2.tar.gz"

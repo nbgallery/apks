@@ -1,0 +1,57 @@
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
+_pack=miscellaneous
+pkgname=octave-nbgallery-$_pack
+pkgver=1.2.1
+pkgrel=0
+pkgdesc="Miscellaneous tools that don't fit somewhere else."
+url="http://octave.sourceforge.net/$_pack/"
+arch="all"
+license="GPL3"
+
+depends="octave-nbgallery gnu-units"
+depends_dev="octave-nbgallery-dev"
+
+makedepends="$depends_dev"
+install="$pkgname.post-install"
+_archive=$_pack-$pkgver.tar.gz
+subpackages=""
+source="http://downloads.sourceforge.net/octave/$_archive
+	$install"
+noextract="$_archive"
+
+_octave_run() {
+	octave --no-history --no-init-file --no-window-system -q -f --eval "$*"
+}
+
+_install_dir() {
+	src=$1
+	dst=$2
+	mkdir -p "$(dirname "$dst")"
+	cp -r "$src" "$dst"
+}
+
+build() {
+	_prefix="$srcdir"/install_prefix
+	_alpineprefix="$srcdir"/install_alpineprefix
+	mkdir -p "$_prefix" "$_alpineprefix"
+	cd "$srcdir"
+	_octave_run "$(cat <<-EOF
+		pkg local_list octave_packages;
+		pkg prefix $_prefix $_alpineprefix;
+		pkg install -verbose -nodeps $_archive;
+		EOF
+		)"
+}
+
+package() {
+	prefix=$pkgdir/usr/share/octave/packages
+	alpineprefix=$pkgdir/usr/lib/octave/packages
+	_install_dir "$srcdir"/install_prefix "$prefix"
+	_install_dir "$srcdir"/install_alpineprefix "$alpineprefix"
+}
+md5sums="d205946284d56a03b06fea1cdf302efb  miscellaneous-1.2.1.tar.gz
+2af0e5079f3696891d3107bde5ae6567  octave-nbgallery-miscellaneous.post-install"
+sha256sums="1f678792b77fb7619b2e3b769bea19eb9d7285fe24720384693c462da7d9100a  miscellaneous-1.2.1.tar.gz
+22085fe0631476145719c22c9049d9755e275b4899c280a74117e2045c8158f8  octave-nbgallery-miscellaneous.post-install"
+sha512sums="1430ce71a0106327b2284f15c404782175edabd1d1af663447dfeaaa9b3a9653d3ca706cec5510ad353ac94528a11423bc814ea0e9a2f926246cd8987b456cd6  miscellaneous-1.2.1.tar.gz
+9f77e9a0079179d1de2b2b2c57eaae129ab2fbcc5a86dd92c55c27899f93f84ebdba58a24a937fd29208c97dbb1195973db5ef8a64d015c0ae8fe1f3e8d5aa1c  octave-nbgallery-miscellaneous.post-install"
