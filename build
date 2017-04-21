@@ -52,11 +52,7 @@ if [ -z "$SRCDIR" ]; then
 fi
 
 if [ -z "$PKGDIR" ]; then
-  if [ "$BRANCH" == "edge" ]; then
-    PKGDIR=$PWD/packages
-  else
-    PKGDIR=$PWD/packages-$BRANCH
-  fi
+  PKGDIR=$PWD/packages-$BRANCH
 fi
 
 KEYFILE=`basename $KEY`
