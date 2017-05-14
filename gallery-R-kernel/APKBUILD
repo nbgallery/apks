@@ -1,7 +1,7 @@
 # Maintainer: nb.gallery team <team@nb.gallery>
 pkgname=gallery-R-kernel
 pkgver=0.7.0
-pkgrel=4
+pkgrel=5
 pkgdesc="R kernel for the nb.gallery Jupyter Alpine client"
 url="https://github.com/nbgallery/apks"
 arch="x86_64"
@@ -18,16 +18,22 @@ build() {
 
 package() {
 	mkdir -p "$pkgdir"/usr/lib/R/library/
-        export R_LIBS_USER="$pkgdir"/usr/lib/R/library/
+	export R_LIBS_USER="$pkgdir"/usr/lib/R/library/
 
 	# add a default CRAN mirror
 	mkdir -p "$pkgdir"/usr/lib/R/etc/
 	echo 'options(repos = c(CRAN = "http://cloud.r-project.org/"))' > "$pkgdir"/usr/lib/R/etc/Rprofile.site
 
 	# install IRKernel dependencies
-        echo "install.packages(c('repr', 'pbdZMQ', 'crayon', 'jsonlite', 'uuid', 'digest', 'evaluate', 'IRdisplay'), repos='http://cloud.r-project.org')" | R --no-save
+	R --no-save -e "install.packages(c('repr', 'pbdZMQ', 'crayon', 'jsonlite', 'uuid', 'digest', 'evaluate', 'IRdisplay', 'getPass'), dependencies=TRUE, repos='http://cloud.r-project.org')"
+
+	# install IRKernel
 	git clone https://github.com/IRkernel/IRkernel
-	echo "install.packages(c('./IRkernel'), repos=NULL, type='source')" | R --no-save
+	R --no-save -e "install.packages('IRkernel', dependencies=TRUE, repos=NULL, type='source')"
 	rm -rf IRkernel
 
+	# install rpki
+	git clone --branch 1.0.0 --depth 1 https://github.com/nbgallery/rpki
+	R --no-save -e "install.packages('rpki', dependencies=TRUE, repos=NULL, type='source')"
+	rm -rf rpki
 }
