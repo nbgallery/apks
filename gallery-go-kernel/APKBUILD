@@ -1,0 +1,36 @@
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
+pkgname=gallery-go-kernel
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="Go kernel from https://github.com/fabian-z/gopherlab"
+url="https://github.com/nbgallery/apks"
+arch="x86_64"
+license="MIT"
+depends="go"
+depends_dev=""
+makedepends="$depends_dev"
+install=""
+subpackages=""
+source=""
+
+_builddir=$startdir/build
+_prefix=/go
+
+prepare() {
+	echo 'Nothing to prepare'
+}
+
+build() {
+	echo 'Nothing to build'
+}
+
+package() {
+	cd $startdir
+	mkdir -p $pkgdir/$_prefix
+	export GOPATH=$pkgdir/$_prefix
+	# Note: if you try to do this in one command ('go get <url>'),
+	# go tries to recompile files in GOROOT, which are owned by root,
+	# so it fails.  Breaking into separate download & install works.
+	go get -d github.com/fabian-z/gopherlab
+	go install github.com/fabian-z/gopherlab
+}
