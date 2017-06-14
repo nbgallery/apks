@@ -1,14 +1,14 @@
 # Maintainer: nb.gallery team <team@nb.gallery>
 pkgname=gallery-R-kernel
 pkgver=0.7.1
-pkgrel=1
+pkgrel=2
 pkgdesc="R kernel for the nb.gallery Jupyter Alpine client"
 url="https://github.com/nbgallery/apks"
 arch="x86_64"
 license="MIT"
-depends="R R-dev R-doc ttf-liberation"
+depends="R R-dev R-doc ttf-liberation cairo libxt openssh"
 depends_dev=""
-makedepends="$depends_dev"
+makedepends="$depends_dev cairo-dev libxt-dev"
 install=""
 subpackages=""
 
