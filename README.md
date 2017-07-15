@@ -22,4 +22,4 @@ docker run -it -p 443:443 -v `pwd`/packages:/root/.jupyter/static nbgallery/jupy
 
 The directory `/root/.jupyter/static` is already configured as an extra static file path for the Jupyter web server.
 
-Once you're inside the container, add the line `http://localhost/Jupyter/static/apks` to `/etc/apk/repositories`.  Then run `jupyter-notebook-secure`, and the dynamic kernel installation should now work.
+Once you're inside the container, add the line `https://localhost/Jupyter/static/apks` to `/etc/apk/repositories`.  Then run `jupyter-notebook-secure`, and the dynamic kernel installation should now work.
