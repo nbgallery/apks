@@ -1,7 +1,7 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=arpack
 pkgver=3.4.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Collection of Fortran77 subroutines designed to solve large scale eigenvalue problems"
 url="https://github.com/opencollab/arpack-ng"
 arch="all"
@@ -28,6 +28,4 @@ package() {
 	rm -f "$pkgdir"/usr/lib/*.la
 }
 
-md5sums="bcd8408387681f9f1faad6c916a245b7  arpack-ng-master.zip"
-sha256sums="74b6a85b3bd0720b02730d64de362262e00d21d9509d25414cee840345b63e0c  arpack-ng-master.zip"
-sha512sums="4187354d9ab3eadd835d7da148726d922bb47a7a73074b1cf0754eb0c7b39276887efd1b326176d86590037f82cdb79ac107cd2519b77bb967de9a027c622fd4  arpack-ng-master.zip"
+sha512sums="dfa1b0f2b0f75e798d83e7b47ae35a4c4248ff247db844dd83544f990927f2688822bb3104a3e6b8839c342ebe05497a37247aa3dd00f43e2dc95f18ab9678a5  arpack-ng-master.zip"
