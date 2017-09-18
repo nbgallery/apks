@@ -1,7 +1,7 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=qhull
 pkgver=7.2.0
-pkgrel=0
+pkgrel=1
 pkgdesc="Computational Geometry C++ Libraries"
 url="http://www.qhull.org"
 arch="noarch"

@@ -10,7 +10,7 @@
 # builds, due to inadequate locking.
 
 pkgname=hdf5
-pkgver=1.8.18
+pkgver=1.8.19
 _pkgver=$pkgver
 pkgrel=0
 pkgdesc="HDF5 is a data model, library, and file format for storing and managing data"
@@ -57,6 +57,4 @@ dev() {
 	default_dev
 }
 
-md5sums="29117bf488887f89888f9304c8ebea0b  hdf5-1.8.18.tar.bz2"
-sha256sums="01c6deadf4211f86922400da82c7a8b5b50dc8fc1ce0b5912de3066af316a48c  hdf5-1.8.18.tar.bz2"
-sha512sums="01f6d14bdd3be2ced9c63cc9e1820cd7ea11db649ff9f3a3055c18c4b0fffe777fd23baad536e3bce31c4d76fe17db64a3972762e1bb4d232927c1ca140e72b2  hdf5-1.8.18.tar.bz2"
+sha512sums="f4eccebbeb27d4b33c4aed4d040c9c83328b3d347a0fcf0bd74f3fd9ab988eb1473f1d69a8e34312df345988d3ba4e192624c8d6ad3ffbd3e456205f981ad90c  hdf5-1.8.19.tar.bz2"
