@@ -1,12 +1,12 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=gallery-ruby-kernel
 pkgver=0.1.1
-pkgrel=2
+pkgrel=3
 pkgdesc="Ruby kernel for the Notebook Gallery Alpine client"
 url="https://github.com/nbgallery/apks"
 arch="x86_64"
 license="MIT"
-depends="ruby ruby-dev ruby-irb ruby-bigdecimal ruby-io-console ruby-json ruby-minitest ruby-rake ruby-rdoc libffi-dev"
+depends="ruby ruby-dev ruby-irb ruby-bigdecimal ruby-io-console ruby-json ruby-minitest ruby-rake ruby-rdoc libffi-dev less"
 depends_dev=""
 makedepends="$depends_dev"
 install=""
@@ -14,10 +14,11 @@ subpackages=""
 source="iruby-master.tar.gz::https://github.com/SciRuby/iruby/tarball/master"
 
 # this is to document the iruby version for this apk release
-_iruby_commit_id="3ca9d63"
+_iruby_commit_id="853ac9b"
 _builddir="$srcdir/SciRuby-iruby-$_iruby_commit_id"
 
 build() {
+        ls -l
 	cd "$_builddir"
 	git init 
 	git add *
@@ -36,9 +37,6 @@ package() {
 
 	# additional iruby dependencies
 	gem install -N -i "$pkgdir/$gemdir" iruby data_uri ffi-rzmq pry erector iruby-dependencies mypki oj
-
-	# patch pry to work with more on alpine instead of less
-	sed -i "/^gem/i ENV['PAGER'] = 'more'" "$pkgdir/$gemdir"/bin/pry
 
 	# add executables to /usr/bin
 	mkdir -p "$pkgdir/usr/bin"
@@ -59,6 +57,6 @@ package() {
 	rm -rf cache build_info doc
 }
 
-md5sums="4599c9f379987a6332f03a6820aaf5bd  iruby-master.tar.gz"
-sha256sums="d8aae8131357b0b92bbfe6b1815145ec37babeb3ebceecad2e31b85a51f592cd  iruby-master.tar.gz"
-sha512sums="24438173f2b26ad110396ad2ffc27872c8f62468e3086df0b761587c766649825f4f2c01cd830dc4c1a8096fe4bf6f1d2caf559122de941247b0cc7e8e1c652f  iruby-master.tar.gz"
+md5sums="b8984ea2754053c8f021f84c3caee5dd  iruby-master.tar.gz"
+sha256sums="3fa3b6a18678c8639c5736c1a758f5d3f18b71922eff3d8050b9e61b7391cdd9  iruby-master.tar.gz"
+sha512sums="bc0378f22629cc411655af00e861af3851a810255a700bfd286ec97174a0a8777c85991d6a16b05d4f00130c23d790e2554d611c52705e009f6d0e2c1a409636  iruby-master.tar.gz"
