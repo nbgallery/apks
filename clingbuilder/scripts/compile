@@ -1,0 +1,2 @@
+cd /home/nbgallery/build
+make -j4 cling

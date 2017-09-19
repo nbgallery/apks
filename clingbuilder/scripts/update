@@ -1,0 +1,7 @@
+cd /home/nbgallery/src
+git pull
+cd /home/nbgallery/src/tools/clang
+git pull
+cd /home/nbgallery/src/tools/cling
+git pull
+

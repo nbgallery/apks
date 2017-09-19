@@ -1,0 +1,47 @@
+# Maintainer: Notebook Gallery Team <team@nb.gallery>
+pkgname=cling
+pkgver=0.1.0
+pkgrel=0
+pkgdesc="cling c++ interpreter"
+url="https://github.com/root-project/cling"
+arch="x86_64"
+license="LGPL-2.1"
+depends=""
+depends_dev=""
+makedepends="$depends_dev"
+install=""
+subpackages=""
+source=""
+
+srcdir=/home/nbgallery/src
+_builddir=/home/nbgallery/install
+_prefix=/usr
+_libdir=$_prefix/lib
+_bindir=$_prefix/bin
+_sharedir=$_prefix/share
+_includedir=$_prefix/include
+
+prepare() {
+	echo 'nothing to prepare'
+}
+
+build() {
+	echo 'nothing to build'
+}
+
+package() {
+	cd $startdir
+	mkdir -p $pkgdir
+	mkdir -p $pkgdir/$_bindir
+	mkdir -p $pkgdir/$_libdir
+	mkdir -p $pkgdir/$_sharedir
+	mkdir -p $pkgdir/$_includedir
+	cp $_builddir/bin/cling $pkgdir/$_bindir
+	cp $_builddir/lib/libcling* $pkgdir/$_libdir
+	cp -r $_builddir/lib/clang $pkgdir/$_libdir
+	cp -r $_builddir/share/cling $pkgdir/$_sharedir
+	cp -r $_builddir/include/cling $pkgdir/$_includedir
+	cp $_builddir/share/cling/Jupyter/kernel/scripts/jupyter-cling-kernel $pkgdir/$_bindir
+	chmod +x $pkgdir/$_bindir/jupyter-cling-kernel
+}
+

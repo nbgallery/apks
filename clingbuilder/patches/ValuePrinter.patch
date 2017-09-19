@@ -1,0 +1,16 @@
+diff --git a/lib/Interpreter/ValuePrinter.cpp b/lib/Interpreter/ValuePrinter.cpp
+index eb220f9e..c0e72c4c 100644
+--- a/lib/Interpreter/ValuePrinter.cpp
++++ b/lib/Interpreter/ValuePrinter.cpp
+@@ -358,9 +358,9 @@ namespace cling {
+     if (IsValid) {
+       // If we're gonnd do this, better make sure the end is valid too
+       // FIXME: getpagesize() & GetSystemInfo().dwPageSize might be better
+-      enum { PAGE_SIZE = 1024 };
++      enum { CLING_PAGE_SIZE = 1024 };
+       while (!(IsValid = utils::isAddressValid(End)) && N > 1024) {
+-        N -= PAGE_SIZE;
++        N -= CLING_PAGE_SIZE;
+         End = Start + N;
+       }
+     }

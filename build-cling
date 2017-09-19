@@ -1,0 +1,63 @@
+#!/bin/bash
+
+command -v realpath &> /dev/null || realpath() {
+    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}
+
+while [[ $# -gt 2 ]]; do
+  case "$1" in
+  -k|--key)
+    KEY="$2"
+    shift
+    ;;
+  -p|--pkg)
+    PKGDIR="$2"
+    shift
+    ;;
+  *)
+    ;;
+  esac
+  shift
+done
+
+if [[ -z "$1" ]]; then
+  echo "Usage: `basename $0` [options] <branch>"
+  echo "Add 'debug' to enter with bash"
+  echo
+  echo "Options:"
+  echo "  --key <private-key.rsa>"
+  echo "  --pkg <output-dir-for-packages>"
+  exit 1
+fi
+
+BRANCH=$1
+DEBUG=$2
+IMAGE="nbgallery/clingbuilder:$BRANCH"
+
+if [ -z "$KEY" ]; then
+  KEY=*nb.gallery*.rsa
+fi
+
+if [ -z "$PKGDIR" ]; then
+  PKGDIR=$PWD/cling-$BRANCH
+fi
+
+KEYFILE=`basename $KEY`
+PUBKEYFILE=$KEYFILE.pub
+KEYDIR=`dirname $KEY`
+KEYDIR=`realpath $KEYDIR`
+
+echo "keyfile: $KEYFILE"
+echo "keydir: $KEYDIR"
+echo "pkgdir: $PKGDIR"
+
+ARGS="--rm -v $KEYDIR:/home/nbgallery/keys -v $PKGDIR:/home/nbgallery/packages -e PACKAGER_PRIVKEY=/home/nbgallery/keys/$KEYFILE -e PACKAGER_PUBKEY=/home/nbgallery/keys/$PUBKEYFILE"
+
+if [ "$DEBUG" == "debug" ]; then
+  ARGS="$ARGS -ti --entrypoint bash $IMAGE"
+else
+  ARGS="$ARGS $IMAGE"
+fi
+
+echo docker run $ARGS
+docker run $ARGS
