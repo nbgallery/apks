@@ -6,6 +6,8 @@ These APKs are used by the [nbgallery Jupyter Docker client](https://github.com/
 
  * [Alpine Linux package management](https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management)
  * [Building Alpine packages](http://wiki.alpinelinux.org/wiki/Creating_an_Alpine_package)
+ * [APKBUILD reference](https://wiki.alpinelinux.org/wiki/APKBUILD_Reference)
+ * [APKBUILD examples](https://wiki.alpinelinux.org/wiki/APKBUILD_examples)
  * [Alpine Linux package search](https://pkgs.alpinelinux.org/packages)
  
 ## apkbuilder docker image
