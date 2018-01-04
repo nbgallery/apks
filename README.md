@@ -6,6 +6,8 @@ These APKs are used by the [nbgallery Jupyter Docker client](https://github.com/
 
  * [Alpine Linux package management](https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management)
  * [Building Alpine packages](http://wiki.alpinelinux.org/wiki/Creating_an_Alpine_package)
+ * [APKBUILD reference](https://wiki.alpinelinux.org/wiki/APKBUILD_Reference)
+ * [APKBUILD examples](https://wiki.alpinelinux.org/wiki/APKBUILD_examples)
  * [Alpine Linux package search](https://pkgs.alpinelinux.org/packages)
  
 ## apkbuilder docker image
@@ -16,9 +18,9 @@ These APKs are used by the [nbgallery Jupyter Docker client](https://github.com/
 2. cd apks
 3. If needed, run `sudo ./build-image <branch>` to build the `nbgallery/apkbuilder:<branch>` image.  Or just [pull the image](https://hub.docker.com/r/nbgallery/apkbuilder/) you need.
 4. Copy the signing key to the current directory -- both public and private keys are required.  The `build` script will pick them up automatically, or use the -k option to specify the private key (public key is assumed to be `<private-key-filename>.pub`.
-    * If you don't have a signing key, you can run the apkbuilder image in debug: `sudo ./build <branch> debug`.  Then run `abuild-keygen` to generate a key.  Inside the container, `/home/nbgallery/apks` is mounted from the current directory, so copy the resulting key files into there to get them out of the container.
+    * If you don't have a signing key already, you can run the apkbuilder image in debug: `sudo ./build <branch> debug`.  Then run `abuild-keygen` to generate a key.  Inside the container, `/home/nbgallery/apks` is mounted from the current directory, so copy the resulting key files into there to get them out of the container.
 5. Run `sudo ./build <branch> <subdir>` to build the apk from the specified subdir.  If you're running from the `apks` top-level directory, the source and package directories should get set automatically.  By default, packages will will be written to the `packages-<branch>` subdirectory.
-6. Check the build output as well as the size of the resulting apk file.  Failures are not always obvious.
+6. Check the build output as well as the size of the resulting apk file.  Failures are not always obvious.  When the apk build is successful, the build output will end with messages about updating and signing the index -- but if the `APKBUILD` script doesn't detect failure properly, you might end up with an empty apk.
 
 ### Workflow for new Alpine releases
 
@@ -28,7 +30,7 @@ All packages must be rebuilt for new Alpine releases.  Here is our general workf
    1. Check [Alpine package search](https://pkgs.alpinelinux.org/packages) to see if it's now an official package.  If yes, delete the package from our repo.  If no, continue with the rest of these steps.
    2. Check the package's home page to see if there's a new version.  Update the APKBUILD file appropriately.  If there is not a new version, we usually bump the build number in the APKBUILD file.
    3. Build the APK using the apkbuilder build script: `sudo ./build <branch> <subdir>`
-      * This step automatically updates the APKINDEX - it's usually easier to have one person build the "master" copy of the repo instead of trying to have everyone keep in sync.
+      * This step automatically updates the APKINDEX - it may be easier to have one person build the "master" copy of the repo instead of trying to have everyone keep in sync.
     
 ## Serving APKs from within the [jupyter-alpine](https://github.com/nbgallery/jupyter-docker) image
 

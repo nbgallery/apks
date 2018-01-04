@@ -8,7 +8,7 @@ Note that some of these may exist in the Alpine official repo, for python 2 and/
 | nose       | -            |
 | cython     | -            |
 | numpy      | nose, cython |
-| matplotlib | numpy        |
+| matplotlib | numpy, cycler|
 | pandas     | numpy        |
 | scipy      | numpy        |
 
@@ -29,7 +29,7 @@ Note that some of these may exist in the Alpine official repo, for python 2 and/
 | qscintilla          | -                |
 | suitesparse         | libtbb           |
 | octave-nbgallery    | everything above |
-| octave-nbgaallery-* | octave-nbgallery |
+| octave-nbgallery-*  | octave-nbgallery |
 
 ## Everything else
 
