@@ -2,7 +2,7 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=cython3
 _pkgname=cython
-pkgver=0.27.3
+pkgver=0.27.2
 pkgrel=0
 pkgdesc="Cython is an optimising static compiler for both the Python & the extended Cython programming languages."
 url="http://cython.org"
