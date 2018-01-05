@@ -8,6 +8,7 @@ arch="x86_64"
 license="MIT"
 depends="openjdk8 snappy java-snappy-native R R-dev R-doc"
 depends_dev=""
+# WARNING - DO NOT UPDATE TO python3
 makedepends="$depends_dev python py2-pip"
 install=""
 subpackages=""
