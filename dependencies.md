@@ -51,22 +51,22 @@ Note that some of these may exist in the Alpine official repo, for python 2 and/
 
 ## Everything else
 
-| Package                | Dependencies     | Alpine 3.7 status |
-|------------------------|------------------|-------------------|
-| gdal                   | -                |                   |
-| geos                   | -                |                   |
-| libpst                 | -                |                   |
-| libspatialindex        | -                |                   |
-| proj4                  | -                |                   |
-| ssdeep                 | -                |                   |
-| hadoop                 | -                |                   |
-| pig                    | hadoop           |                   |
-| gallery-pig-kernel     | pig, hadoop      |                   |
-| gallery-go-kernel      | -                |                   |
-| gallery-nodejs-kernel  | -                | built             |
-| gallery-python3-kernel | -                |                   |
-| gallery-R-kernel       | -                |                   |
-| gallery-ruby-kernel    | -                | built             |
-| gallery-toree-kernel   | -                |                   |
-| cling                  | good luck!       |                   |
-| gallery-cpp-kernel     | cling            |                   |
+| Package                    | Dependencies     | Alpine 3.7 status       |
+|----------------------------|------------------|-------------------------|
+| gdal                       | -                | 2.2.3 (from edge)       |
+| geos                       | -                | 3.6.2 (from edge)       |
+| libpst                     | -                | 0.6.71 (by nbgallery)   |
+| libspatialindex            | -                | 1.8.5 (by nbgallery)    |
+| proj4                      | -                | 4.9.3 (from edge)       |
+| ssdeep                     | -                | 2.14.1 (by nbgallery)   |
+| hadoop                     | -                | 2.6.5 (by nbgallery)    |
+| pig                        | hadoop           | 0.16.0 (by nbgallery)   |
+| gallery-pig-kernel         | pig, hadoop      | built                   |
+| gallery-go-kernel          | -                |                         |
+| gallery-nodejs-kernel      | -                | built                   |
+| ~~gallery-python3-kernel~~ | -                | now baked into image    |
+| gallery-R-kernel           | -                | built                   |
+| gallery-ruby-kernel        | -                | built                   |
+| gallery-toree-kernel       | -                | built                   |
+| cling                      | good luck!       |                         |
+| gallery-cpp-kernel         | cling            |                         |

@@ -18,9 +18,10 @@ These APKs are used by the [nbgallery Jupyter Docker client](https://github.com/
 2. cd apks
 3. If needed, run `sudo ./build-image <branch>` to build the `nbgallery/apkbuilder:<branch>` image.  Or just [pull the image](https://hub.docker.com/r/nbgallery/apkbuilder/) you need.
 4. Copy the signing key to the current directory -- both public and private keys are required.  The `build` script will pick them up automatically, or use the -k option to specify the private key (public key is assumed to be `<private-key-filename>.pub`.
-    * If you don't have a signing key already, you can run the apkbuilder image in debug: `sudo ./build <branch> debug`.  Then run `abuild-keygen` to generate a key.  Inside the container, `/home/nbgallery/apks` is mounted from the current directory, so copy the resulting key files into there to get them out of the container.
+   * If you don't have a signing key already, you can run the apkbuilder image in debug: `sudo ./build <branch> debug`.  Then run `abuild-keygen` to generate a key.  Inside the container, `/home/nbgallery/apks` is mounted from the current directory, so copy the resulting key files into there to get them out of the container.
 5. Run `sudo ./build <branch> <subdir>` to build the apk from the specified subdir.  If you're running from the `apks` top-level directory, the source and package directories should get set automatically.  By default, packages will will be written to the `packages-<branch>` subdirectory.
 6. Check the build output as well as the size of the resulting apk file.  Failures are not always obvious.  When the apk build is successful, the build output will end with messages about updating and signing the index -- but if the `APKBUILD` script doesn't detect failure properly, you might end up with an empty apk.
+   * You'll also see `fatal: No names found, cannot describe anything.`, but don't worry, it's not actually fatal
 
 ### Workflow for new Alpine releases
 
