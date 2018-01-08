@@ -1,9 +1,9 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=nlopt
 pkgver=2.4.2
-pkgrel=0
+pkgrel=1
 pkgdesc="NLopt is a free/open-source library for nonlinear optimization"
-url="http://ab-initio.mit.edu/wiki/index.php/NLopt"
+url="https://nlopt.readthedocs.io"
 arch="all"
 license="MIT"
 depends=""
@@ -46,6 +46,4 @@ package() {
 	make DESTDIR="$pkgdir" install || return 1
 }
 
-md5sums="d0b8f139a4acf29b76dbae69ade8ac54  nlopt-2.4.2.tar.gz"
-sha256sums="8099633de9d71cbc06cd435da993eb424bbcdbded8f803cdaa9fb8c6e09c8e89  nlopt-2.4.2.tar.gz"
 sha512sums="136aacc00a69f77e8a7ce5dc26a5f3f027bc8c01b97aa1f43919462e0a412154eabfb01be258e082dffe61f9b554bb2bfbb550a7b82c7c77c7b22874a64a9703  nlopt-2.4.2.tar.gz"

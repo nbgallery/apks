@@ -14,39 +14,39 @@ Note that some of these may exist in the Alpine official repo, for python 2 and/
 
 ## Octave packages
 
-| Package                              | Dependencies      | Alpine 3.7 status |
-|--------------------------------------|-------------------|-------------------|
-| arpack                               | -                 |                   |
-| texlive                              | -                 |                   |
-| gl2ps                                | texlive           |                   |
-| glpk                                 | -                 |                   |
-| gnu-units                            | -                 |                   |
-| hdf5                                 | -                 |                   |
-| libtbb                               | -                 |                   |
-| nlopt                                | -                 |                   |
-| qhull                                | -                 |                   |
-| qrupdate                             | -                 |                   |
-| qscintilla                           | -                 |                   |
-| suitesparse                          | libtbb            |                   |
-| octave-nbgallery                     | everything above  |                   |
-| octave-nbgallery-communications      | octave-nbg        |                   |
-| octave-nbgallery-data-smoothing      | octave-nbg        |                   |
-| octave-nbgallery-fuzzy-logic-toolkit | octave-nbg        |                   |
-| octave-nbgallery-general             | octave-nbg        |                   |
-| octave-nbgallery-gsl                 | octave-nbg        |                   |
-| octave-nbgallery-image               | octave-nbg        |                   |
-| octave-nbgallery-linear-algebra      | octave-nbg        |                   |
-| octave-nbgallery-ltfat               | octave-nbg        |                   |
-| octave-nbgallery-miscellaneous       | octave-nbg, units |                   |
-| octave-nbgallery-mvn                 | octave-nbg        |                   |
-| octave-nbgallery-nan                 | octave-nbg        |                   |
-| octave-nbgallery-signal              | octave-nbg        |                   |
-| octave-nbgallery-splines             | octave-nbg        |                   |
-| octave-nbgallery-statistics          | octave-nbg        |                   |
-| octave-nbgallery-strings             | octave-nbg        |                   |
-| octave-nbgallery-struct              | octave-nbg        |                   |
-| octave-nbgallery-toolkits            | octave-nbg        |                   |
-| octave-nbgallery-tsa                 | octave-nbg        |                   |
+| Package                              | Dependencies      | Alpine 3.7 status          |
+|--------------------------------------|-------------------|----------------------------|
+| ~~arpack~~                           | -                 | 3.5.0 now in official repo |
+| texlive                              | -                 | 20170524 (from edge)       |
+| gl2ps                                | texlive           | 1.4.0 (by nbgallery)       |
+| glpk                                 | -                 | 4.64 (by nbgallery)        |
+| gnu-units                            | -                 | 2.16 (by nbgallery)        |
+| hdf5                                 | -                 | 1.8.20 (from edge)         |
+| libtbb                               | -                 | 4.4.4 (from edge)          |
+| nlopt                                | -                 | 2.4.2 (by nbgallery)       |
+| qhull                                | -                 | 7.2.0 (by nbgallery)       |
+| qrupdate                             | -                 | 1.1.2 (by nbgallery)       |
+| qscintilla                           | -                 | 2.10.2 (by nbgallery)      |
+| ~~suitesparse~~                      | libtbb            | 4.5.6 now in official repo |
+| octave-nbgallery                     | everything above  |                            |
+| octave-nbgallery-communications      | octave-nbg        |                            |
+| octave-nbgallery-data-smoothing      | octave-nbg        |                            |
+| octave-nbgallery-fuzzy-logic-toolkit | octave-nbg        |                            |
+| octave-nbgallery-general             | octave-nbg        |                            |
+| octave-nbgallery-gsl                 | octave-nbg        |                            |
+| octave-nbgallery-image               | octave-nbg        |                            |
+| octave-nbgallery-linear-algebra      | octave-nbg        |                            |
+| octave-nbgallery-ltfat               | octave-nbg        |                            |
+| octave-nbgallery-miscellaneous       | octave-nbg, units |                            |
+| octave-nbgallery-mvn                 | octave-nbg        |                            |
+| octave-nbgallery-nan                 | octave-nbg        |                            |
+| octave-nbgallery-signal              | octave-nbg        |                            |
+| octave-nbgallery-splines             | octave-nbg        |                            |
+| octave-nbgallery-statistics          | octave-nbg        |                            |
+| octave-nbgallery-strings             | octave-nbg        |                            |
+| octave-nbgallery-struct              | octave-nbg        |                            |
+| octave-nbgallery-tsa                 | octave-nbg        |                            |
+| octave-nbgallery-toolkits            | everything above  |                            |
 
 
 ## Everything else
