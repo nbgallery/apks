@@ -2,7 +2,7 @@
 _pack=struct
 pkgname=octave-nbgallery-$_pack
 pkgver=1.0.14
-pkgrel=0
+pkgrel=1
 pkgdesc="Additional structure manipulation functions."
 url="http://octave.sourceforge.net/$_pack/"
 arch="all"
@@ -49,9 +49,5 @@ package() {
 	_install_dir "$srcdir"/install_prefix "$prefix"
 	_install_dir "$srcdir"/install_alpineprefix "$alpineprefix"
 }
-md5sums="3589d5eb8000f18426e2178587eb82f4  struct-1.0.14.tar.gz
-224c4abaccb217c74c712a36264f8605  octave-nbgallery-struct.post-install"
-sha256sums="ad4e17687bc24650f032757271b20b70fe32c35513d4dd9ab1e549919df36b47  struct-1.0.14.tar.gz
-cee33b53a301fdaf5f0d94e2e2486b7546f6ced4d2cfd99e4b51c41d75fc6426  octave-nbgallery-struct.post-install"
 sha512sums="6a0685bd744372f46bf818a74bc8724630d589e23e92f12233c811d58bf238fd9e1c82ed2c488b50897ed3ee17b50627790bf08bce9577c5ac880782b069a149  struct-1.0.14.tar.gz
 9c7ede1a010fdb16909cdc267550e11e5a6c0edb76c51f18474bc6ec309edce67a623776f58ca13e40946b3d894090e87aba5e0922bb8498e8e5ad9b1233c4bc  octave-nbgallery-struct.post-install"

@@ -14,6 +14,8 @@ Note that some of these may exist in the Alpine official repo, for python 2 and/
 
 ## Octave packages
 
+Note: in the Alpine 3.7 official repo, `lapack-dev` and `openblas-dev` conflict -- they contain some of the same header files and cannot be installed at the same time.  The `qrupdate` package will build if `lapack-dev` is moved to `makedepends` but that may cause a problem at runtime.  The `nan` toolkit also requires `lapack-dev` (specifically `-lblas`), but also depends on `openblas-dev` via `octave-nbgallery-dev`, so I've removed that from the toolkits metapackage for now.
+
 | Package                              | Dependencies      | Alpine 3.7 status          |
 |--------------------------------------|-------------------|----------------------------|
 | ~~arpack~~                           | -                 | 3.5.0 now in official repo |
@@ -28,25 +30,25 @@ Note that some of these may exist in the Alpine official repo, for python 2 and/
 | qrupdate                             | -                 | 1.1.2 (by nbgallery)       |
 | qscintilla                           | -                 | 2.10.2 (by nbgallery)      |
 | ~~suitesparse~~                      | libtbb            | 4.5.6 now in official repo |
-| octave-nbgallery                     | everything above  |                            |
-| octave-nbgallery-communications      | octave-nbg        |                            |
-| octave-nbgallery-data-smoothing      | octave-nbg        |                            |
-| octave-nbgallery-fuzzy-logic-toolkit | octave-nbg        |                            |
-| octave-nbgallery-general             | octave-nbg        |                            |
-| octave-nbgallery-gsl                 | octave-nbg        |                            |
-| octave-nbgallery-image               | octave-nbg        |                            |
-| octave-nbgallery-linear-algebra      | octave-nbg        |                            |
-| octave-nbgallery-ltfat               | octave-nbg        |                            |
-| octave-nbgallery-miscellaneous       | octave-nbg, units |                            |
-| octave-nbgallery-mvn                 | octave-nbg        |                            |
-| octave-nbgallery-nan                 | octave-nbg        |                            |
-| octave-nbgallery-signal              | octave-nbg        |                            |
-| octave-nbgallery-splines             | octave-nbg        |                            |
-| octave-nbgallery-statistics          | octave-nbg        |                            |
-| octave-nbgallery-strings             | octave-nbg        |                            |
-| octave-nbgallery-struct              | octave-nbg        |                            |
-| octave-nbgallery-tsa                 | octave-nbg        |                            |
-| octave-nbgallery-toolkits            | everything above  |                            |
+| octave-nbgallery                     | everything above  | 4.2.1 (by nbgallery)       |
+| octave-nbgallery-communications      | octave-nbg        | 1.2.1                      |
+| octave-nbgallery-data-smoothing      | octave-nbg        | 1.3.0                      |
+| octave-nbgallery-fuzzy-logic-toolkit | octave-nbg        | 0.4.5                      |
+| octave-nbgallery-general             | octave-nbg        | 2.0.0                      |
+| octave-nbgallery-gsl                 | octave-nbg        | 2.1.0                      |
+| octave-nbgallery-image               | octave-nbg        | 2.6.2                      |
+| octave-nbgallery-linear-algebra      | octave-nbg        | 2.2.2                      |
+| octave-nbgallery-ltfat               | octave-nbg        | 2.2.0                      |
+| octave-nbgallery-miscellaneous       | octave-nbg, units | 1.2.1                      |
+| octave-nbgallery-mvn                 | octave-nbg        | 1.1.0                      |
+| ~~octave-nbgallery-nan~~             | octave-nbg        | broken, see note above     |
+| octave-nbgallery-signal              | octave-nbg        | 1.3.2                      |
+| octave-nbgallery-splines             | octave-nbg        | 1.3.2                      |
+| octave-nbgallery-statistics          | octave-nbg        | 1.3.0                      |
+| octave-nbgallery-strings             | octave-nbg        | 1.2.0                      |
+| octave-nbgallery-struct              | octave-nbg        | 1.0.14                     |
+| octave-nbgallery-tsa                 | octave-nbg        | 4.4.5                      |
+| octave-nbgallery-toolkits            | everything above  | 4.2.1                      |
 
 
 ## Everything else

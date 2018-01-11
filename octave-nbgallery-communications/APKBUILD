@@ -2,7 +2,7 @@
 _pack=communications
 pkgname=octave-nbgallery-$_pack
 pkgver=1.2.1
-pkgrel=0
+pkgrel=1
 pkgdesc="Digital Communications, Error Correcting Codes (Channel Code), Source Code functions, Modulation and Galois Fields."
 url="http://octave.sourceforge.net/$_pack/"
 arch="all"
@@ -66,16 +66,6 @@ package() {
 	_install_dir "$srcdir"/install_prefix "$prefix"
 	_install_dir "$srcdir"/install_alpineprefix "$alpineprefix"
 }
-md5sums="cf5ad84af0c3221199b2e04109946562  communications-1.2.1.tar.gz
-c167bfcde4db9aa8d76c934fc0b9bd51  communications-1.patch
-3b298ec96d9603982d8ce9840f3289e2  communications-2.patch
-f7f4d8af6758fc0dfd15f48572417ba2  communications-3.patch
-d59112e1c26018561c9fd63f0baa6b56  octave-nbgallery-communications.post-install"
-sha256sums="5014dbfa37ae7c8cc2249093c9b03f255ddcc8da68050abe6b2f07ab530e0e91  communications-1.2.1.tar.gz
-aac0a2af0e5bf8226488817f2a5e4c3dfaaf950a55bea4dfe4bd28efed83e319  communications-1.patch
-cce718df8495f4c8f04470ecbcc41428c40a24c635b9d440218e1637c4d48d63  communications-2.patch
-8e39b69b5e5ca04fe16a36ba76e709d6940ea04c3795a0686683e71ef09194cc  communications-3.patch
-81f0a48a59f9f5be8571df0df6d2f15729141fb89526291ed5e94fe78a4934d2  octave-nbgallery-communications.post-install"
 sha512sums="920bb195e6f68441110533139f48c2a9027646da3be4cc5e90eefac6522e29486c03855265914fbc84afcd9a451d1d650018f10362d6d6b5e7e583afe16dfdeb  communications-1.2.1.tar.gz
 833d00163908615cc725bc683feb146f5b67edd136ea33a7814b20bd765767a0f8d330fbfdddd3c2c3c7efb04110643d8801d34ea1b1f173f33db2e536b51ee2  communications-1.patch
 ddfe2666ac6d43efa0e60bab6ccf4d08622fc8f37700f159e8bec0cae070107c2b2f6a72a0bbefc2a3637b5952bb515615b16b33c8fac96f9941a85a4a7d1026  communications-2.patch
