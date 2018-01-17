@@ -31,6 +31,6 @@ package() {
 	# Note: if you try to do this in one command ('go get <url>'),
 	# go tries to recompile files in GOROOT, which are owned by root,
 	# so it fails.  Breaking into separate download & install works.
-	go get -d github.com/gohperdata/gophernotes
-	go install github.com/gohperdata/gophernotes
+	go get -d github.com/gopherdata/gophernotes
+	go install github.com/gopherdata/gophernotes
 }
