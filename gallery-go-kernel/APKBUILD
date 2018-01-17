@@ -2,7 +2,7 @@
 pkgname=gallery-go-kernel
 pkgver=1.0.0
 pkgrel=1
-pkgdesc="Go kernel from https://github.com/fabian-z/gopherlab"
+pkgdesc="Go kernel from https://github.com/gopherdata/gophernotes"
 url="https://github.com/nbgallery/apks"
 arch="x86_64"
 license="MIT"
@@ -31,6 +31,6 @@ package() {
 	# Note: if you try to do this in one command ('go get <url>'),
 	# go tries to recompile files in GOROOT, which are owned by root,
 	# so it fails.  Breaking into separate download & install works.
-	go get -d github.com/fabian-z/gopherlab
-	go install github.com/fabian-z/gopherlab
+	go get -d github.com/gohperdata/gophernotes
+	go install github.com/gohperdata/gophernotes
 }
