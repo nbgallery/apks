@@ -1,7 +1,7 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=gallery-go-kernel
-pkgver=1.0.0
-pkgrel=1
+pkgver=1.9.2
+pkgrel=0
 pkgdesc="Go kernel from https://github.com/gopherdata/gophernotes"
 url="https://github.com/nbgallery/apks"
 arch="x86_64"
