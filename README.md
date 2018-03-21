@@ -1,6 +1,6 @@
 # nb.gallery APKs 
 
-These APKs are used by the [nbgallery Jupyter Docker client](https://github.com/nbgallery/jupyter-docker) to dynamically install kernels. 
+These APKs are used by the [nbgallery Jupyter Docker client](https://github.com/nbgallery/jupyter-docker) to install kernels and pre-compiled python modules on the fly.  Kernels are typically installed by [scripts in the docker image](https://github.com/nbgallery/jupyter-docker/tree/master/kernels/installers), and pre-compiled python packages are installed by the [ipydeps dependencies mechanism](https://github.com/nbgallery/ipydeps#dependencieslink).
 
 ## apkbuilder docker image
 
