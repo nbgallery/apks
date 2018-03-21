@@ -1,6 +1,6 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=libpst
-pkgver=0.6.70
+pkgver=0.6.71
 pkgrel=0
 pkgdesc="Library for interacting with PST (MS Outlook Personal Folders) files"
 url="http://www.five-ten-sg.com/libpst/"
@@ -42,6 +42,4 @@ package() {
 	make DESTDIR="$pkgdir" install || return 1
 }
 
-md5sums="3708ef8e8ec30b689072fd9fb482a81a  libpst-0.6.70.tar.gz"
-sha256sums="19981c0661305d093e7df8cf579662c6157ffb38a7873091cfc9e900fb4667d4  libpst-0.6.70.tar.gz"
-sha512sums="0ba168cd4718d657c1f07210d9377251f5c5f21c1ea18193c56713d9b8f09c7e6bf16e60660e1f79d0693d19994a24ef7b557e1cb825d5f709fef1d7730eebf8  libpst-0.6.70.tar.gz"
+sha512sums="7e03d8e7c37acdae3bd2fd9f3eca03de2c683146416d2a17ed4e673a69cb553dc59932fd8388a751de399e9063f559eaa8d2511f6d3407eebfa6b211763d83aa  libpst-0.6.71.tar.gz"

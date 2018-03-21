@@ -1,7 +1,7 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=gallery-ruby-kernel
-pkgver=0.1.1
-pkgrel=3
+pkgver=2.4.3
+pkgrel=1
 pkgdesc="Ruby kernel for the Notebook Gallery Alpine client"
 url="https://github.com/nbgallery/apks"
 arch="x86_64"
@@ -30,7 +30,7 @@ package() {
 	local gemdir="$(ruby -rubygems -e 'puts Gem.default_dir')"
 
 	# install iruby 
-	gem install -N -i "$pkgdir/$gemdir" -l iruby
+	gem install -N -i "$pkgdir/$gemdir" -l -f iruby
 	
 	# install ruby-2 default gems that don't have apks
 	gem install -N -i "$pkgdir/$gemdir" psych test-unit 
@@ -57,6 +57,4 @@ package() {
 	rm -rf cache build_info doc
 }
 
-md5sums="b8984ea2754053c8f021f84c3caee5dd  iruby-master.tar.gz"
-sha256sums="3fa3b6a18678c8639c5736c1a758f5d3f18b71922eff3d8050b9e61b7391cdd9  iruby-master.tar.gz"
 sha512sums="bc0378f22629cc411655af00e861af3851a810255a700bfd286ec97174a0a8777c85991d6a16b05d4f00130c23d790e2554d611c52705e009f6d0e2c1a409636  iruby-master.tar.gz"

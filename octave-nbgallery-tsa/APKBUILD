@@ -2,7 +2,7 @@
 _pack=tsa
 pkgname=octave-nbgallery-$_pack
 pkgver=4.4.5
-pkgrel=0
+pkgrel=1
 pkgdesc="Stochastic concepts and maximum entropy methods for time series analysis."
 url="http://octave.sourceforge.net/$_pack/"
 arch="all"
@@ -49,9 +49,5 @@ package() {
 	_install_dir "$srcdir"/install_prefix "$prefix"
 	_install_dir "$srcdir"/install_alpineprefix "$alpineprefix"
 }
-md5sums="e4d23a5b41cba7743a954808be8df078  tsa-4.4.5.tar.gz
-5d2e56a7841c80be27e597a3298c98f8  octave-nbgallery-tsa.post-install"
-sha256sums="c9eb377fc9006e9764f3b152f7bd4725cb6025699bfab0d6a68f26fe2484d6ef  tsa-4.4.5.tar.gz
-cf01e2ca1f3a1f43a8155f5b9d557d25d323db2860049bcf505cebe93131bc05  octave-nbgallery-tsa.post-install"
 sha512sums="2b3808698711c202d874b1d450a36e42f9e85a6249f9d1d006aec63902b38c8106218a60fa5831c52704a614a7328971051980b28080bc623014f0f0cf4817d5  tsa-4.4.5.tar.gz
 f88df2dd8121b19aded666e1c1ea5e416207ee52f42d7a35b6b9453e34635088b15166a5ebd69609ffef2a189b99d455c324486b5b2ec85c60f8bbfd5d35ed0e  octave-nbgallery-tsa.post-install"

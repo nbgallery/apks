@@ -2,15 +2,15 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=py3-scipy
 _pkgname=scipy
-pkgver=0.18.1
-pkgrel=1
+pkgver=1.0.0
+pkgrel=0
 pkgdesc="Python library for scientific computing"
 url="http://www.scipy.org"
 arch="all"
 license="BSD"
-depends="python3 py3-numpy"
-depends_dev="python3-dev gfortran py3-numpy-dev openblas-dev"
-makedepends="$depends_dev"
+depends="python3 py3-numpy py3-numpy-f2py"
+depends_dev="python3-dev gfortran py-numpy-dev openblas-dev"
+makedepends="$depends_dev cython3-dev"
 install=""
 subpackages="$pkgname-dev"
 source="$_pkgname-$pkgver.tar.gz::http://github.com/$_pkgname/$_pkgname/archive/v$pkgver.tar.gz"
@@ -40,6 +40,4 @@ package() {
 	python3 setup.py install --prefix=/usr --root="$pkgdir" || return 1
 }
 
-md5sums="96d0dd6b0b584b2693fc7b08fdda48cd  scipy-0.18.1.tar.gz"
-sha256sums="561790fa201dffc46f6ba8771b1f28a380fbe01fa0d38c8d8be74aae5cd6549f  scipy-0.18.1.tar.gz"
-sha512sums="64640470fcaa5ddf25a945f0ad87fa72fdab5840e525fc53bdeee2998cce0add2191a64400fee9c2dfe9774c0616bde4aaee12954ffb60bfccd157e444a996de  scipy-0.18.1.tar.gz"
+sha512sums="6633047076f31b4e3abd7d66d2962d28d67b2af196225409d309d2e33d90abca03159ae827aa06676aae788a3fa6eeaa4cdfaf66dceddaa9e56e37dad3a44420  scipy-1.0.0.tar.gz"

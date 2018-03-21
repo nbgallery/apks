@@ -1,7 +1,7 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=qhull
 pkgver=7.2.0
-pkgrel=0
+pkgrel=1
 pkgdesc="Computational Geometry C++ Libraries"
 url="http://www.qhull.org"
 arch="noarch"
@@ -30,6 +30,4 @@ package() {
 	install -Dm644 COPYING.txt "$pkgdir"/usr/share/licenses/"$pkgname"/COPYING.txt
 	rm -f "$pkgdir"/usr/lib/*.la
 }
-md5sums="30c2985adf62009039c2f14e1e1e4cce  qhull.zip"
-sha256sums="dd570505e81fd1d59edf35dfac3c5c5cb0ae2399e7a2baedb7b1726a35693604  qhull.zip"
 sha512sums="7c627268378aa9600fbd622a03d9d126c0e93303bf4a06322b6b945a20599b7bf938f8889ba28c08f7cf9838856a26281a19077560479ae399767530f7d5001e  qhull.zip"

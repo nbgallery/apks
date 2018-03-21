@@ -1,6 +1,6 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=gnu-units
-pkgver=2.14
+pkgver=2.16
 pkgrel=0
 pkgdesc="Converts measurements to their equivalents in other systems of measurement."
 url="https://www.gnu.org/software/units"
@@ -37,9 +37,5 @@ package() {
 	make DESTDIR="$pkgdir" install || return 1
 	install -Dm644 COPYING "$pkgdir"/usr/share/licenses/"$pkgname"/COPYING || return 1
 }
-md5sums="a0f133794d2d36b92319be56094b4096  units-2.14.tar.gz
-8e0378e168b9990d68468a822b9d8e53  units-2.14.tar.gz.sig"
-sha256sums="9d33893d82f3ddd831d5822992007c40bcd0826ae67d3cbc96539951fb0a82e8  units-2.14.tar.gz
-ed3faeb37744c2413a8adf64bbf2e88b41800687bd68fdeed0311b8fa9c904b2  units-2.14.tar.gz.sig"
-sha512sums="3cd09a76fb1cccbafaa3e023c791740738c8347425b2645cad1fa768dee3ebde917602cf65988ee8922fed512ec0bc2367f68545450789fc6bf1a79f066a6986  units-2.14.tar.gz
-42fa9816857964a10b2eeb01bcc4b7183ceafbd440addb57ffaa90d0bf4d85fd016e56382d2f0c7ab23bf4d3784996861d876a6c6206e1d2adf799b80f5add65  units-2.14.tar.gz.sig"
+sha512sums="afca2bf313208db2d0a3f4e96fed7bb86a3e96030b420e1cfa68a140499b9a8f2ef8c166c1d608d03c9ca6260199569a67c67c623d8c6a4b8d52e9d5cb6e3091  units-2.16.tar.gz
+49fc69c510445524b3b7aee0d4bb9573208c952f5be59982313e9ef38219a824d999b356394d9ecce28a6e8970eac901e9a5a9dff4501aab6df279896b8ff63c  units-2.16.tar.gz.sig"

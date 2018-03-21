@@ -1,7 +1,7 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=pig
 pkgver=0.16.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Pig framework for Hadoop"
 url="https://pig.apache.org"
 arch="noarch"
@@ -40,6 +40,4 @@ package() {
 	mkdir -p $pkgdir/usr/$pkgname
 	cp -r $builddir/* $pkgdir/usr/$pkgname
 }
-md5sums="e9d7b20c70bd7d9e9dc0f15f2c50bcbc  pig-0.16.0.tar.gz"
-sha256sums="08947c3f381a1f810430c3703081277bd0b27ac3f76c5a52c096ea587e7ee95c  pig-0.16.0.tar.gz"
 sha512sums="1c0161418a0f17c44a93704a4881670a790aac9387dd1601ab797418023ec5c565a96768602a9eecefff79d1356e3d44efe12ca177934d8dd4fb178d1362006e  pig-0.16.0.tar.gz"

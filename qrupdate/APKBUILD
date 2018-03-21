@@ -1,14 +1,14 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=qrupdate
 pkgver=1.1.2
-pkgrel=0
+pkgrel=1
 pkgdesc="Fortran library for fast updates of QR and Cholesky decompositions"
 url="https://sourceforge.net/projects/qrupdate"
 arch="all"
 license="GNU"
 depends="gfortran"
-depends_dev="lapack-dev"
-makedepends="$depends_dev"
+depends_dev=""
+makedepends="$depends_dev lapack-dev"
 install=""
 subpackages="$pkgname-dev $pkgname-doc"
 source="https://sourceforge.net/projects/qrupdate/files/qrupdate/1.2/qrupdate-1.1.2.tar.gz/download"
@@ -31,6 +31,4 @@ package() {
 	rm -f "$pkgdir"/usr/lib/*.la
 }
 
-md5sums="6d073887c6e858c24aeda5b54c57a8c4  download"
-sha256sums="e2a1c711dc8ebc418e21195833814cb2f84b878b90a2774365f0166402308e08  download"
 sha512sums="cc4e466ea91958e15c66be82b0c4c8ad813fbe4643f21259a9cb3ca8e0a411dd764bb2397ece848a7045f322d30316801d1540c4ebf7912030bef6995b44917c  download"
