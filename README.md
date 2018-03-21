@@ -16,7 +16,7 @@ These APKs are used by the [nbgallery Jupyter Docker client](https://github.com/
 
 1. git clone https://github.com/nbgallery/apks
 2. cd apks
-3. If needed, run `sudo ./build-image <branch>` to build the `nbgallery/apkbuilder:<branch>` image.  Or just [pull the image](https://hub.docker.com/r/nbgallery/apkbuilder/) you need.
+3. Pull the apkbuilder image from [Docker Hub](https://hub.docker.com/r/nbgallery/apkbuilder/) for the Alpine version you want: `docker pull nbgallery/apkbuilder:<branch>`, where `branch` is an Alpine version such as `3.7`.  To build the `nbgallery/apkbuilder:<branch>` image from source, run `sudo ./build-image <branch>`.  
 4. Copy the signing key to the current directory -- both public and private keys are required.  The `build` script will pick them up automatically, or use the -k option to specify the private key (public key is assumed to be `<private-key-filename>.pub`.
    * If you don't have a signing key already, you can run the apkbuilder image in debug: `sudo ./build <branch> debug`.  Then run `abuild-keygen` to generate a key and specify an output file like `/home/nbgallery/apks/somekey.rsa`.  Inside the container, `/home/nbgallery/apks` is mounted from the current directory, so the key files will be there after the container exits.
 5. Run `sudo ./build <branch> <subdir>` to build the apk from the specified subdir.  If you're running from the `apks` top-level directory, the source and package directories should get set automatically.  By default, packages will will be written to the `packages-<branch>` subdirectory.
