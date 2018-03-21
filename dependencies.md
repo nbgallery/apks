@@ -64,11 +64,11 @@ Note: in the Alpine 3.7 official repo, `lapack-dev` and `openblas-dev` conflict 
 | hadoop                     | -                | 2.6.5 (by nbgallery)    |
 | pig                        | hadoop           | 0.16.0 (by nbgallery)   |
 | gallery-pig-kernel         | pig, hadoop      | built                   |
-| gallery-go-kernel          | -                |                         |
+| gallery-go-kernel          | -                | built                   |
 | gallery-nodejs-kernel      | -                | built                   |
 | ~~gallery-python3-kernel~~ | -                | now baked into image    |
 | gallery-R-kernel           | -                | built                   |
 | gallery-ruby-kernel        | -                | built                   |
 | gallery-toree-kernel       | -                | built                   |
-| cling                      | good luck!       |                         |
-| gallery-cpp-kernel         | cling            |                         |
+| cling                      | good luck!       | not attempted yet       |
+| gallery-cpp-kernel         | cling            | not attempted yet       |
