@@ -1,7 +1,7 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=pig
 pkgver=0.16.0
-pkgrel=2
+pkgrel=3
 pkgdesc="Pig framework for Hadoop"
 url="https://pig.apache.org"
 arch="noarch"
@@ -27,8 +27,8 @@ prepare() {
 }
 
 build() {
-	# Nothing to build
-	return 0
+        sed -i 's/# pig.pretty.print.schema=false/pig.pretty.print.schema=true/g' $builddir/conf/pig.properties
+        return 0
 }
 
 package() {
