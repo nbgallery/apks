@@ -1,46 +1,47 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=hadoop
 pkgver=2.6.5
-pkgrel=2
+pkgrel=3
 pkgdesc="Apache Hadoop and Map/Reduce"
 url="https://hadoop.apache.org"
 arch="x86_64"
 license="MIT"
 depends="openjdk8"
 depends_dev=""
-makedepends=""
+makedepends="automake libtool autoconf maven"
 install=""
-subpackages="$pkgname-dev $pkgname-doc"
+subpackages="$pkgname-dev"
 package="$pkgname-$pkgver"
-package_tar="$package.tar.gz"
-source="http://apache.mirrors.tds.net/$pkgname/common/$pkgname-$pkgver/$pkgname-$pkgver.tar.gz"
-
-builddir="$srcdir/$pkgname-$pkgver"
+source="http://www.trieuvan.com/apache/hadoop/common/$pkgname-$pkgver/$pkgname-$pkgver-src.tar.gz
+        https://github.com/protocolbuffers/protobuf/archive/v2.5.0.tar.gz"
+pbufdir="$srcdir/protobuf-2.5.0"
+builddir="$srcdir/$pkgname-$pkgver-src"
+targetdir="$builddir/hadoop-dist/target/$pkgname-$pkgver"
 
 prepare() {
+	cd $pbufdir
+        autoreconf --install
+        autoconf
+	./configure
+	make
+	sudo make install
 	cd $builddir
-
-	# Move .txt files so they get put into the -doc subpackage
-	mkdir -p share/licenses/$pkgname
-	mv LICENSE.txt NOTICE.txt share/licenses/$pkgname
-	mv README.txt share/doc/$pkgname
-
-	# Clean up
-	# TODO: Identify more files to remove
-	find . -name "*sources.jar" -exec rm {} \;
-
-	# TODO: Patch spark jar with alpine snappy .so
 }
 
 build() {
-	# This just installs the binaries, so nothing to build
+        mvn package -Pdist -DadditionalJOption=-Xdoclint:none -DskipTests -Dtar
+        mkdir -p $targetdir/share/licenses/$pkgname $targetdir/share/doc/$pkgname
+        mv $targetdir/LICENSE.txt NOTICE.txt $targetdir/share/licenses/$pkgname
+        mv $targetdir/README.txt $targetdir/share/doc/$pkgname
+        find $targetdir -name "*-sources.jar" -exec rm {} \;
 	return 0
 }
 
 package() {
 	mkdir -p $pkgdir/usr
 	cd $builddir
-	cp -r $builddir/* $pkgdir/usr
+	cp -r $targetdir/* $pkgdir/usr
 }
 
-sha512sums="fd9d24155bb18475c25bc6a88284a696224d5ef38503c5c3f1d4c0b65ae1c552d90d2136ca0fa45294d62204eed3d1154785c12cc260cca42ea2fbf027b461b2  hadoop-2.6.5.tar.gz"
+sha512sums="61948becadff13b6d9add2f12db6de646fbbf821c709079c6a06e6aa1ac4815c8f9c28f130d6a4a09a8e6d23e8c4f3ea3b8b36e38ec6f6018d2a46c9c65e38ae  hadoop-2.6.5-src.tar.gz
+0128d810b5517fbb801b263146ccc673516c7dfe665e33da35ce81f1589b35d15c7c4440d22a2151533dcb88e19a1ea1749f6a7d0a91e8484943c2ae0c7bdb24 v2.5.0.tar.gz"
