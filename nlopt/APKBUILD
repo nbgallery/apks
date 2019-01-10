@@ -1,7 +1,7 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=nlopt
 pkgver=2.4.2
-pkgrel=1
+pkgrel=2
 pkgdesc="NLopt is a free/open-source library for nonlinear optimization"
 url="https://nlopt.readthedocs.io"
 arch="all"

@@ -2,7 +2,7 @@
 _pack=communications
 pkgname=octave-nbgallery-$_pack
 pkgver=1.2.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Digital Communications, Error Correcting Codes (Channel Code), Source Code functions, Modulation and Galois Fields."
 url="http://octave.sourceforge.net/$_pack/"
 arch="all"

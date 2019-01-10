@@ -2,7 +2,7 @@
 _pack=mvn
 pkgname=octave-nbgallery-$_pack
 pkgver=1.1.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Multivariate normal distribution clustering and utility functions."
 url="http://octave.sourceforge.net/$_pack/"
 arch="all"

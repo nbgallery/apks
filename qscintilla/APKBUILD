@@ -1,6 +1,6 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=qscintilla
-pkgver=2.10.2
+pkgver=2.10.8
 pkgrel=0
 pkgdesc="A QT port of Scintilla"
 url="http://www.riverbankcomputing.co.uk/software/qscintilla"
@@ -36,4 +36,4 @@ package() {
 	cd "$builddir"
 	make install INSTALL_ROOT="${pkgdir}" DESTDIR="${pkgdir}" INSTALL_LIB="${pkgdir}"/usr/lib INSTALL_INCLUDE="${pkgdir}"/usr/include INSTALL_DOC="${pkgdir}"/usr/share/doc || return 1
 }
-sha512sums="755f486d62275acb5908262c4a50ad31dd9d8fca0501eb1eeec1aa2181872f8d16179b42f4213b207fd6b46fd8a72d25af7ce6c5cc10eabb363a92c0600ca972  QScintilla_gpl-2.10.2.tar.gz"
+sha512sums="c0a216737dbda6bc390225196b37a43e4884c9cd67e6e81fc1b1b952683fe88dbfe7caf3c66d94a378f37502e1f08cbdf788426248e73f5f66ec65982b7652b5  QScintilla_gpl-2.10.8.tar.gz"

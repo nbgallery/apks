@@ -1,6 +1,6 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=glpk
-pkgver=4.64
+pkgver=4.65
 pkgrel=0
 pkgdesc="GNU Linear Programming Kit"
 url="http://www.gnu.org/software/glpk"
@@ -28,4 +28,4 @@ package() {
 	rm -f "$pkgdir"/usr/lib/*.la
 }
 
-sha512sums="512255d495408f42cf4b5ed2273600b0807c531d6b7eb17fdfd0b46caeeec42b3b7a427410387fa8de27af0dada2b3f1caf0f41132f9fb4486e09a5b5f164c1c  glpk-4.64.tar.gz"
+sha512sums="997e8e599ff1718a08c66b86eadd0e01f4644899f1e95920f8ae91d66b4d8361021766b346845f4dcbcfe667b41ab72ea3d377017a0ebf85d7ece091cfd81375  glpk-4.65.tar.gz"

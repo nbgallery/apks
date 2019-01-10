@@ -1,8 +1,8 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 _pack=signal
 pkgname=octave-nbgallery-$_pack
-pkgver=1.3.2
-pkgrel=1
+pkgver=1.4.0
+pkgrel=0
 pkgdesc="Signal processing tools, including filtering, windowing, and display functions."
 url="http://octave.sourceforge.net/$_pack/"
 arch="all"
@@ -49,5 +49,5 @@ package() {
 	_install_dir "$srcdir"/install_prefix "$prefix"
 	_install_dir "$srcdir"/install_alpineprefix "$alpineprefix"
 }
-sha512sums="f687012156e635f2d893162cea76b5cc1f86fcfaf037aeaabd72f7b855d319c955f24d44c77f254cad83b798bd76325ede9401357070f6a66ca8d0e89630c3c6  signal-1.3.2.tar.gz
+sha512sums="896dc391115da2207bfe42252f863346080307d9a70d27b08ef9f1cc93d4eb1b38abec08ee71bd76eaca4fdf618497079936615ac211492e395ce3ba4b33da9e  signal-1.4.0.tar.gz
 29c9ae7f0ac7e1467481bbcda6a7c0b3eda08bdbb67b867fc6ece7f687c7275444de2eb44c0c330e1115fdd98c0cd4afb54fb8174262ff3f32a22500ab42361e  octave-nbgallery-signal.post-install"

@@ -2,7 +2,7 @@
 _pack=strings
 pkgname=octave-nbgallery-$_pack
 pkgver=1.2.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Additional functions for manipulation and analysis of strings."
 url="http://octave.sourceforge.net/$_pack/"
 arch="all"

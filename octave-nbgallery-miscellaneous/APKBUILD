@@ -2,7 +2,7 @@
 _pack=miscellaneous
 pkgname=octave-nbgallery-$_pack
 pkgver=1.2.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Miscellaneous tools that don't fit somewhere else."
 url="http://octave.sourceforge.net/$_pack/"
 arch="all"

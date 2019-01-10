@@ -1,8 +1,8 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 _pack=statistics
 pkgname=octave-nbgallery-$_pack
-pkgver=1.3.0
-pkgrel=1
+pkgver=1.4.0
+pkgrel=0
 pkgdesc="Additional statistics functions for Octave."
 url="http://octave.sourceforge.net/$_pack/"
 arch="noarch"
@@ -49,5 +49,5 @@ package() {
 	_install_dir "$srcdir"/install_prefix "$prefix"
 	_install_dir "$srcdir"/install_alpineprefix "$alpineprefix"
 }
-sha512sums="31f9fb2104a4da4879ae97a7a699f24a47a8b96a7e78a12380beef0035dfe54b4d14ebbabbac7bfbaf4e64553a8cd9ca6e128014a40b8762dfc3f3ca984fc3d2  statistics-1.3.0.tar.gz
+sha512sums="a44d78a54b4803d9ed6f5a0152e2018469f7e6b720446a1a1559c244e704b3840b54d266c363c7de62fb1b36531e58d8836aba6e9bc3c9beb2675390647fdf23  statistics-1.4.0.tar.gz
 5be521d2e7acbf1167c9491116f583ee343bf1755f47da646a862140927c761083833a81caed9f9bf0bf6f6ec01d7a075f9de50a51b7b2ebe2dae294f363102c  octave-nbgallery-statistics.post-install"

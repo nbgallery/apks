@@ -1,7 +1,7 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=qrupdate
 pkgver=1.1.2
-pkgrel=1
+pkgrel=2
 pkgdesc="Fortran library for fast updates of QR and Cholesky decompositions"
 url="https://sourceforge.net/projects/qrupdate"
 arch="all"

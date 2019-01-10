@@ -1,7 +1,7 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 _pack=image
 pkgname=octave-nbgallery-$_pack
-pkgver=2.6.2
+pkgver=2.10.0
 pkgrel=0
 pkgdesc="Provides functions for image processing."
 url="http://octave.sourceforge.net/$_pack/"
@@ -49,5 +49,5 @@ package() {
 	_install_dir "$srcdir"/install_prefix "$prefix"
 	_install_dir "$srcdir"/install_alpineprefix "$alpineprefix"
 }
-sha512sums="4f32f91729bfec493f683da89470bf11236995328e58805dea9dd3572f6cdecc3ca193d984e332c777e615691c51594f57d99bb4440769cb1f48ef53be837a82  image-2.6.2.tar.gz
+sha512sums="2591f7d0c34e138160598b9d6497c0873493a0782a9807bc8f93cb63a4c0f901d4331971cf542f9e3f6635815dd2ef15f2e3bd70342a4fb784adceecc6cefab3  image-2.10.0.tar.gz
 00529b619f7d00d6f9548b6b68293fdbbda61f22c4c1f980025453f297bfff8a6886044fba147fe31270d7d9cc916a220ffb9a7f7005f54b5c0a698cea78195f  octave-nbgallery-image.post-install"

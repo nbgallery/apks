@@ -2,7 +2,7 @@
 _pack=tsa
 pkgname=octave-nbgallery-$_pack
 pkgver=4.4.5
-pkgrel=1
+pkgrel=2
 pkgdesc="Stochastic concepts and maximum entropy methods for time series analysis."
 url="http://octave.sourceforge.net/$_pack/"
 arch="all"

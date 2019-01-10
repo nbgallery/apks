@@ -2,7 +2,7 @@
 _pack=fuzzy-logic-toolkit
 pkgname=octave-nbgallery-$_pack
 pkgver=0.4.5
-pkgrel=1
+pkgrel=2
 pkgdesc="A mostly MATLAB-compatible fuzzy logic toolkit for octave."
 url="http://octave.sourceforge.net/$_pack/"
 arch="noarch"

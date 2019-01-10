@@ -2,7 +2,7 @@
 _pack=data-smoothing
 pkgname=octave-nbgallery-$_pack
 pkgver=1.3.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Algorithms for smoothing noisy data."
 url="http://octave.sourceforge.net/$_pack/"
 arch="noarch"
