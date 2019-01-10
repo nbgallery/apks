@@ -1,7 +1,7 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=gallery-toree-kernel
-pkgver=1.0.0
-pkgrel=4
+pkgver=1.0.1
+pkgrel=0
 pkgdesc="Apache Toree (Spark) kernels for NBGallery alpine client"
 url="https://github.com/nbgallery/apks"
 arch="x86_64"
@@ -49,5 +49,5 @@ package() {
 
 	# Install the kernel
 	pip install --no-deps --no-cache-dir --root="$pkgdir" py4j
-	pip install --no-deps --no-cache-dir --root="$pkgdir" https://dist.apache.org/repos/dist/dev/incubator/toree/0.2.0/snapshots/dev1/toree-pip/toree-0.2.0.dev1.tar.gz
+	pip install --no-deps --no-cache-dir --root="$pkgdir" toree
 }

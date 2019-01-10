@@ -1,7 +1,7 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=pig
 pkgver=0.16.0
-pkgrel=3
+pkgrel=4
 pkgdesc="Pig framework for Hadoop"
 url="https://pig.apache.org"
 arch="noarch"

@@ -1,7 +1,7 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=gallery-pig-kernel
 pkgver=0.16.0
-pkgrel=3
+pkgrel=4
 pkgdesc="Pig kernel for the Notebook Gallery Alpine client"
 url="https://github.com/nbgallery/apks"
 arch="noarch"

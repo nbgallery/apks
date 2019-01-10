@@ -51,20 +51,19 @@ Note: in the Alpine 3.8 official repo (as in 3.7), `lapack-dev` and `openblas-de
 
 ## Everything else
 
-| Package                    | Dependencies     | Alpine 3.7 status       |
+| Package                    | Dependencies     | Alpine 3.8 status       |
 |----------------------------|------------------|-------------------------|
-| gdal                       | -                | 2.2.3 (from edge)       |
-| geos                       | -                | 3.6.2 (from edge)       |
-| libpst                     | -                | 0.6.71 (by nbgallery)   |
+| gdal                       | -                | 2.4.0 (from edge)       |
+| geos                       | -                | 3.7.0 (from edge)       |
+| libpst                     | -                | 0.6.72 (by nbgallery)   |
 | libspatialindex            | -                | 1.8.5 (by nbgallery)    |
-| proj4                      | -                | 4.9.3 (from edge)       |
+| proj4                      | -                | 5.0.1 (from edge)       |
 | ssdeep                     | -                | 2.14.1 (by nbgallery)   |
 | hadoop                     | -                | 2.6.5 (by nbgallery)    |
 | pig                        | hadoop           | 0.16.0 (by nbgallery)   |
 | gallery-pig-kernel         | pig, hadoop      | built                   |
 | gallery-go-kernel          | -                | built                   |
 | gallery-nodejs-kernel      | -                | built                   |
-| ~~gallery-python3-kernel~~ | -                | now baked into image    |
 | gallery-R-kernel           | -                | built                   |
 | gallery-ruby-kernel        | -                | built                   |
 | gallery-toree-kernel       | -                | built                   |

@@ -1,7 +1,7 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=libspatialindex
 pkgver=1.8.5
-pkgrel=1
+pkgrel=2
 pkgdesc="C++ implementation of R*-tree, an MVR-tree and a TPR-tree with C API"
 url="https://libspatialindex.github.io"
 arch="all"

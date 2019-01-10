@@ -1,7 +1,7 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=ssdeep
 pkgver=2.14.1
-pkgrel=0
+pkgrel=1
 pkgdesc="A program for computing context triggered piecewise hashes (CTPH), i.e. fuzzy hashes"
 url="https://ssdeep-project.github.io/ssdeep/"
 arch="all"

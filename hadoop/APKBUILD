@@ -1,7 +1,7 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=hadoop
 pkgver=2.6.5
-pkgrel=3
+pkgrel=4
 pkgdesc="Apache Hadoop and Map/Reduce"
 url="https://hadoop.apache.org"
 arch="x86_64"
@@ -44,4 +44,4 @@ package() {
 }
 
 sha512sums="61948becadff13b6d9add2f12db6de646fbbf821c709079c6a06e6aa1ac4815c8f9c28f130d6a4a09a8e6d23e8c4f3ea3b8b36e38ec6f6018d2a46c9c65e38ae  hadoop-2.6.5-src.tar.gz
-0128d810b5517fbb801b263146ccc673516c7dfe665e33da35ce81f1589b35d15c7c4440d22a2151533dcb88e19a1ea1749f6a7d0a91e8484943c2ae0c7bdb24 v2.5.0.tar.gz"
+0128d810b5517fbb801b263146ccc673516c7dfe665e33da35ce81f1589b35d15c7c4440d22a2151533dcb88e19a1ea1749f6a7d0a91e8484943c2ae0c7bdb24  v2.5.0.tar.gz"
