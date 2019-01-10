@@ -27,7 +27,7 @@ build() {
 
 package() {
 	cd "$_builddir"
-	local gemdir="$(ruby -rubygems -e 'puts Gem.default_dir')"
+	local gemdir="$(ruby -r rubygems -e 'puts Gem.default_dir')"
 
 	# install iruby 
 	gem install -N -i "$pkgdir/$gemdir" -l -f iruby
