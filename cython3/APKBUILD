@@ -2,7 +2,7 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=cython3
 _pkgname=cython
-pkgver=0.27.2
+pkgver=0.28.2
 pkgrel=0
 pkgdesc="Cython is an optimising static compiler for both the Python & the extended Cython programming languages."
 url="http://cython.org"
@@ -12,7 +12,7 @@ depends=""
 depends_dev="python3-dev cython3"
 makedepends="$depends_dev"
 subpackages="$pkgname-dev"
-source="$_pkgname-$pkgver.tar.gz::https://github.com/$_pkgname/$_pkgname/archive/$pkgver.tar.gz"
+source="$_pkgname-$pkgver.tar.gz::https://github.com/cython/cython/archive/$pkgver.tar.gz"
 
 _builddir="$srcdir"/$_pkgname-$pkgver
 build() {
@@ -29,4 +29,4 @@ package() {
         mv "$pkgdir"/usr/bin/cygdb "$pkgdir"/usr/bin/cygdb3
 }
 
-sha512sums="5e0c97100ac420c4281e3b5847e30801e96611a94c431ab6b30b68ad806288d08ddd387942e97b9c8052623bd705bc723869ba4711c05f5fa622585ce44c3a13  cython-0.27.2.tar.gz"
+sha512sums="4325cd7a5a7998da0b65e98fd4d8d61279f0cb693170ca7b904b61c2d8366b0240c8b4af73b8abe30530adf53bd4ebcacc49cc4f8a6273df88fa3ce7cb1f23b3  cython-0.28.2.tar.gz"

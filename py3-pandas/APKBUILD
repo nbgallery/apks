@@ -1,7 +1,7 @@
 # Maintainer: Notebook Gallery Team <team@nb.gallery>
 pkgname=py3-pandas
 _pkgname=pandas
-pkgver=0.22.0
+pkgver=0.23.4
 pkgrel=0
 pkgdesc="Cross-section and time series data analysis toolkit"
 url="http://pandas.pydata.org"
@@ -25,4 +25,4 @@ package() {
 	python3 setup.py install --prefix=/usr --root="$pkgdir" || return 1
 }
 
-sha512sums="51717ac83aa9221132881aef3d855bf237a80d6a8d362a0a7854eb26a5f09ecb387a26ba8be0c7daa5104405e474c623866c4d1b760e8a672b3fcbbd0c8eab6a  pandas-0.22.0.tar.gz"
+sha512sums="2b6b84361ed892494084fbbdd632f71322d1ae1a86b3d022f6d341ec7cc0928a5b324fa721b02c5b51683a469de5912ac6e25ab1fb0be44d4fa5de414bd8fe68  pandas-0.23.4.tar.gz"

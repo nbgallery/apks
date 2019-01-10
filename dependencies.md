@@ -2,15 +2,15 @@
 
 Note that some of these may exist in the Alpine official repo, for python 2 and/or 3, depending which branch you're looking at.  Build in this order:
 
-| Package    | Dependencies  | Alpine 3.7 status                        |
-|------------|---------------|------------------------------------------|
-| cycler     | -             | 0.10.0 built by nbgallery                |
-| ~~nose~~   | -             | 1.3.7 now in official repo               |
-| cython     | -             | 0.27.2 official for py2; nbg for py3     |
-| ~~numpy~~  | nose, cython  | 1.13.3 now in official repo              |
-| matplotlib | numpy, cycler | 2.1.1 built by nbgallery                 |
-| pandas     | numpy, cython | 0.22.0 built by nbgallery                |
-| scipy      | numpy, cython | 1.0.0 built by nbgallery                 |
+| Package       | Dependencies            | Alpine 3.8 status                        |
+|---------------|-------------------------|------------------------------------------|
+| cycler        | -                       | 0.10.0 copied frome edge                 |
+| cython        | -                       | 0.28.2 official for py2; nbg for py3     |
+| kiwisolver    | -                       | 1.0.1 copied from edge                   |
+| backports lru | -                       | 1.5 copied from edge                     |
+| matplotlib    | cycler, backports, kiwi | 2.2.3 copied from edge                   |
+| pandas        | numpy, cython           | 0.23.4 built by nbgallery                |
+| ~~scipy~~     | numpy, cython           | 1.0.1 now in official repo               |
 
 ## Octave packages
 
