@@ -1,6 +1,15 @@
 # nb.gallery APKs 
 
+[![Project Status: Unsupported – We are migrating off of Alpine onto Project Jupyter's base image, so we no longer maintain our own Alpine packages.](https://www.repostatus.org/badges/latest/unsupported.svg)](https://www.repostatus.org/#unsupported)
+
+## Overview
+
 These APKs are used by the [nbgallery Jupyter Docker client](https://github.com/nbgallery/jupyter-docker) to install kernels and pre-compiled python modules on the fly.  Kernels are typically installed by [scripts in the docker image](https://github.com/nbgallery/jupyter-docker/tree/master/kernels/installers), and pre-compiled python packages are installed by the [ipydeps dependencies mechanism](https://github.com/nbgallery/ipydeps#dependencieslink).
+
+## Repository Status
+
+We are moving off of Alpine onto Project Jupyter's base image ([why?](https://github.com/nbgallery/jupyter-alpine#repository-status
+)), so we no longer maintain our own apks.
 
 ## Background reading and helpful links
 
